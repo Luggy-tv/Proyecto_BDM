@@ -1,0 +1,18 @@
+:root{
+    --azul:#2649F2 ;
+    --primary:#4FACEF;
+    --celesteClaro:#9BD3F0;
+    --morado:#9A64F4;
+    --moradoClaro:#CAC0F8;
+    --coral:#FF8B5C;
+    --coralClaro:#F5CC83;
+}
+body{
+    font-family: 'Poppins' ,sans-serif;
+    background: var(--morado);
+    background: linear-gradient(to right, var(--morado),var(--coral));
+}
+.bgImg{
+    background-image: url(https://as1.ftcdn.net/v2/jpg/05/59/81/64/1000_F_559816413_kG1NAvtwoBM9pJDnI1gavsoon9V7y34i.jpg);
+    background-position: center center;
+}
