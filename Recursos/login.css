@@ -12,8 +12,8 @@
 }
 body{
     font-family: 'Poppins' ,sans-serif;
-    background: var(--morado);
-    background: linear-gradient(to right, var(--portage),var(--royal-blue));
+    background: var(--big-stone);
+    background: linear-gradient(to right, var(--picton-blue),var(--perfume));
 }
 .bgImg{
     background-image: url(https://as1.ftcdn.net/v2/jpg/05/59/81/64/1000_F_559816413_kG1NAvtwoBM9pJDnI1gavsoon9V7y34i.jpg);
@@ -22,10 +22,23 @@ body{
 
 .btn-primary{
     background-color: var(--royal-blue);
+    color: white;
     border-width: 0px;
+ 
 }
 
 .btn-primary:hover{
-    background-color: #9863f3;
+    background-color: var(--portage);
     
     }
+
+img{
+        max-width: 100%;
+        height: auto;
+}
+
+h2{
+    color: var(--big-stone);
+}
+
+
