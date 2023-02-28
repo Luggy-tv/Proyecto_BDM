@@ -21,6 +21,11 @@ body{
 }
 
 .btn-primary{
-    background-color: var(--salmon);
+    background-color: var(--royal-blue);
     border-width: 0px;
 }
+
+.btn-primary:hover{
+    background-color: #9863f3;
+    
+    }
