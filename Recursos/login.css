@@ -1,12 +1,17 @@
 :root{
     --azul:#2649F2 ;
-    --primary:#4FACEF;
+    --celeste:#4FACEF;
     --celesteClaro:#9BD3F0;
     --morado:#9A64F4;
     --moradoClaro:#CAC0F8;
     --coral:#FF8B5C;
     --coralClaro:#F5CC83;
 }
+
+.button-primary{
+    background-color: var(--morado);
+}
+
 body{
     font-family: 'Poppins' ,sans-serif;
     background: var(--morado);

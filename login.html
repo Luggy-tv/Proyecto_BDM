@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Inicia Sesion | Codebug </title>
+  <title>Inicia Sesion | Codebug</title>
   <link rel="icon" href="Recursos/Intellibug_placeholder.png">
 
 
@@ -32,22 +32,24 @@
         <h2 class="fw-bold text-center py-4">Bienvenido de nuevo</h2>
 
         <!--LOGIN-->
-        <form action="#">
+        <form id="form-login" action="#">
           
           <div class="mb-4">
             <label for="email" class="from-label">Correo Electronico</label>
-            <input type="email" class="form-control" name="email" placeholder="ejemplo@mail.com">
+            <input type="email" id="email" class="form-control" name="email" placeholder="ejemplo@mail.com">
           </div>
           
           <div class="mb-4">
             <label for="password" class="from-label">Contraseña</label>
             <input type="password" class="form-control" name="password" placeholder="••••••••••">
           </div>
-          
+
+          <!--
           <div class="mb-4 form-check">
             <input type="checkbox" name="connected" class="form-check-input">
             <label for="connected" class="form-check-label"> Mantenerme conectado</label>
           </div>
+          -->
           
           <div class="d-grid">
             <button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar Sesion</button>
@@ -61,5 +63,6 @@
       </div>
     </div>
   </div>
+  <script src="scripts/login.js"></script>
 </body>
 </html>
