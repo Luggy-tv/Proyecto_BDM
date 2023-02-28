@@ -8,8 +8,9 @@
     --coralClaro:#F5CC83;
 }
 
-.button-primary{
+.btn-primary{
     background-color: var(--morado);
+    border-color: var(--morado);
 }
 
 body{
