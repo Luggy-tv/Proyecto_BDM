@@ -12,12 +12,34 @@
 
 body{
     font-family: 'Poppins' ,sans-serif;
-    background: var(--big-stone);
-    background: linear-gradient(to right, var(--mandys-pink),var(--perfume));
+    background: var(--perfume);
 }
 
-nav {
+.navbar {
     background-color: var(--big-stone);
-    
+    color: #9863f3;
 }
 
+a{
+    color: white;
+}
+
+div {
+    size: 100vh;
+}
+
+.btn-primary {
+    background-color: var(--portage);
+    border: none;
+    margin-top: 1vh;
+    width: 50vh;
+   
+}
+
+.btn-outline-primary {
+    color: var(--salmon);
+    border-color: var(--salmon);
+    margin-top: 1vh;
+    width: 50vh;
+
+}
