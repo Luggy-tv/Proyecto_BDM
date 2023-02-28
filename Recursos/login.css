@@ -13,7 +13,7 @@
 body{
     font-family: 'Poppins' ,sans-serif;
     background: var(--big-stone);
-    background: linear-gradient(to right, var(--picton-blue),var(--perfume));
+    background: linear-gradient(to right, var(--mandys-pink),var(--perfume));
 }
 .bgImg{
     background-image: url(https://as1.ftcdn.net/v2/jpg/05/59/81/64/1000_F_559816413_kG1NAvtwoBM9pJDnI1gavsoon9V7y34i.jpg);
@@ -39,6 +39,10 @@ img{
 
 h2{
     color: var(--big-stone);
+}
+
+a{
+    color: var(--royal-blue)
 }
 
 
