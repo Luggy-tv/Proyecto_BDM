@@ -1,0 +1,23 @@
+:root{
+    --big-stone: #172542;     /*Azul oscuro*/
+    --royal-blue: #2648f0;    /*Azul medio*/
+    --picton-blue: #4eaaed;   /*Azul claro*/
+    --cornflower: #9ad1ef;    /*Azul claro++*/
+    --portage: #9863f3;       /*Morado*/
+    --perfume: #c8bdf9;       /*Morado claro*/
+    --link-water: #dfdbf6;    /*Morado claro++*/
+    --salmon: #ff885d;        /*Coral*/
+    --mandys-pink: #f4cab2;   /*Coral claro*/
+}
+
+body{
+    font-family: 'Poppins' ,sans-serif;
+    background: var(--big-stone);
+    background: linear-gradient(to right, var(--mandys-pink),var(--perfume));
+}
+
+nav {
+    background-color: var(--big-stone);
+    
+}
+
