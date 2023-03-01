@@ -10,6 +10,12 @@
     --mandys-pink: #f4cab2;   /*Coral claro*/
     
 }
+
+.btn-primary{
+    background-color: var(--morado);
+    border-color: var(--morado);
+}
+
 body{
     font-family: 'Poppins' ,sans-serif;
     background: var(--big-stone);
