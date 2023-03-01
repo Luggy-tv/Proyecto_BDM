@@ -32,7 +32,8 @@ div {
     background-color: var(--portage);
     border: none;
     margin-top: 1vh;
-    width: 50vh;
+    width: 45%;
+    text-align: center;
    
 }
 
@@ -40,6 +41,11 @@ div {
     color: var(--salmon);
     border-color: var(--salmon);
     margin-top: 1vh;
-    width: 50vh;
-
+    width: 45%;
+    text-align: center;
 }
+
+.row {
+    margin: 0%;
+}
+
