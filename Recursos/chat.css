@@ -1,0 +1,60 @@
+:root{
+    --big-stone: #172542;     /*Azul oscuro*/
+    --royal-blue: #2648f0;    /*Azul medio*/
+    --picton-blue: #4eaaed;   /*Azul claro*/
+    --cornflower: #9ad1ef;    /*Azul claro++*/
+    --portage: #9863f3;       /*Morado*/
+    --perfume: #c8bdf9;       /*Morado claro*/
+    --link-water: #dfdbf6;    /*Morado claro++*/
+    --salmon: #ff885d;        /*Coral*/
+    --mandys-pink: #f4cab2;   /*Coral claro*/
+}
+
+nav{
+    background-color: var(--big-stone);
+}
+
+
+body {
+  background-color: white;
+  min-height: 80vh;
+}
+
+.text-small {
+  font-size: 0.9rem;
+}
+
+
+.chat-box {
+    min-height: 80vh;
+    max-height: 84vh;
+    overflow-y: scroll;
+    background-color: #9ad1ef;
+}
+
+.messages-box{
+    min-height: 80vh;
+    max-height: 84vh;
+    overflow-y: scroll;
+}
+
+input::placeholder {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+#button-addon2{
+    background-color: var(--portage);
+    height: 100%;
+    border-radius: 0;
+    color: white;
+}
+
+.form-control {
+    height: 1px;
+}
+
+
+.bg{
+    background-color: var(--salmon);
+}
