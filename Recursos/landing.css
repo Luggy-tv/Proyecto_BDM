@@ -69,8 +69,6 @@ h2 {
 }
 
 
-
-
 .carousel {
 	margin: 30px auto 60px;
 	padding: 0 80px;
@@ -119,11 +117,10 @@ h2 {
 	width: 44px;
 	background: none;	
 	margin: auto 0;
-	border-radius: 50%;
-	border: 3px solid rgba(0, 0, 0, 0.8);
+
 }
 .carousel-control-prev i, .carousel-control-next i {
-	font-size: 36px;
+	font-size: 50px;
 	position: absolute;
 	top: 50%;
 	display: inline-block;
@@ -131,7 +128,7 @@ h2 {
 	z-index: 5;
 	left: 0;
 	right: 0;
-	color: rgba(0, 0, 0, 0.8);
+	color: white;
 	text-shadow: none;
 	font-weight: bold;
 }
@@ -143,17 +140,4 @@ h2 {
 }
 .carousel-indicators {
 	bottom: 100px;
-}
-.carousel-indicators li, .carousel-indicators li.active {
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	margin: 4px;
-	border: none;
-}
-.carousel-indicators li {	
-	background: #ababab;
-}
-.carousel-indicators li.active {	
-	background: #555;
 }
