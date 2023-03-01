@@ -33,6 +33,7 @@ formSignin.addEventListener("submit", (e)=>{
     e.preventDefault();
 
     invalidMsg="Hay campos llenados de forma incorrecta, favor de ver el mensaje:\n";
+
     let flag = true;
 
     let inputEmail= document.getElementById("email").value;
@@ -54,18 +55,22 @@ formSignin.addEventListener("submit", (e)=>{
     
     if(flag){
         flag = validatePassword(inputPassword);
+
     } 
         
     if(flag) {
         flag = validateConfirmPass(inputPassword,inputConfirmpass);
+
     }
     
     if(flag){
     flag = validaCorreo(inputEmail);
     }
+    
     if(flag){
         flag = validaGenero(inputGenero);
     }
+
     if(flag){
         flag = esMaestro(inputEsMaestro);
     }
@@ -78,14 +83,14 @@ formSignin.addEventListener("submit", (e)=>{
         flag = validateFechaNac(inputFechaDeNac);
     }
 
-    console.log("-----------------------------");
     
     if(!flag){
-        //alert(invalidMsg);
-        console.log(invalidMsg);
+        alert(invalidMsg);
+    }else{
+        alert("Registro exitoso, redirigiendo al inicio de sesion...");
+        window.location = 'login.html';
     }
 
-    console.log("-----------------------------");
 
 });
 
@@ -93,11 +98,11 @@ function validateFechaNac(inputFechaDeNac){
     let inputyears = Math.round(inputFechaDeNac.getTime() / year);
 
     if(inputyears<years){
-        console.log("Fecha valida");
+        //console.log("Fecha valida");
         return true;
 
     }else{
-        console.log("Fecha no valida, favor de seleccionar una fecha anterior al año actual.");
+        //console.log("Fecha no valida, favor de seleccionar una fecha anterior al año actual.");
         
         invalidMsg += "- Fecha no valida, favor de seleccionar una fecha anterior al año actual.\n";
         return false;
@@ -106,71 +111,73 @@ function validateFechaNac(inputFechaDeNac){
 
 function validateConfirmPass(inputPassword,inputConfirmpass){
     if(inputPassword===inputConfirmpass){
-        console.log("confirmPass valid");
-        console.log(inputPassword,inputConfirmpass);
+        //console.log("confirmPass valid");
+        //console.log(inputPassword,inputConfirmpass);
         return true;
     }
     else{
-        console.log("La contraseña difiere, favor de escribir lo mismo en los dos campos.");
+        //console.log("La contraseña difiere, favor de escribir lo mismo en los dos campos.");
         invalidMsg += "- La contraseña difiere, favor de escribir lo mismo en los dos campos.\n"
-        console.log(inputPassword,inputConfirmpass);
+        //console.log(inputPassword,inputConfirmpass);
         return false;
     }
 }
 
 function validatePassword(password){
     if(passRegex.test(password)){
-        console.log("Pass valid");
-        console.log(password);
+        //console.log("Pass valid");
+        //console.log(password);
 
         return true;
     }
     else{
-        console.log("La contraseña no es valida, esta tiene que tener minimo 8 caracteres y contar con una mayuscula (A), minuscula (a), numero (8) y caracter especial ( -¡!¿?:;@#_$%^&,.{}=+*[ )");
+       // console.log("La contraseña no es valida, esta tiene que tener minimo 8 caracteres y contar con una mayuscula (A), minuscula (a), numero (8) y caracter especial ( -¡!¿?:;@#_$%^&,.{}=+*[ )");
         invalidMsg += "- La contraseña no es valida, esta tiene que tener minimo 8 caracteres y contar con una mayuscula (A), minuscula (a), numero (8) y caracter especial ( -¡!¿?:;@#_$%^&,.{}=+*[ ) \n";
-        console.log(password);
+        //console.log(password);
 
         return false;
     }
 }
 
 function validaCorreo(inputEmail){
-    console.log("Email: ");
-    console.log(inputEmail);
+    //console.log("Email: ");
+    //console.log(inputEmail);
     return true;
 };
 
 function validaGenero(inputGenero){
     for (var radio of inputGenero){
         if (radio.checked) {  
-            console.log("Genero: ");  
-            console.log(radio.value);
+            //console.log("Genero: ");  
+            //console.log(radio.value);
             return true;
+        }
+        else{
+            invalidMsg+="- Favor de seleccionar un genero";
+            return false;
         }
     }
 };
 
 function esMaestro(inputEsMaestro){
     if (inputEsMaestro) {
-        console.log("Es Maestro ");  
+        //console.log("Es Maestro ");  
         return true;
     } else {
-        console.log("No es maestro ");  
+        //console.log("No es maestro ");  
         return true;
     }
 }
 
 function ValidaNomApPatApMat(inputNombre,inputApellidoPat,inputApellidoMat){
     if(nameRegex.test(inputNombre) && nameRegex.test(inputApellidoPat) && nameRegex.test(inputApellidoMat)){
-        if(nameRegex.test(inputApellidoMat)){
-            console.log(inputNombre);
-            console.log(inputApellidoPat);
-            console.log(inputApellidoMat);
-        return true;
-        } 
+            //console.log(inputNombre);
+            //console.log(inputApellidoPat);
+            //console.log(inputApellidoMat);
+            return true;
     }
     else{
-        console.log("Nombre o apellidos deben contener solo letras");
+        //console.log("Nombre o apellidos deben contener solo letras");
         invalidMsg+= "- Nombre o apellidos deben contener solo letras";
         return false;
     }
