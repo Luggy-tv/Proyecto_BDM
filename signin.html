@@ -29,7 +29,7 @@
             
                 <div class="col-6 mb-4">
                     <label for="email" class="from-label">Correo Electronico</label>
-                    <input id="email" type="email" class="form-control" name="email" placeholder="ejemplo@mail.com" required>
+                    <input minlength="5" maxlength="50" id="email" type="email" class="form-control" name="email" placeholder="ejemplo@mail.com" >
                 </div>
 
                 <div class="col-3 mb-4">
@@ -52,22 +52,22 @@
 
                 <div class="col-4 mb-4">
                     <label for="nombre" class="from-label">Nombre(s)</label>
-                    <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Juan Armando" required>
+                    <input minlength="1" maxlength="30" id="nombre" type="text" class="form-control" name="nombre" placeholder="Juan Armando" >
                 </div>
                    
                 <div class="col-4 mb-4">
                     <label for="ApellidoPat" class="from-label">Apellido Paterno</label>
-                    <input id="apellidoPat" type="text" class="form-control" name="ApellidoPat" placeholder="Martinez" required>
+                    <input minlength="3" maxlength="30" id="apellidoPat" type="text" class="form-control" name="ApellidoPat" placeholder="Martinez" >
                 </div>
 
                 <div class="col-4 mb-4">
                     <label for="ApellidoMat" class="from-label">Apellido Materno</label>
-                    <input id="apellidoMat" type="text" class="form-control" name="ApellidoMat" placeholder="Perez" required>
+                    <input minlength="3" maxlength="30" id="apellidoMat" type="text" class="form-control" name="ApellidoMat" placeholder="Perez" >
                 </div>   
 
                 <div class="col-7 mb-4">
                     <label for="FechaDeNacimiento" class="form-label">Fecha de Nacimiento</label>
-                    <input id="fechaDeNac" type="date" class="form-control" autocomplete="off" name="FechaDeNacimiento" required>
+                    <input id="fechaDeNac" type="date" class="form-control" autocomplete="off" name="FechaDeNacimiento" >
                 </div>
                 
                 <div class="col-5 mb-4 ">
@@ -77,12 +77,12 @@
                 
                 <div class="col-6 mb-4">
                     <label  for="password" class="form-label">Contraseña</label>
-                    <input id="password" type="text" class="form-control" name="password" placeholder="••••••••••" required>
+                    <input minlength="8" maxlength="20" id="password" type="text" class="form-control" name="password" placeholder="••••••••••" >
                 </div>
 
                 <div class="col-6 mb-4">
                     <label  for="confirmPass" class="form-label">Confirmar Contraseña</label>
-                    <input id="confirmPass" type="text" class="form-control" name="confirmPass" placeholder="••••••••••" required>
+                    <input minlength="8" maxlength="20" id="confirmPass" type="text" class="form-control" name="confirmPass" placeholder="••••••••••" >
                 </div>
            
             </div>
