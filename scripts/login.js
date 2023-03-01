@@ -13,7 +13,7 @@ var passRegex = new RegExp("^((?=.*[A-Z])(?=.*[0-9])(?=.*[-¡!¿?:;@#_$%^&,.{}=+
 formLogin.addEventListener("submit", (e)=>{
 
     e.preventDefault();
-    let inputEmail = document.getElementById("email").value;
+    //let inputEmail = document.getElementById("email").value;
     let inputContraseña =document.getElementById("password").value;
     
    // console.log(inputEmail);

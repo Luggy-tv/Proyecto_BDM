@@ -29,15 +29,15 @@
             
                 <div class="col-6 mb-4">
                     <label for="email" class="from-label">Correo Electronico</label>
-                    <input id="email" type="email" class="form-control" name="email" placeholder="ejemplo@mail.com">
+                    <input id="email" type="email" class="form-control" name="email" placeholder="ejemplo@mail.com" required>
                 </div>
 
                 <div class="col-3 mb-4">
                     <label for="Genero" class="form-label">Genero</label>
                     <br>
-                    <input type="radio" class="form-check-input" name="Genero" id="generoMasculino" value="masculino">
+                    <input type="radio" class="form-check-input" name="Genero" id="generoMasculino" value="Masculino">
                     <label for="Masculino" class="form-check-label px-2">Masculino</label>
-                    <input type="radio" class="form-check-input" name="Genero" id="generoFemenino" value="femenino">
+                    <input type="radio" class="form-check-input" name="Genero" id="generoFemenino" value="Femenino">
                     <label for="Femenino" class="form-check-label px-2">Femenino</label>
                 </div>
 
@@ -52,37 +52,37 @@
 
                 <div class="col-4 mb-4">
                     <label for="nombre" class="from-label">Nombre(s)</label>
-                    <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Juan Armando">
+                    <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Juan Armando" required>
                 </div>
                    
                 <div class="col-4 mb-4">
                     <label for="ApellidoPat" class="from-label">Apellido Paterno</label>
-                    <input id="apellidoPat" type="text" class="form-control" name="ApellidoPat" placeholder="Martinez">
+                    <input id="apellidoPat" type="text" class="form-control" name="ApellidoPat" placeholder="Martinez" required>
                 </div>
 
                 <div class="col-4 mb-4">
                     <label for="ApellidoMat" class="from-label">Apellido Materno</label>
-                    <input type="text" class="form-control" name="ApellidoMat" placeholder="Perez (opcional)">
+                    <input id="apellidoMat" type="text" class="form-control" name="ApellidoMat" placeholder="Perez" required>
                 </div>   
 
                 <div class="col-7 mb-4">
-                    <label for="Genero" class="form-label">Fecha de Nacimiento</label>
-                    <input type="date" class="form-control" autocomplete="off" name="FechaDeNacimiento">
+                    <label for="FechaDeNacimiento" class="form-label">Fecha de Nacimiento</label>
+                    <input id="fechaDeNac" type="date" class="form-control" autocomplete="off" name="FechaDeNacimiento" required>
                 </div>
                 
                 <div class="col-5 mb-4 ">
                     <label for="Imagen" class="form-label">Foto de perfil</label>
-                    <input type="file" class="form-control" name="Image" id="ImagenDePerfil" accept="image/*">
+                    <input type="file" class="form-control" name="Image" id="ImagenDePerfil" accept="image/*" >
                 </div>
                 
                 <div class="col-6 mb-4">
-                    <label id="password" for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="password" placeholder="••••••••••">
+                    <label  for="password" class="form-label">Contraseña</label>
+                    <input id="password" type="text" class="form-control" name="password" placeholder="••••••••••" required>
                 </div>
 
                 <div class="col-6 mb-4">
-                    <label id="confirmPass" for="confirmPass" class="form-label">Confirmar Contraseña</label>
-                    <input type="pass" class="form-control" name="confirmPass" placeholder="••••••••••">
+                    <label  for="confirmPass" class="form-label">Confirmar Contraseña</label>
+                    <input id="confirmPass" type="text" class="form-control" name="confirmPass" placeholder="••••••••••" required>
                 </div>
            
             </div>
