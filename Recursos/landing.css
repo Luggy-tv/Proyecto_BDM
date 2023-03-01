@@ -12,12 +12,12 @@
 
 body{
     font-family: 'Poppins' ,sans-serif;
-    background: var(--perfume);
+    background: var(--link-water);
 }
 
 .navbar {
     background-color: var(--big-stone);
-    color: #9863f3;
+
 }
 
 a{
@@ -49,3 +49,11 @@ div {
     margin: 0%;
 }
 
+h1 {
+    color: #172542;
+    font-weight: bold;
+}
+
+h2 {
+    color: #172542;
+}
