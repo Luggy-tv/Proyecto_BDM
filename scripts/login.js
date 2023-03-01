@@ -9,6 +9,7 @@ let formLogin =document.getElementById("form-login");
 
 var passRegex = new RegExp("^((?=.*[A-Z])(?=.*[0-9])(?=.*[-¡!¿?:;@#_$%^&,.{}=+*[])(?=.{8,}))");
 
+
 formLogin.addEventListener("submit", (e)=>{
 
     e.preventDefault();

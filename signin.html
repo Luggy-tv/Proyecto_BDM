@@ -26,20 +26,29 @@
         <form action="#" id="form-signin">
             <div class="row gx-3 mx-5">
             
-                <div class="col-8 mb-4">
+                <div class="col-6 mb-4">
                     <label for="email" class="from-label">Correo Electronico</label>
                     <input type="email" class="form-control" name="email" placeholder="ejemplo@mail.com">
                 </div>
 
-                <div class="col-4 mb-4">
+                <div class="col-3 mb-4">
                     <label for="Genero" class="form-label">Genero</label>
                     <br>
-                    <input type="radio" class="form-check-input" name="Masculino">
+                    <input type="radio" class="form-check-input" name="Genero" id="generoMasculino" value="masculino">
                     <label for="Masculino" class="form-check-label px-2">Masculino</label>
-                    <input type="radio" class="form-check-input" name="Femenino">
+                    <input type="radio" class="form-check-input" name="Genero" id="generoFemenino" value="femenino">
                     <label for="Femenino" class="form-check-label px-2">Femenino</label>
                 </div>
+
+                <div class="col-3 mb-4">
+                    <label for="esMaestro" class="form-label"> Eres maestro?</label>
+                    <br>
+                    <input type="checkbox" class="form-check-input" name="esMaestro">
+                    <label for="esMaestro" class="form-check-label px-2">Si</label>
+                </div>
                     
+                
+
                 <div class="col-4 mb-4">
                     <label for="nombre" class="from-label">Nombre(s)</label>
                     <input type="text" class="form-control" name="nombre" placeholder="Juan Armando">
@@ -62,7 +71,7 @@
                 
                 <div class="col-5 mb-4 ">
                     <label for="Imagen" class="form-label">Foto de perfil</label>
-                    <input type="file" class="form-control" name="Image" id="ImagenDePerfil">
+                    <input type="file" class="form-control" name="Image" id="ImagenDePerfil" accept="image/*">
                 </div>
                 
                 <div class="col-6 mb-4">
