@@ -18,50 +18,52 @@
 
 </head>
 <body>
-  <div class="container w-90 h-auto mt-5 rounded shadow">
+  <div class="container w-90 h-auto my-5 rounded shadow"> <!--Margin Top-->
     <div class="row align-items-stretch rounded">
 
       <div class="col bgImg rounded">
 
       </div>
-      <div class="col opacity-75 bg-white rounded-end p-md-5">
+      <div class="col opacity-100 bg-white rounded-end p-md-3 ">
+        <!--Inicia columna con transparencia-->
+        
          
-        <div class=" text-end">
-          <img src="Recursos/Intellibug_placeholder.png" width="50" alt="">
+        <div class="text-center mt-3">
+          <img src="Recursos/Intellibug_placeholder.png" width="15%" alt="">
           
         </div>
 
-        <h2 class="fw-bold text-center py-4">Bienvenido de nuevo</h2>
+        <h2 class="fw-bold text-center py-4">Bienvenido a Codebug</h2>
 
         <!--LOGIN-->
         <form id="form-login" action="#">
           
-          <div class="mb-4">
+          <div class="mb-4 mx-5"> <!--Margin Bottom-->
             <label for="email" class="from-label">Correo Electronico</label>
             <input type="email" id="email" class="form-control" name="email" placeholder="ejemplo@mail.com">
           </div>
           
-          <div class="mb-4">
+          <div class="mb-4 mx-5">
             <label for="password" class="from-label">Contraseña</label>
             <input type="password" id="password" class="form-control" name="password" placeholder="••••••••••">
           </div>
-
           <!--
-          <div class="mb-4 form-check">
             <input type="checkbox" name="connected" class="form-check-input">
             <label for="connected" class="form-check-label"> Mantenerme conectado</label>
           </div>
           -->
           
-          <div class="d-grid">
+          <div class="d-grid mx-5"> <!--Tipo de grid-->
             <button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar Sesion</button>
           </div>
 
-          <div class="my-3">
+          <div class="my-3 mx-5"> <!--Margin in Y-->
               <span>No tienes cuenta? <a href="signin.html">Registrate</a> </span>
           </div>
 
         </form>
+
+        <!--Termina columna con transparencia-->
       </div>
     </div>
   </div>
