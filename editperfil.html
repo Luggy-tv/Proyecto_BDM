@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil | Codebug </title>
+
+    <link rel="icon" href="Recursos/Intellibug_placeholder.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="Recursos/edit_perfil.css">
+
+    <link rel="preload" as="image" href="profilePictures/ppimg1.png">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-dark navbar-expand-md">
+        <div class="container-fluid">
+
+            <a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+            
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div id="navcol-1" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.html">Mensajes</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="inicio.html">Mas Cursos</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="perfil.html">Perfil</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container bg-white my-3 rounded shadow p-md-2">
+
+        <div class="row">
+            <div class="col-1">
+                <!--<a href="perfil.html" class="link-dark pt-3">
+                    <i class="fa fa-arrow-left "></i>
+                    Regresar
+                </a>-->
+            </div>
+            <div class="col-10 text-md-center my-4">
+                <h2 class="fw-bold">Editar Perfil</h2>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 px-5 py-3">
+                <div class="row">
+                    <img class="img-thumbnail h-25 rounded  " src="profilePictures/ppimg1.png" alt="">
+                </div>
+
+            
+            </div>
+
+                <div class="col-md-6 px-4">
+                    <form action="">
+                        <div class="row me-4">
+
+                            <div class="col-6 mb-4">
+                                <label for="nombre" class="from-label">Nombre(s) a cambiar:</label>
+                                <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Luis Alfonso" readonly >
+                            </div>
+
+                            <div class="col-6 mb-4">
+                                <label for="nombre" class="from-label">   </label>
+                                <input minlength="1" maxlength="30" id="nombre" type="text" class="form-control" name="nombre" placeholder="Luis Alfonso" required >
+                            </div>
+                            
+                            <div class="col-6 mb-4">
+                                <label for="ApellidoPat" class="from-label">Apellido Paterno</label>
+                                <input id="apellidoPat" type="text" class="form-control" name="ApellidoPat" placeholder="Martinez" readonly>
+                            </div>
+                            
+                            <div class="col-6 mb-4">
+                                <label for="ApellidoPat" class="from-label">  </label>
+                                <input minlength="3" maxlength="30" id="apellidoPat" type="text" class="form-control" name="ApellidoPat" placeholder="Martinez" required>
+                            </div>
+
+                            <div class="col-6 mb-4">
+                                <label for="ApellidoMat" class="from-label">Apellido Materno</label>
+                                <input  id="apellidoMat" type="text" class="form-control" name="ApellidoMat" placeholder="Martinez" readonly>
+                            </div> 
+            
+                            <div class="col-6 mb-4">
+                                <label for="ApellidoMat" class="from-label"> </label>
+                                <input minlength="3" maxlength="30" id="apellidoMat" type="text" class="form-control" name="ApellidoMat" placeholder="Martinez" required>
+                            </div> 
+                            
+                            <div class="col-12 mb-4">
+                                <label for="Imagen" class="form-label">Foto de perfil</label>
+                                <input type="file" class="form-control" name="Image" id="ImagenDePerfil" accept="image/*" >
+                            </div>
+
+                            <div class="col-6 mb-4">
+                                <label  for="password" class="form-label">Contraseña</label>
+                                <input minlength="8" maxlength="20" id="password" type="password" class="form-control" name="password" placeholder="••••••••••" required>
+                            </div>
+            
+                            <div class="col-6 mb-4">
+                                <label  for="confirmPass" class="form-label">Confirmar Contraseña</label>
+                                <input minlength="8" maxlength="20" id="confirmPass" type="password" class="form-control" name="confirmPass" placeholder="••••••••••" required>
+                            </div>
+
+                            <div class="d-grid py-2 px-5">
+                                <button type="submit" class="btn btn-primary btn-lg mt-2 mb-4">Guardar</button>
+                                <a href="perfil.html" class="btn btn-outline-primary btn-lg ">Cancelar</a>
+                            </div>
+                        
+                        </div>
+                    </form>
+                
+            </div>
+        </div>
+    </div>
+
+    <footer id="Footer" class="footer text center">
+        <div class="text-center p-3">
+            <p class="lead link-light">© 2023 Copyright: Codebug.com</p> 
+        </div>
+        </footer>
+    
+</body>
+</html>

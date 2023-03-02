@@ -9,28 +9,22 @@
     --salmon: #ff885d;        /*Coral*/
     --mandys-pink: #f4cab2;   /*Coral claro*/
 }
-
 body{
-    font-family: 'Poppins' ,sans-serif;
-    background: var(--link-water);
+    font-family: 'Poppins' ,sans-serif; 
 }
 
 .navbar {
     background-color: var(--big-stone);
 
 }
-
 .footer{
     background-color: var(--big-stone);
-}
-
-a{
-    color: white;
 }
 
 div {
     size: 100vh;
 }
+
 
 .btn-primary {
     background-color: var(--portage);
@@ -53,17 +47,12 @@ div {
     margin: 0%;
 }
 
-h1 {
-    color: #172542;
-    font-weight: bold;
-}
-
-h2 {
-    color: #172542;
-}
-
 #cursos {
-    background-color: var(--salmon);
+    background-color: var(--link-water);
+}
+
+#kardex{
+    background-color: var(--cornflower);
 }
 
 #curso {
@@ -72,11 +61,11 @@ h2 {
     height: 50vh;
 }
 
-
 .carousel {
 	margin: 30px auto 60px;
 	padding: 0 80px;
 }
+
 .carousel .carousel-item {
 	text-align: center;
 	overflow: hidden;
@@ -88,6 +77,7 @@ h2 {
 	max-width: 100%;
 	display: inline-block;
 }
+
 .carousel .carousel-item .btn {
 	border-radius: 0;
 	font-size: 12px;
@@ -109,7 +99,7 @@ h2 {
 .carousel .thumb-wrapper {
 	margin: 5px;
 	text-align: left;
-	background: #fff;
+	background: white;
 	box-shadow: 0px 2px 2px rgba(0,0,0,0.1);   
 }
 .carousel .thumb-content {
@@ -132,7 +122,7 @@ h2 {
 	z-index: 5;
 	left: 0;
 	right: 0;
-	color: white;
+	color: var(--portage);
 	text-shadow: none;
 	font-weight: bold;
 }

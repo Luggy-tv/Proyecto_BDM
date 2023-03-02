@@ -23,6 +23,7 @@ formLogin.addEventListener("submit", (e)=>{
     if(validatePassword(inputContraseña)){
        alert("Contraseña y correo validos");
        formLogin.reset();
+       window.location = 'inicio.html';
    }
    else{
        alert("Contraseña invalida, favor de volverla a ingresar ");
