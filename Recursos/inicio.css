@@ -19,6 +19,12 @@ h2{
     color: var(--salmon);
 }
 
+p{
+
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 #second{
     color: var(--portage);
 }
@@ -109,7 +115,7 @@ body{
 	z-index: 5;
 	left: 0;
 	right: 0;
-	color: var(--portage);
+	color: var(--salmon);
 	text-shadow: none;
 	font-weight: bold;
 }

@@ -24,6 +24,10 @@ body {
   font-size: 0.9rem;
 }
 
+#turesp{
+    text-align: end;
+}
+
 
 .chat-box {
     min-height: 80vh;
@@ -44,7 +48,7 @@ input::placeholder {
 }
 
 #button-addon2{
-    background-color: var(--portage);
+    background-color: var(--salmon);
     height: 100%;
     border-radius: 0;
     color: white;
@@ -56,5 +60,14 @@ input::placeholder {
 
 
 .bg{
-    background-color: var(--salmon);
+    background-color: var(--portage);
+}
+
+#chatbox{
+    background-color: var(--link-water);
+}
+
+#chatact:active{
+    background-color: var(--cornflower);
+
 }
