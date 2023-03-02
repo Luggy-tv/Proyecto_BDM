@@ -20,6 +20,10 @@ body{
 
 }
 
+.img-fluid{
+	size: 100%;
+}
+
 .footer{
     background-color: var(--big-stone);
 }
