@@ -30,8 +30,6 @@ let formSignin = document.getElementById("form-signin");
 
 formSignin.addEventListener("submit", (e)=>{
 
-    e.preventDefault();
-
     invalidMsg="Hay campos llenados de forma incorrecta, favor de ver el mensaje:\n";
 
     let flag = true;
@@ -40,7 +38,7 @@ formSignin.addEventListener("submit", (e)=>{
     
     let inputGenero= document.getElementsByName("Genero");
     
-    let inputEsMaestro = document.getElementById("esMaestro").checked;
+    //let inputEsMaestro = document.getElementById("esMaestro").checked;
 
     let inputFechaDeNac = new Date( Date.parse(document.getElementById("fechaDeNac").value));//) document.getElementById("fechaDeNac");
 
@@ -72,10 +70,6 @@ formSignin.addEventListener("submit", (e)=>{
     }
 
     if(flag){
-        flag = esMaestro(inputEsMaestro);
-    }
-
-    if(flag){
         flag = ValidaNomApPatApMat(inputNombre,inputApellidoPat,inputApellidoMat);
     }
 
@@ -85,13 +79,10 @@ formSignin.addEventListener("submit", (e)=>{
 
     
     if(!flag){
+        e.preventDefault();
         alert(invalidMsg);
-    }else{
-        alert("Registro exitoso, redirigiendo al inicio de sesion...");
-        window.location = 'login.html';
     }
-
-
+    //else alert("Registro exitoso, redirigiendo al inicio de sesion...");
 });
 
 function validateFechaNac(inputFechaDeNac){
@@ -146,28 +137,22 @@ function validaCorreo(inputEmail){
 };
 
 function validaGenero(inputGenero){
+    let oneIsChecked =false;
     for (var radio of inputGenero){
         if (radio.checked) {  
             //console.log("Genero: ");  
             //console.log(radio.value);
-            return true;
+            oneIsChecked= true;
         }
-        else{
-            invalidMsg+="- Favor de seleccionar un genero";
-            return false;
-        }
+    }
+
+    if(oneIsChecked){
+        return true;
+    }else{
+        invalidMsg+= "- Escoge un genero";
+        return false;
     }
 };
-
-function esMaestro(inputEsMaestro){
-    if (inputEsMaestro) {
-        //console.log("Es Maestro ");  
-        return true;
-    } else {
-        //console.log("No es maestro ");  
-        return true;
-    }
-}
 
 function ValidaNomApPatApMat(inputNombre,inputApellidoPat,inputApellidoMat){
     if(nameRegex.test(inputNombre) && nameRegex.test(inputApellidoPat) && nameRegex.test(inputApellidoMat)){
@@ -182,3 +167,7 @@ function ValidaNomApPatApMat(inputNombre,inputApellidoPat,inputApellidoMat){
         return false;
     }
 };
+
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })

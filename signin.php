@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,6 +14,15 @@
 
 </head>
 <body>
+
+    <?php if(isset($_GET['error'])): ?>
+        <div class="container bg-opacity-100 bg-danger rounded shadow mt-5 p-md-2">
+            <div class="col-12 text-md-center my-2">
+                <h4 class="fw-bold"><?php echo $_GET['error']; ?> </h4>
+            </div>
+        </div>
+    <?php endif ?>
+
     <div class="container bg-opacity-100 bg-white my-5 rounded shadow p-md-2">
         <div class="row">
           
@@ -24,7 +32,7 @@
          
         </div>
 
-        <form action="#" id="form-signin">
+        <form  method="post" id="form-signin" enctype="multipart/form-data" action="upload.php">
             <div class="row gx-3 mx-5">
             
                 <div class="col-6 mb-4">
@@ -35,9 +43,9 @@
                 <div class="col-3 mb-4">
                     <label for="Genero" class="form-label">Genero</label>
                     <br>
-                    <input type="radio" class="form-check-input" name="Genero" id="generoMasculino" value="Masculino">
+                    <input type="radio" class="form-check-input" name="Genero" id="generoMasculino" value="M">
                     <label for="Masculino" class="form-check-label px-2">Masculino</label>
-                    <input type="radio" class="form-check-input" name="Genero" id="generoFemenino" value="Femenino">
+                    <input type="radio" class="form-check-input" name="Genero" id="generoFemenino" value="F">
                     <label for="Femenino" class="form-check-label px-2">Femenino</label>
                 </div>
 
@@ -47,8 +55,6 @@
                     <input id="esMaestro" type="checkbox" class="form-check-input" name="esMaestro">
                     <label for="esMaestro" class="form-check-label px-2">Si</label>
                 </div>
-
-
 
                 <div class="col-4 mb-4">
                     <label for="nombre" class="from-label">Nombre(s)</label>
@@ -71,30 +77,30 @@
                 </div>
                 
                 <div class="col-5 mb-4 ">
-                    <label for="Imagen" class="form-label">Foto de perfil</label>
-                    <input type="file" class="form-control" name="Image" id="ImagenDePerfil" accept="image/*" >
+                    <label for="imagen" class="form-label">Foto de perfil</label>
+                    <input type="file" class="form-control" name="imagen" id="ImagenDePerfil" accept=".png, .jpg, .jpeg" >
                 </div>
-                
+
                 <div class="col-6 mb-4">
                     <label  for="password" class="form-label">Contraseña</label>
-                    <input minlength="8" maxlength="20" id="password" type="password" class="form-control" name="password" placeholder="••••••••••" required>
+                    <input minlength="8" maxlength="16" id="password" type="password" class="form-control" name="password" placeholder="••••••••••" required>
                 </div>
 
                 <div class="col-6 mb-4">
                     <label  for="confirmPass" class="form-label">Confirmar Contraseña</label>
-                    <input minlength="8" maxlength="20" id="confirmPass" type="password" class="form-control" name="confirmPass" placeholder="••••••••••" required>
+                    <input minlength="8" maxlength="16" id="confirmPass" type="password" class="form-control" name="confirmPass" placeholder="••••••••••" required>
                 </div>
            
             </div>
 
             <div class="d-grid py-2 px-5">
-                <button type="submit" class="btn btn-primary btn-lg ">Crear cuenta</button>
+                <button type="submit" name="submit" class="btn btn-primary btn-lg ">Crear cuenta</button>
               </div>
 
               <div class="row">
                 <div class="col-12 pt-2 py-2 text-center">
                     <span> Ya tienes cuenta? 
-                        <a href="login.html">
+                        <a href="login.php">
                             Inicia Sesion
                         </a>
                     </span>

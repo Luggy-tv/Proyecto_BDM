@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 
 	<meta charset="UTF-8">
@@ -55,7 +54,7 @@
           </div>
 
           <div class="my-3 mx-5 mb-4"> <!--Margin in Y-->
-              <span>No tienes cuenta? <a href="signin.html">Registrate</a> </span>
+              <span>No tienes cuenta? <a href="signin.php">Registrate</a> </span>
           </div>
 
         </form>
