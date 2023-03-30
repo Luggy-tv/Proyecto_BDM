@@ -15,10 +15,10 @@
 </head>
 <body>
 
-    <?php if(isset($_GET['error'])): ?>
+    <?php if(isset($_GET['Error'])): ?>
         <div class="container bg-opacity-100 bg-danger rounded shadow mt-5 p-md-2">
             <div class="col-12 text-md-center my-2">
-                <h4 class="fw-bold"><?php echo $_GET['error']; ?> </h4>
+                <h4 class="fw-bold"><?php echo $_GET['Error']; ?> </h4>
             </div>
         </div>
     <?php endif ?>

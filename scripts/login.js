@@ -1,10 +1,3 @@
-class user{
-    constructor(user,password){
-        this.password=password;
-        this.user=user;
-    }
-}
-
 let formLogin =document.getElementById("form-login");
 
 var passRegex = new RegExp("^((?=.*[A-Z])(?=.*[0-9])(?=.*[-¡!¿?:;@#_$%^&,.{}=+*[])(?=.{8,}))");
@@ -12,7 +5,7 @@ var passRegex = new RegExp("^((?=.*[A-Z])(?=.*[0-9])(?=.*[-¡!¿?:;@#_$%^&,.{}=+
 
 formLogin.addEventListener("submit", (e)=>{
 
-    e.preventDefault();
+  
     //let inputEmail = document.getElementById("email").value;
     let inputContraseña =document.getElementById("password").value;
     
@@ -20,14 +13,12 @@ formLogin.addEventListener("submit", (e)=>{
    // console.log(inputContraseña);
    // console.log(validatePassword(inputContraseña));
    
-    if(validatePassword(inputContraseña)){
-       alert("Contraseña y correo validos");
+    if(!validatePassword(inputContraseña)){
+        alert("Contraseña invalida, favor de volverla a ingresar ");
        formLogin.reset();
-       window.location = 'inicio.html';
-   }
-   else{
-       alert("Contraseña invalida, favor de volverla a ingresar ");
-       formLogin.reset();
+       e.preventDefault();
+       //alert("Contraseña y correo validos");
+       //window.location = 'inicio.html';
    }
 })
 

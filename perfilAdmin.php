@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+include_once("scripts/userClass.php");
+$usuario = SetUserFromToken();
+$usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
+$imgPath = "profilePictures/ImagenesSubidasPorUsuarios/".$usuario->Imagen;
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -53,16 +59,15 @@
 
     <!--Imagen y nombre de perfil-->
     <section>
-        <div class="container-fluid bg-light w-100">
+        <div class="container-fluid bg-light w-100 my-4">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
-                    <img class="img-fluid img-thumbnail h-auto" src="profilePictures/ppimg1.png"  alt="" >
+                    <img class="img-fluid img-thumbnail h-auto" src="<?php echo $imgPath ?>"  alt="" >
                 </div>
                 <div class="col-8 mt-3 ">
-                    <h1 id="nombreCompleto" class="fw-bold">Luis Martinez Martinez</h1>
-                    <p id="correo">luis@mail.com</p>
-                    <!--<a id="btn-loadNewPfp" class="btn btn-primary px-2 py-1" href="#">Actualizar foto de perfil</a>-->
+                    <h1 id="nombreCompleto" class="fw-bold"><?php echo $usuario_nombreComp ?></h1>
+                    <p id="correo"><?php echo $usuario->Email ?></p>
                     <a id="btn-editProfile" class="btn btn-primary px-2 py-1"  href="editperfil.html">Editar perfil</a>
                 </div>
             </div>
@@ -71,7 +76,7 @@
     
     <!--TUS CURSOS-->
     <section>
-        <div id="cursos" class="row h-100 pb-4">
+        <div id="cursos" class="row h-auto pb-4">
             <h2 class="my-2 text-center fw-bold">Tus cursos</h2>
 
             <div class="container-xl">
@@ -188,9 +193,9 @@
     
     <!--KARDEX-->
     <section>
-        <div id="kardex" class="row h-100 pb-4">
-            <h2 class="my-2 text-center fw-bold">Tu Kardex</h2>
-            <div class="container-xl ">
+        <div id="kardex" class="row h-auto pb-4">
+            <h2 class="my-2 text-center fw-bold">Usuarios</h2>
+            <div class="container ">
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-10 bg-light rounded-3 p-0">
@@ -198,48 +203,38 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Cursos</th>
-                                <th scope="col">Niveles</th>
-                                <th scope="col">Diploma</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Intentos</th>
+                                <th scope="col">Desbloquear</th>
+                                <th scope="col">Dar de baja</th>
                             </tr>
                             </thead>
+
                             <tbody>
                             <tr>
                                 <th scope="row">1</th>
-                                <td>Aprende HTML desde cero</td>
-                                <td>2/5</td>
-                                <td><button class="btn p-0" onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" disabled> <i class="fa fa-download"></i> Descargar</button></td>
+                                <td>Luis Alfonso</td>
+                                <td>Activo</td>
+                                <td>1</td>
+                                <td><button class="btn p-0" disabled> <i class="fa fa-unlock" aria-hidden="true"></i> </button></td>
+                                <td><button class="btn p-0"> <i class="fa fa-trash-o" aria-hidden="true"></i> </button></td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
-                                <td>Bootstrap: Todo lo que debes saber</td>
-                                <td>1/8</td>
-                                <td><button class="btn p-0" onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" disabled> <i class="fa fa-download"></i> Descargar</button></td>
+                                <td>Velvet Daniela</td>
+                                <td>Bloqueado</td>
+                                <td>15</td>
+                                <td><button class="btn p-0"> <i class="fa fa-unlock" aria-hidden="true"></i> </button></td>
+                                <td><button class="btn p-0"> <i class="fa fa-trash-o" aria-hidden="true"></i> </button></td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td>Fundamentos de las bases de datos</td>
-                                <td>0/10</td>
-                                <td><button class="btn p-0"  onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" disabled> <i class="fa fa-download"></i> Descargar</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>MySQL para principiantes</td>
-                                <td>15/15</td>
-                                <td><button class="btn p-0" onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" > <i class="fa fa-download"></i> Descargar</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>MySQL nivel avanzado</td>
-                                <td>5/20</td>
-                                <td><button class="btn p-0" onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" disabled> <i class="fa fa-download"></i> Descargar</button></td>
-                            </tr>
-                            
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Introducción a la progrmación web</td>
-                                <td>10/10</td>
-                                <td><button class="btn p-0" onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')"> <i class="fa fa-download"></i> Descargar</button></td>
+                                <td>Irving Jaret</td>
+                                <td>Bloqueado</td>
+                                <td>15</td>
+                                <td><button class="btn p-0"> <i class="fa fa-unlock" aria-hidden="true"></i> </button></td>
+                                <td><button class="btn p-0"> <i class="fa fa-trash-o" aria-hidden="true"></i> </button></td>
                             </tr>
 
                             </tbody>
