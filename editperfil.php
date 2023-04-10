@@ -10,6 +10,7 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Editar Perfil | Codebug </title>
 
     <link rel="icon" href="Recursos/Intellibug_placeholder.png">
@@ -19,26 +20,9 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
     
     <link rel="stylesheet" href="CSS/edit_perfil.css">
 
-    <link rel="preload" as="image" href="profilePictures/ppimg1.png">
 
 </head>
 <body>
-    
-    <?php if(isset($_GET['success'])): ?>
-        <div class="container bg-opacity-100 bg-info rounded shadow mt-5 p-md-2">
-            <div class="col-12 text-md-center my-2">
-                <h4 class="fw-bold"><?php echo $_GET['success']; ?> </h4>
-            </div>
-        </div>
-    <?php endif ?>
-
-    <?php if(isset($_GET['error'])): ?>
-        <div class="container bg-opacity-100 bg-danger rounded shadow mt-5 p-md-2">
-            <div class="col-12 text-md-center my-2">
-                <h4 class="fw-bold"><?php echo $_GET['error']; ?> </h4>
-            </div>
-        </div>
-    <?php endif ?>
 
     <nav class="navbar navbar-dark navbar-expand-md">
         <div class="container-fluid">
@@ -60,6 +44,22 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
 
         </div>
     </nav>
+
+    <?php if(isset($_GET['success'])): ?>
+        <div class="container bg-opacity-100 bg-info rounded shadow mt-5 p-md-2">
+            <div class="col-12 text-md-center my-2">
+                <h4 class="fw-bold"><?php echo $_GET['success']; ?> </h4>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <?php if(isset($_GET['error'])): ?>
+        <div class="container bg-opacity-100 bg-danger rounded shadow mt-5 p-md-2">
+            <div class="col-12 text-md-center my-2">
+                <h4 class="fw-bold"><?php echo $_GET['error']; ?> </h4>
+            </div>
+        </div>
+    <?php endif ?>
 
     <div class="container bg-white my-3 rounded shadow p-md-2">
 
@@ -95,7 +95,7 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
                             </div>
 
                             <div class="col-6 mb-4">
-                                <label for="nombre" class="from-label">   </label>
+                                <label for="nombre" class="from-label"> Nombre nuevo:  </label>
                                 <input minlength="1" maxlength="30" id="NuevoNombre" type="text" class="form-control" name="NuevoNombre" placeholder="<?php echo $usuario->nombre ?>" required >
                             </div>
                             
@@ -105,7 +105,7 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
                             </div>
                             
                             <div class="col-6 mb-4">
-                                <label for="nuevoApellidoPat" class="from-label">  </label>
+                                <label for="nuevoApellidoPat" class="from-label"> Apellido Nuevo: </label>
                                 <input minlength="3" maxlength="30" id="nuevoApellidoPat" type="text" class="form-control" name="nuevoApellidoPat" placeholder="<?php echo $usuario->apellidoPat ?>" required>
                             </div>
 
@@ -115,7 +115,7 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
                             </div> 
             
                             <div class="col-6 mb-4">
-                                <label for="nuevoApellidoMat" class="from-label"> </label>
+                                <label for="nuevoApellidoMat" class="from-label"> Apellido Nuevo </label>
                                 <input minlength="3" maxlength="30" id="nuevoApellidoMat" type="text" class="form-control" name="nuevoApellidoMat" placeholder="<?php echo $usuario->apellidoMat ?>" required>
                             </div> 
                             
@@ -135,7 +135,7 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
                             </div>
 
                             <div class="d-grid py-2 px-5">
-                                <button type="submit" class="btn btn-primary btn-lg mt-2 mb-4">Guardar</button>
+                                <button type="submit" name="submit" class="btn btn-primary btn-lg mt-2 mb-4">Guardar</button>
                                 <a href="scripts/perfilRedir.php" class="btn btn-outline-primary btn-lg ">Cancelar</a>
                             </div>
                         

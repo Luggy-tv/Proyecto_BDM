@@ -68,7 +68,7 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/".$usuario->Imagen;
                 <div class="col-8 mt-3 ">
                     <h1 id="nombreCompleto" class="fw-bold"><?php echo $usuario_nombreComp ?></h1>
                     <p id="correo"><?php echo $usuario->Email ?></p>
-                    <a id="btn-editProfile" class="btn btn-primary px-2 py-1"  href="editperfil.html">Editar perfil</a>
+                    <a id="btn-editProfile" class="btn btn-primary px-2 py-1"  href="editperfil.php">Editar perfil</a>
                 </div>
             </div>
         </div>
