@@ -14,7 +14,9 @@ drop table curso;
 drop table categoria;
 drop table mensajes;
 drop table conversacion;
+drop table usuarioLogins;
 drop table usuario;
+
 */
 
 create table  if not exists usuario( 
@@ -26,15 +28,25 @@ create table  if not exists usuario(
     Pass		varchar(16) not null		comment 'Contaseña del usuario',
     Genero		Char not null				comment 'Genero en el cual se identifica el usuario M=Masculino, F=Femenino',
     FechaDeNac 	date not null				comment 'Fecha de nacimiento del usuario',
-    LastLogin	datetime					comment 'Fecha del utlimo inico de sesion del usuario',
     Imagen		TEXT  NOT NULL				comment 'Imagen ingresada por el usuario',
     Estatus		bit	not null default true	comment 'Bit que identifica si el usuario esta activo y puede ser accesado por inicio de sesion',
-    isBlocked	bit	not null				comment 'Bit que identifica si el usuario esta bloqueado o no, el usuario se bloquea con 3 errores de contraseña al iniciar sesion',
+    isBlocked	tinyint	not null			comment 'Intentos que cuenta si el usuario esta bloqueado o no, el usuario se bloquea con 3 errores de contraseña al iniciar sesion',
     isAdmin		bit	not null				comment 'Bit que identifica si el usuario es administrador de la plataforma',
     isMaestro	bit	not null				comment 'Bit que identifica si el usuario es maestro y puede subir cursos',
     constraint PK_Usuario
 		Primary key (ID_Usuario)
 		
+)Engine=InnoDB;
+
+create table if not exists usuarioLogins(
+	ID_login		int auto_increment 	comment 'Identificador de cada login de usuario es autogenerado y comienza a partir del 1',
+    ID_UsuarioFK 	int					comment 'Llave foranea que hace referencia al usuario que inicia sesion',
+	LastLogin		datetime			comment 'Fecha del utlimo inico de sesion del usuario',
+	LoginToken		varchar(10)			comment 'String generado de forma aleatoria que identifica la sesion del usuario, se encuentra aqui para validad la sesion con la que se encuentra en el buscador',
+    constraint PK_usuarioLogin
+		primary key (ID_login),
+	constraint FK_UsuarioQueLogin
+		foreign key (ID_UsuarioFK) references usuario(ID_usuario)
 )Engine=InnoDB;
 
 create table if not exists curso(

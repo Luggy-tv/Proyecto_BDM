@@ -1,8 +1,16 @@
 <?php
-include_once("scripts/userClass.php");
-$usuario = SetUserFromToken();
-$usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
-$imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
+
+
+
+if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
+    header("HTTP/1.1 400 Bad Request");
+    die("Se produjo un error de solicitud. La cookie no se encontró o está vacía.");
+  }else{
+    include_once("scripts/userClass.php");
+    $usuario = SetUserFromToken();
+    $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
+    $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/". $usuario->Imagen;
+  }
 ?>
 
 <html lang="en">

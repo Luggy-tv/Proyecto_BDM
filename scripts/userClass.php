@@ -63,4 +63,5 @@ function getIDFromToken()
     return $ID_Usuario;
 
 }
+
 ?>

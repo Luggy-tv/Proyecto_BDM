@@ -26,6 +26,7 @@ if (isset($_POST['submit']) && isset($_FILES['imagen']) && $_SERVER["REQUEST_MET
     if (!ValidaEmail($Email)) {
         //Validate Imagen
         if ($img_error === 0) {
+            
             if ($img_size > 125000) {
                 $em = "Su archivo es demasiado grande, no puede ser mas de 1MB.";
                 echo "<script type='text/javascript'>alert('$em');</script>";
