@@ -38,14 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //print_r($p_token);
 
             mysqli_close($conn);
-            header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/inicio.php");
+            header("Location: ../inicio.php");
 
 
         } else {
 
             AddAttempt($Email);
             $em = "La contraseña no es correcta";
-            header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/login.php?error=$em");
+            header("Location: ../login.php?error=$em");
             mysqli_close($conn);
         }
 
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
 
         $em = "Ese correo electronico no existe o el usuario esta bloqueado";
-        header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/login.php?error=$em");
+        header("Location: ../login.php?error=$em");
         mysqli_close($conn);
     }
 

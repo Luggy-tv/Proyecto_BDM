@@ -28,7 +28,7 @@ create table  if not exists usuario(
     Pass		varchar(16) not null		comment 'Contaseña del usuario',
     Genero		Char not null				comment 'Genero en el cual se identifica el usuario M=Masculino, F=Femenino',
     FechaDeNac 	date not null				comment 'Fecha de nacimiento del usuario',
-    Imagen		TEXT  NOT NULL				comment 'Imagen ingresada por el usuario',
+    Imagen		mediumblob  NOT NULL				comment 'Imagen ingresada por el usuario',
     Estatus		bit	not null default true	comment 'Bit que identifica si el usuario esta activo y puede ser accesado por inicio de sesion',
     isBlocked	tinyint	not null			comment 'Intentos que cuenta si el usuario esta bloqueado o no, el usuario se bloquea con 3 errores de contraseña al iniciar sesion',
     isAdmin		bit	not null				comment 'Bit que identifica si el usuario es administrador de la plataforma',

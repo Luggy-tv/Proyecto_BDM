@@ -2,7 +2,7 @@
 
 
 
-if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
+if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
   }else{
@@ -35,7 +35,7 @@ if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
     <nav class="navbar navbar-dark navbar-expand-md">
         <div class="container-fluid">
 
-            <a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+            <a class="navbar-brand link-light" href="inicio.php">Codebug</a>
             
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -45,7 +45,7 @@ if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
                     <li class="nav-item"><a class="nav-link link-light" href="chat.html">Mensajes</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="inicio.html">Mas Cursos</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="inicio.php">Mas Cursos</a></li>
                     <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php">Perfil</a></li>
                 </ul>
             </div>
@@ -87,7 +87,7 @@ if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
         <div class="row">
             <div class="col-md-6 px-5 py-3">
                 <div class="row">
-                    <img class="img-thumbnail h-25 rounded  " src="<?php echo $imgPath ?>" alt="">
+                    <img class="img-thumbnail h-25 rounded  " src="scripts/loaduserimg.php" alt="">
                 </div>
 
             

@@ -21,15 +21,17 @@ if(isset($_POST['submit']) && isset($_FILES['Imagen']) && $_SERVER["REQUEST_METH
     $img_size       = $_FILES['Imagen']['size'];
     $img_temp_name  = $_FILES['Imagen']['tmp_name'];
     $img_error      = $_FILES['Imagen']['error'];
+    $img_temp_name_str = mysqli_escape_string ($conn,file_get_contents($_FILES['Imagen']['tmp_name']));
+    
 
     
     if(ValidPass($usuario_Actual->Email,$Pass)){
         if($img_error===0){
 
-            if($img_size > 125000){
+            if($img_size > 1000000){
                 echo "Su archivo es demasiado grande";
                 $em= "Su archivo es demasiado grande, no puede ser mas de 1MB.";
-                header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/editperfil.php?error=$em");
+                header("Location: editperfil.php?error=$em");
             }
             else{
 
@@ -51,21 +53,21 @@ if(isset($_POST['submit']) && isset($_FILES['Imagen']) && $_SERVER["REQUEST_METH
                     //print_r($img_upload_path);
 
                     
-                    $sql ="call SP_UsuarioManage('B', $ID_Usuario , '$Nombre' , '$ApPaterno' , '$ApMaterno' ,'','','','', '$new_img_name' ,'');";
+                    $sql ="call SP_UsuarioManage('B', $ID_Usuario , '$Nombre' , '$ApPaterno' , '$ApMaterno' ,'','','','', '$img_temp_name_str' ,'');";
                     
-                    $img_upload_path = '/profilePictures/ImagenesSubidasPorUsuarios/' . $new_img_name;
+                    // $img_upload_path = '/profilePictures/ImagenesSubidasPorUsuarios/' . $new_img_name;
 
-                    if(mysqli_query($conn,$sql)&& move_uploaded_file($img_temp_name,$img_upload_path)){
+                    if(mysqli_query($conn,$sql)){
 
                         echo "Se han cambiado los datos de forma exitosa";
                         $em = 'Se han cambiado los datos de forma exitosa...';
                         
-                        //header("Location:  http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/editperfil.php?success=$em");
+                        header("Location:  editperfil.php?success=$em");
     
                     }else{
                         echo "Error de Base de datos o no se encontró la direccion que se marca";
                         $em = 'Error de Base de datos: ' . mysqli_error($conn);
-                        //header("Location:  http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/editperfil.php?error=$em");
+                        header("Location:  editperfil.php?error=$em");
     
                     }
                     
@@ -73,7 +75,7 @@ if(isset($_POST['submit']) && isset($_FILES['Imagen']) && $_SERVER["REQUEST_METH
                 }else{
                     echo "No puede subir ese tipo de archivo";
                     $em= "No puede subir ese tipo de archivo, necesita ser de imagen (png, jpg, jepg) Favor de Volverlo a intentar";
-                    header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/editperfil.php?error=$em");
+                    header("Location: editperfil.php?error=$em");
     
                 }
     
@@ -89,7 +91,7 @@ if(isset($_POST['submit']) && isset($_FILES['Imagen']) && $_SERVER["REQUEST_METH
     }else{
         echo "La contraseña no es correcta";
         $em= "La contraseña no es correcta, porfavor introduzca la contraseña con la que inicio sesion.";
-        header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/editperfil.php?error=$em");
+        header("Location: editperfil.php?error=$em");
     }
             
 }

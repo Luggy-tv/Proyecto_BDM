@@ -1,13 +1,13 @@
 <?php
-if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
+if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
-  }else{
+} else {
     include_once("scripts/userClass.php");
     $usuario = SetUserFromToken();
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
     $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
-  }
+}
 
 ?>
 
@@ -49,7 +49,7 @@ if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
     <nav class="navbar navbar-dark navbar-expand-md">
         <div class="container-fluid">
 
-            <a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+            <a class="navbar-brand link-light" href="inicio.php">Codebug</a>
 
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -72,7 +72,7 @@ if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
-                    <img class="img-fluid img-thumbnail h-auto" src="<?php echo $imgPath ?>" alt="">
+                    <img class="img-fluid img-thumbnail h-auto" src="scripts/loaduserimg.php">
                 </div>
                 <div class="col-8 mt-3 ">
                     <h1 id="nombreCompleto" class="fw-bold">

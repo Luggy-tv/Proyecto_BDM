@@ -21,7 +21,7 @@ CREATE PROCEDURE SP_UsuarioManage(
 	IN p_Pass		varchar(16)	,
 	IN p_Genero		Char 		,	
 	IN p_FechaDeNac	date 		,
-	IN p_Imagen		TEXT		,	
+	IN p_Imagen		mediumblob		,	
 	IN p_isMaestro	bit			
     
     /*    Opciones 

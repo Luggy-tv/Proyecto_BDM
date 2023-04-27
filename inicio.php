@@ -1,7 +1,6 @@
 <?php
 
-
-if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
+if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
   }else{
@@ -47,7 +46,7 @@ if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.php">Codebug</a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
