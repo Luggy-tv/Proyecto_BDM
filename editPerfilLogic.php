@@ -21,7 +21,7 @@ if(isset($_POST['submit']) && isset($_FILES['Imagen']) && $_SERVER["REQUEST_METH
     $img_size       = $_FILES['Imagen']['size'];
     $img_temp_name  = $_FILES['Imagen']['tmp_name'];
     $img_error      = $_FILES['Imagen']['error'];
-    $img_temp_name_str = mysqli_escape_string ($conn,file_get_contents($_FILES['Imagen']['tmp_name']));
+    $img_temp_name_str = mysqli_real_escape_string ($conn,file_get_contents($_FILES['Imagen']['tmp_name']));
     
 
     
@@ -53,7 +53,7 @@ if(isset($_POST['submit']) && isset($_FILES['Imagen']) && $_SERVER["REQUEST_METH
                     //print_r($img_upload_path);
 
                     
-                    $sql ="call SP_UsuarioManage('B', $ID_Usuario , '$Nombre' , '$ApPaterno' , '$ApMaterno' ,'','','','', '$img_temp_name_str' ,'');";
+                    $sql ="call SP_UsuarioManage('B', $ID_Usuario , '$Nombre' , '$ApPaterno' , '$ApMaterno' ,'','','','', '$img_ex_lc' , '$img_temp_name_str'  ,'');";
                     
                     // $img_upload_path = '/profilePictures/ImagenesSubidasPorUsuarios/' . $new_img_name;
 

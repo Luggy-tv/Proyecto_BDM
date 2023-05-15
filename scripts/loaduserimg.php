@@ -1,6 +1,7 @@
 <?php
 include_once("./userClass.php");
     $usuario = SetUserFromToken();
-    header("Content-type: image/jpeg");
+    $userImageEx = $usuario->ImagenEx;
+    header("Content-type: image/{$userImageEx}");
     echo $usuario->Imagen;
 ?>

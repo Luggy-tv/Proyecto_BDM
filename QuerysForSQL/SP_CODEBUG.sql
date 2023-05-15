@@ -1,12 +1,5 @@
 use codebug;
 
-/*
-drop procedure SP_UsuarioManage;
-drop procedure SP_UsuarioLoginUpdate;
-drop procedure SP_UsuarioBlock;
-drop procedure SP_UsuarioUNBlock;
-*/
-
 	#SP_UsuarioManage
 #call SP_UsuarioManage(OP,p_ID_Usuario,p_Nombre, p_ApPaterno ,p_ApMaterno,p_Email,p_Pass,p_Genero,p_FechaDeNac,p_Imagen,p_isMaestro);
 DROP PROCEDURE IF EXISTS SP_UsuarioManage;
@@ -21,7 +14,8 @@ CREATE PROCEDURE SP_UsuarioManage(
 	IN p_Pass		varchar(16)	,
 	IN p_Genero		Char 		,	
 	IN p_FechaDeNac	date 		,
-	IN p_Imagen		mediumblob		,	
+    IN p_ImagenEx varchar(10)	,	
+	IN p_Imagen		mediumblob	,	
 	IN p_isMaestro	bit			
     
     /*    Opciones 
@@ -34,12 +28,12 @@ CREATE PROCEDURE SP_UsuarioManage(
 BEGIN
     
 	IF OP = 'A' THEN
-		INSERT INTO usuario(Nombre,ApPaterno,ApMaterno,Email,Pass,Genero,FechaDeNac,Imagen,isMaestro)
-		VALUES(p_Nombre,p_ApPaterno,p_ApMaterno,p_Email,p_Pass,p_Genero,p_FechaDeNac,p_Imagen,p_isMaestro);
+		INSERT INTO usuario(Nombre,ApPaterno,ApMaterno,Email,Pass,Genero,FechaDeNac,Imagen,ImagenEx,isMaestro)
+		VALUES(p_Nombre,p_ApPaterno,p_ApMaterno,p_Email,p_Pass,p_Genero,p_FechaDeNac,p_Imagen,p_ImagenEx,p_isMaestro);
 	END IF;
     IF OP = 'Z' then
-		insert into usuario(Nombre,ApPaterno,ApMaterno,Email,Pass,Genero,FechaDeNac,Imagen,isAdmin)
-		VALUES(p_Nombre,p_ApPaterno,p_ApMaterno,p_Email,p_Pass,p_Genero,p_FechaDeNac,p_Imagen,true);
+		insert into usuario(Nombre,ApPaterno,ApMaterno,Email,Pass,Genero,FechaDeNac,Imagen,ImagenEx,isAdmin)
+		VALUES(p_Nombre,p_ApPaterno,p_ApMaterno,p_Email,p_Pass,p_Genero,p_FechaDeNac,p_Imagen,p_ImagenEx,true);
 	end if;
     IF OP = 'B' then
 		update usuario
@@ -47,7 +41,8 @@ BEGIN
 			Nombre 		= ifnull(p_nombre,nombre),
             ApPaterno	= ifnull(p_ApPaterno,ApPaterno),
             ApMaterno	= ifnull(p_ApMaterno,ApMaterno),
-            Imagen		= ifnull(p_Imagen,Imagen)
+            Imagen		= ifnull(p_Imagen,Imagen),
+            ImagenEx	= ifnull(p_ImagenEx,ImagenEx)
 		where
 			ID_Usuario=p_ID_Usuario;
     end if;
@@ -80,8 +75,6 @@ begin
     
 end //
 DELIMITER ;
-
-
 
 	#SP_UsuarioAddAttempt
 #call SP_UsuarioAddAttempt(p_email);
@@ -233,11 +226,10 @@ begin
     IF user_id IS NULL THEN
         SELECT 'Token not found';
     ELSE
-        SELECT Nombre,ApPaterno ,ApMaterno , Email, Imagen,isBlocked , isAdmin,isMaestro FROM usuario WHERE ID_Usuario = user_id;
+        SELECT Nombre,ApPaterno ,ApMaterno , Email, Imagen,ImagenEx,isBlocked , isAdmin,isMaestro FROM usuario WHERE ID_Usuario = user_id;
     END IF;
 end //
 DELIMITER ;
-
 
 	#SP_SelectIDFromToken
 #Call SP_SelectIDFromToken(p_token);
@@ -248,7 +240,13 @@ create procedure SP_SelectIDFromToken(
 )
 begin
 	DECLARE user_id INT;
-    SELECT ID_UsuarioFK INTO user_id FROM usuarioLogins WHERE LoginToken = p_token LIMIT 1;
+SELECT 
+    ID_UsuarioFK
+INTO user_id FROM
+    usuarioLogins
+WHERE
+    LoginToken = p_token
+LIMIT 1;
     IF user_id IS NULL THEN
         SELECT 'Token not found';
     ELSE
@@ -257,6 +255,34 @@ begin
 end //
 DELIMITER ;
 
+	#SP_CategoriaManage
+    
+DROP PROCEDURE IF EXISTS SP_CategoriaManage;
+DELIMITER //
+create procedure SP_CategoriaManage(
+IN OP 						char		,
+IN p_IDCategoria			int			,
+IN p_NombreDeCategoria 		varchar(30)	,
+IN p_DescripcionDeCategoria varchar(140),
+IN p_Usuario				int		
 
-
-
+    /*    Opciones 
+    A= Ingresar
+    C=Eliminar (baja logica) 
+    */	
+)
+begin
+	
+    DECLARE p_fechaDeCreacion datetime;
+    set p_fechaDeCreacion=  curdate();
+    
+	IF OP ='A' then
+		insert into categoria(NombreDeCategoria,DescripcionCategoria,FechaDeCreacion,Usuario) Values (p_nombreDeCategoria,p_DescripcionDeCategoria,p_fechaDeCreacion,p_usuario);
+    end if;
+    
+    IF OP = 'C' then
+		Delete from categoria where ID_Categoria =p_IDCategoria;
+    end if;
+    
+end //
+DELIMITER ;

@@ -21,7 +21,7 @@ if (isset($_POST['submit']) && isset($_FILES['imagen']) && $_SERVER["REQUEST_MET
     $img_type = $_FILES['imagen']['type'];
     $img_size = $_FILES['imagen']['size'];
     $img_temp_name = $_FILES['imagen']['tmp_name'];
-    $img_temp_name_str = mysqli_escape_string ($conn,file_get_contents($_FILES['imagen']['tmp_name']));
+    $img_temp_name_str = mysqli_real_escape_string ($conn,file_get_contents($_FILES['imagen']['tmp_name']));
     $img_error = $_FILES['imagen']['error'];
 
     //print_r($img_size);
@@ -43,9 +43,11 @@ if (isset($_POST['submit']) && isset($_FILES['imagen']) && $_SERVER["REQUEST_MET
                 if (in_array($img_ex_lc, $allowed_exs)) {
 
                     //print_r($img_temp_name_str);
-                    $sql = "call SP_UsuarioManage('A', 0, '$Nombre' ,  '$ApPaterno', '$ApMaterno', '$Email', '$Pass', '$Genero', $FechaDeNac, '$img_temp_name_str', $isMaestro);";
+                    $sql = "call SP_UsuarioManage('A', 0, '$Nombre' ,  '$ApPaterno', '$ApMaterno', '$Email', '$Pass', '$Genero', $FechaDeNac, '$img_temp_name_str','$img_ex_lc', $isMaestro);";
                     
                     // $new_img_name = uniqid("IMG-", true) . "." . $img_ex_lc;
+
+                    //$path = getcwd() .  '\Videos\\' . GUID() . '.mp4';
 
                     // $sql = "call SP_UsuarioManage('A', 0, '$Nombre' ,  '$ApPaterno', '$ApMaterno', '$Email', '$Pass', '$Genero', $FechaDeNac, '$new_img_name', $isMaestro);";
 
@@ -53,6 +55,7 @@ if (isset($_POST['submit']) && isset($_FILES['imagen']) && $_SERVER["REQUEST_MET
 
                     //     $img_upload_path = 'profilePictures/ImagenesSubidasPorUsuarios/' . $new_img_name;
                     //     move_uploaded_file($img_temp_name, $img_upload_path);
+
                         $em = 'Registro exitoso. Se ha redirigido al inicio de sesion...';
                         // echo "<script type='text/javascript'>alert('$em');</script>";
                         header("Location: login.php?success=$em");

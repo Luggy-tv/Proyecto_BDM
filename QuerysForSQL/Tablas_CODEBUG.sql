@@ -4,10 +4,14 @@ use codebug;
 /* 
 DROPS ALL TABLES
 
+drops db
+drop database codebug;
+
+
 drop table adjuntoDeCurso;
 drop table niveldecurso;
 drop table categoriaDeCurso;
-drop table diploma;
+drop table diploma; 
 drop table calificacionDeCurso;
 drop table UsuarioEnCurso;
 drop table curso;
@@ -16,7 +20,6 @@ drop table mensajes;
 drop table conversacion;
 drop table usuarioLogins;
 drop table usuario;
-
 */
 
 create table  if not exists usuario( 
@@ -28,7 +31,8 @@ create table  if not exists usuario(
     Pass		varchar(16) not null		comment 'Contaseña del usuario',
     Genero		Char not null				comment 'Genero en el cual se identifica el usuario M=Masculino, F=Femenino',
     FechaDeNac 	date not null				comment 'Fecha de nacimiento del usuario',
-    Imagen		mediumblob  NOT NULL				comment 'Imagen ingresada por el usuario',
+    Imagen		mediumblob  NOT NULL		comment 'Imagen ingresada por el usuario',
+    ImagenEx  varchar(10) NOT NULL			comment 'Extension de la imagen, es necesaria para cargar la imagen en el cliente',				
     Estatus		bit	not null default true	comment 'Bit que identifica si el usuario esta activo y puede ser accesado por inicio de sesion',
     isBlocked	tinyint	not null			comment 'Intentos que cuenta si el usuario esta bloqueado o no, el usuario se bloquea con 3 errores de contraseña al iniciar sesion',
     isAdmin		bit	not null				comment 'Bit que identifica si el usuario es administrador de la plataforma',
@@ -89,11 +93,12 @@ create table if not exists adjuntoDeCurso(
 )Engine=InnoDB;
 
 create table if not exists categoria(
-	ID_Categoria 			int  auto_increment		comment 'Identifiacor de cada categoria es auto generado y comienza a partir del 1',
-    NombreDeCategoria		varchar(30) not null	comment 'Nombre de la categoria',
-    DescripcionCategoria	varchar(140) not null	comment 'Breve descripcion de la categoria',
-    FechaDeCreacion			datetime	not null	comment 'Fecha de creacion de la categoría',
-    Usuario					int			not null	comment 'Llave foranea que hace referencia al usuario que crea la categoria',
+	ID_Categoria 			int  auto_increment				comment 'Identifiacor de cada categoria es auto generado y comienza a partir del 1',
+    NombreDeCategoria		varchar(30) 		not null	comment 'Nombre de la categoria',
+    DescripcionCategoria	varchar(140) 		not null	comment 'Breve descripcion de la categoria',
+    FechaDeCreacion			datetime			not null	comment 'Fecha de creacion de la categoría',
+    Usuario					int					not null	comment 'Llave foranea que hace referencia al usuario que crea la categoria',
+    Estatus					bit	default true	not null  	comment 'Bit que identifica que la categoria esta activa',
     constraint PK_Categoria
 		primary key (ID_Categoria),
 	constraint PK_UsuarioQueCreaCategoria
