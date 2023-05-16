@@ -21,7 +21,7 @@ if (isset($_POST['submit']) && isset($_FILES['imagen']) && $_SERVER["REQUEST_MET
     $img_type = $_FILES['imagen']['type'];
     $img_size = $_FILES['imagen']['size'];
     $img_temp_name = $_FILES['imagen']['tmp_name'];
-    $img_temp_name_str =file_get_contents($_FILES['imagen']['tmp_name']);
+    $img_temp_name_str = mysqli_escape_string ($conn,file_get_contents($_FILES['imagen']['tmp_name']));
     $img_error = $_FILES['imagen']['error'];
 
     if (!ValidaEmail($Email)) {
@@ -40,27 +40,27 @@ if (isset($_POST['submit']) && isset($_FILES['imagen']) && $_SERVER["REQUEST_MET
                 $allowed_exs = array("jpg", "jpeg", "png");
                 if (in_array($img_ex_lc, $allowed_exs)) {
 
-                    $sql = "call SP_UsuarioManage('A', 0, '$Nombre' ,  '$ApPaterno', '$ApMaterno', '$Email', '$Pass', '$Genero', $FechaDeNac, '$new_img_name', $isMaestro);";
+                    $sql = "call SP_UsuarioManage('A', 0, '$Nombre' ,  '$ApPaterno', '$ApMaterno', '$Email', '$Pass', '$Genero', $FechaDeNac, '$img_temp_name_str', $isMaestro);";
                     
                     // $new_img_name = uniqid("IMG-", true) . "." . $img_ex_lc;
 
                     // $sql = "call SP_UsuarioManage('A', 0, '$Nombre' ,  '$ApPaterno', '$ApMaterno', '$Email', '$Pass', '$Genero', $FechaDeNac, '$new_img_name', $isMaestro);";
 
-                    // if (mysqli_query($conn, $sql)) {
+                    if (mysqli_query($conn, $sql)) {
 
-                    //     $img_upload_path = 'profilePictures/ImagenesSubidasPorUsuarios/' . $new_img_name;
-                    //     move_uploaded_file($img_temp_name, $img_upload_path);
-                    //     $em = 'Registro exitoso. Se ha redirigido al inicio de sesion...';
-                    //     // echo "<script type='text/javascript'>alert('$em');</script>";
-                    //     header("Location: login.php?success=$em");
+                        // $img_upload_path = 'profilePictures/ImagenesSubidasPorUsuarios/' . $new_img_name;
+                        // move_uploaded_file($img_temp_name, $img_upload_path);
+                        $em = 'Registro exitoso. Se ha redirigido al inicio de sesion...';
+                        // echo "<script type='text/javascript'>alert('$em');</script>";
+                        header("Location: login.php?success=$em");
 
-                    // } else {
+                    } else {
 
-                    //     $em = 'Error de Base de datos: ' . mysqli_error($conn);
-                    //     //echo "<script type='text/javascript'>alert('$em');</script>";
-                    //     header("Location: signin.php?error=$em");
+                        $em = 'Error de Base de datos: ' . mysqli_error($conn);
+                        //echo "<script type='text/javascript'>alert('$em');</script>";
+                        header("Location: signin.php?error=$em");
 
-                    // }
+                    }
 
                 } else {
                     $em = "No puede subir ese tipo de archivo, necesita ser de imagen (png, jpg, jepg) Favor de Volverlo a intentar";

@@ -1,7 +1,7 @@
 <?php
 
 
-if (!isset($_COOKIE['mi_cookie']) || empty($_COOKIE['mi_cookie'])) {
+if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
   }else{
