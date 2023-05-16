@@ -17,14 +17,15 @@ BEGIN
 END; // 
 DELIMITER
 
+drop trigger if exists TRG_Before_Delete_Categoria;
 DELIMITER //
-CREATE TRIGGER before_delete_categoria
+CREATE TRIGGER TRG_Before_Delete_Categoria
 BEFORE DELETE ON categoria
 FOR EACH ROW
 BEGIN
-UPDATE categoria
+	UPDATE categoria
 	set
-		Estatus= false
-        Where OLD.ID_Categoria = IDCategoria;
+		Estatus= 0
+	Where OLD.ID_Categoria = ID_Categoria;
 END //
 DELIMITER ;

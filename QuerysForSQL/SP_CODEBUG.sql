@@ -187,7 +187,15 @@ create procedure SP_SelectTokenFromEmail(
 )
 begin
 	DECLARE found_token VARCHAR(10);
-    SELECT LoginToken INTO found_token FROM usuarioLogins left join usuario on ID_Usuario = ID_UsuarioFK WHERE LoginToken = token_to_find LIMIT 1;
+SELECT 
+    LoginToken
+INTO found_token FROM
+    usuarioLogins
+        LEFT JOIN
+    usuario ON ID_Usuario = ID_UsuarioFK
+WHERE
+    LoginToken = token_to_find
+LIMIT 1;
     IF found_token IS NULL THEN
         SELECT '0';
     ELSE
@@ -255,16 +263,15 @@ LIMIT 1;
 end //
 DELIMITER ;
 
-	#SP_CategoriaManage
-    
+	#SP_CategoriaManage    
 DROP PROCEDURE IF EXISTS SP_CategoriaManage;
 DELIMITER //
+/* Call sp_categoriaManage(OP,p_IDCategoria,p_NombreDeCategoria,p_DescripcionDeCategoria,p_Usuario) */
 create procedure SP_CategoriaManage(
-IN OP 						char		,
-IN p_IDCategoria			int			,
-IN p_NombreDeCategoria 		varchar(30)	,
-IN p_DescripcionDeCategoria varchar(140),
-IN p_Usuario				int		
+	IN OP 						char		,
+	IN p_IDCategoria			int			,
+	IN p_NombreDeCategoria 		varchar(30)	,
+	IN p_DescripcionDeCategoria varchar(140)
 
     /*    Opciones 
     A= Ingresar
@@ -274,15 +281,36 @@ IN p_Usuario				int
 begin
 	
     DECLARE p_fechaDeCreacion datetime;
-    set p_fechaDeCreacion=  curdate();
+    set p_fechaDeCreacion=  now();
     
 	IF OP ='A' then
-		insert into categoria(NombreDeCategoria,DescripcionCategoria,FechaDeCreacion,Usuario) Values (p_nombreDeCategoria,p_DescripcionDeCategoria,p_fechaDeCreacion,p_usuario);
+		insert into categoria(NombreDeCategoria,DescripcionCategoria,FechaDeCreacion) Values (p_nombreDeCategoria,p_DescripcionDeCategoria,p_fechaDeCreacion);
     end if;
     
     IF OP = 'C' then
-		Delete from categoria where ID_Categoria =p_IDCategoria;
+		update categoria
+        set
+        estatus =0
+        where id_categoria = p_IDCategoria;
     end if;
     
+end //	
+DELIMITER ;
+
+	#SP_SelectCategoriasExistentes
+Drop Procedure If Exists SP_SelectCategoriasExistentes;
+DELIMITER //
+create procedure SP_SelectCategoriasExistentes()
+begin 
+	select ID,Categoria,Descripcion,Creada from v_categoriasActivas;
 end //
 DELIMITER ;
+
+
+	#SP_SelectUserExistentes
+    Drop Procedure if exists SP_SelectUserExistentes;
+    DELIMITER //
+    create procedure SP_SelectUserExistentes()
+    begin
+		select Nombre_Completo as Nombre,Email,Estado,Intentos,Rol from v_infodeusuariosactivos;
+    end

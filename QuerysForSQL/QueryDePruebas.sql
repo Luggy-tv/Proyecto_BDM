@@ -37,3 +37,12 @@ truncate table usuario;
 
 select email, pass from usuario where isblocked = false and estatus =true;
 
+Call sp_categoriaManage('a',1,'Matematicas','Este curso contiene matematicas');
+Call sp_categoriaManage('a',2,'MySQL Avanzado','Este curso contiene MySQL Avanzado');
+Call sp_categoriaManage('a',2,'c++','Este curso contiene c++ basico');
+
+call SP_SelectCategoriasExistentes
+
+Call SP_SelectCategoriasExistentes
+
+*/

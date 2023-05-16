@@ -3,7 +3,7 @@ use codebug;
 DROP VIEW IF EXISTS v_InfoDeUsuariosActivos;
 CREATE VIEW v_InfoDeUsuariosActivos AS
     SELECT 
-        CONCAT(Nombre, ' ', ApPaterno, ' ', ApMaterno) AS 'Nombre Completo',
+        CONCAT(Nombre, ' ', ApPaterno, ' ', ApMaterno) AS Nombre_Completo,
         TIMESTAMPDIFF(YEAR,
             FechaDeNac,
             CURDATE()) AS Edad,
@@ -22,13 +22,15 @@ CREATE VIEW v_InfoDeUsuariosActivos AS
             WHEN isAdmin = 1 THEN 'Admin'
             WHEN isMaestro = 1 THEN 'Maestro'
             ELSE 'Usuario Normal'
-        END AS Rol
+        END AS Rol,
+        isBlocked AS Intentos
     FROM
         usuario where Estatus = true;
 
 drop view if exists v_CategoriasActivas;
 CREATE VIEW v_CategoriasActivas AS
     SELECT 
+		ID_Categoria AS 'ID',
         NombreDeCategoria AS 'Categoria',
         DescripcionCategoria AS 'Descripcion',
         DATE_FORMAT(FechaDeCreacion, '%d-%m %H:%i') AS 'Creada'

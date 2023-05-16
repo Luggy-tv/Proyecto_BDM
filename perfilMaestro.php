@@ -6,7 +6,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     include_once("scripts/userClass.php");
     $usuario = SetUserFromToken();
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
-    $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
 }
 
 ?>

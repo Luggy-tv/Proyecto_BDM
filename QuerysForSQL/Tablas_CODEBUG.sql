@@ -97,12 +97,9 @@ create table if not exists categoria(
     NombreDeCategoria		varchar(30) 		not null	comment 'Nombre de la categoria',
     DescripcionCategoria	varchar(140) 		not null	comment 'Breve descripcion de la categoria',
     FechaDeCreacion			datetime			not null	comment 'Fecha de creacion de la categoría',
-    Usuario					int					not null	comment 'Llave foranea que hace referencia al usuario que crea la categoria',
     Estatus					bit	default true	not null  	comment 'Bit que identifica que la categoria esta activa',
     constraint PK_Categoria
-		primary key (ID_Categoria),
-	constraint PK_UsuarioQueCreaCategoria
-		foreign key (Usuario) references usuario (ID_Usuario)
+		primary key (ID_Categoria)
 )Engine=InnoDB;
 
 create table if not exists categoriaDeCurso(
