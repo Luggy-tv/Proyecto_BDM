@@ -67,7 +67,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                     </div>
 
                     <li class="nav-item"><a class="nav-link link-light" href="#">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html"
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.php"
                             style="border-left-style: none;">Mensajes</a></li>
                     <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php"
                             style="border-left-style: none;">Perfil</a></li>

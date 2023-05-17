@@ -44,7 +44,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html">Mensajes</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.php">Mensajes</a></li>
                     <li class="nav-item"><a class="nav-link link-light" href="inicio.php">Mas Cursos</a></li>
                     <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php">Perfil</a></li>
                 </ul>
