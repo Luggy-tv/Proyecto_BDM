@@ -1,6 +1,5 @@
 <?php
 
-
 if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
@@ -47,7 +46,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.php">Codebug</a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
@@ -68,7 +67,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                     </div>
 
                     <li class="nav-item"><a class="nav-link link-light" href="#">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html"
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.php"
                             style="border-left-style: none;">Mensajes</a></li>
                     <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php"
                             style="border-left-style: none;">Perfil</a></li>

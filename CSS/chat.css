@@ -63,7 +63,3 @@ input::placeholder {
 #chatbox {
   background-color: var(--link-water);
 }
-
-#chatact:active {
-  background-color: var(--cornflower);
-}

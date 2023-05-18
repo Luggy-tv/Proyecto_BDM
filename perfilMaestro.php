@@ -2,12 +2,11 @@
 if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
-  }else{
+} else {
     include_once("scripts/userClass.php");
     $usuario = SetUserFromToken();
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
-    $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
-  }
+}
 
 ?>
 
@@ -27,14 +26,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <link rel="stylesheet" href="CSS/perfil.css">
 
-    <link rel="preload" as="image" href="profilePictures/ppimg1.png">
-    <link rel="preload" as="image" href="Recursos/tinypngs/html.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/bootstrap.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/database.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/mysql.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/mysql2.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/programador1.jpg">
-
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -49,7 +40,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     <nav class="navbar navbar-dark navbar-expand-md">
         <div class="container-fluid">
 
-            <a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+            <a class="navbar-brand link-light" href="inicio.php">Codebug</a>
 
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -58,7 +49,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html">Mensajes</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.php">Mensajes</a></li>
                     <li class="nav-item"><a class="nav-link link-light" href="#">Mas Cursos</a></li>
                 </ul>
             </div>
@@ -72,7 +63,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
-                    <img class="img-fluid img-thumbnail h-auto" src="<?php echo $imgPath ?>" alt="">
+                    <img class="img-fluid img-thumbnail h-auto" src="scripts/loaduserimg.php">
                 </div>
                 <div class="col-8 mt-3 ">
                     <h1 id="nombreCompleto" class="fw-bold">

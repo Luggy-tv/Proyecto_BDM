@@ -1,3 +1,9 @@
+<?php
+//Check if Cookie is set and if is set then a bg info appears with a button if 
+
+?>
+
+
 <html>
 
 <head>

@@ -35,7 +35,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     <nav class="navbar navbar-dark navbar-expand-md">
         <div class="container-fluid">
 
-            <a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+            <a class="navbar-brand link-light" href="inicio.php">Codebug</a>
             
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -44,8 +44,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html">Mensajes</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="inicio.html">Mas Cursos</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.php">Mensajes</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="inicio.php">Mas Cursos</a></li>
                     <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php">Perfil</a></li>
                 </ul>
             </div>
@@ -87,7 +87,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         <div class="row">
             <div class="col-md-6 px-5 py-3">
                 <div class="row">
-                    <img class="img-thumbnail h-25 rounded  " src="<?php echo $imgPath ?>" alt="">
+                    <img class="img-thumbnail h-25 rounded  " src="scripts/loaduserimg.php" alt="">
                 </div>
 
             
@@ -104,7 +104,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
                             <div class="col-6 mb-4">
                                 <label for="nombre" class="from-label"> Nombre nuevo:  </label>
-                                <input minlength="1" maxlength="30" id="NuevoNombre" type="text" class="form-control" name="NuevoNombre" placeholder="<?php echo $usuario->nombre ?>" required >
+                                <input minlength="1" maxlength="30" id="NuevoNombre" type="text" class="form-control" name="NuevoNombre" placeholder="<?php echo $usuario->nombre ?>" >
                             </div>
                             
                             <div class="col-6 mb-4">
@@ -114,7 +114,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                             
                             <div class="col-6 mb-4">
                                 <label for="nuevoApellidoPat" class="from-label"> Apellido Nuevo: </label>
-                                <input minlength="3" maxlength="30" id="nuevoApellidoPat" type="text" class="form-control" name="nuevoApellidoPat" placeholder="<?php echo $usuario->apellidoPat ?>" required>
+                                <input minlength="3" maxlength="30" id="nuevoApellidoPat" type="text" class="form-control" name="nuevoApellidoPat" placeholder="<?php echo $usuario->apellidoPat ?>" >
                             </div>
 
                             <div class="col-6 mb-4">
@@ -124,12 +124,12 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             
                             <div class="col-6 mb-4">
                                 <label for="nuevoApellidoMat" class="from-label"> Apellido Nuevo </label>
-                                <input minlength="3" maxlength="30" id="nuevoApellidoMat" type="text" class="form-control" name="nuevoApellidoMat" placeholder="<?php echo $usuario->apellidoMat ?>" required>
+                                <input minlength="3" maxlength="30" id="nuevoApellidoMat" type="text" class="form-control" name="nuevoApellidoMat" placeholder="<?php echo $usuario->apellidoMat ?>" >
                             </div> 
                             
                             <div class="col-12 mb-4">
                                 <label for="Imagen" class="form-label">Foto de perfil</label>
-                                <input type="file" class="form-control" name="Imagen" id="Imagen" accept=".png, .jpg, .jpeg" required >
+                                <input type="file" class="form-control" name="Imagen" id="Imagen" accept=".png, .jpg, .jpeg"  >
                             </div>
 
                             <div class="col-6 mb-4">

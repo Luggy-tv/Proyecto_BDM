@@ -6,14 +6,14 @@ $usuario = SetUserFromToken();
 
 if ($usuario->isMaestro) {
 
-    header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/perfilMaestro.php");
+    header("Location: ../perfilMaestro.php");
 } else {
     if ($usuario->isAdmin) {
 
-        header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/perfilAdmin.php");
+        header("Location: ../perfilAdmin.php");
     } else {
 
-        header("Location: http://localhost:8080/RepositorioParaProyectoDeBDM/BDM/perfil.php");
+        header("Location: ../perfil.php");
     }
 }
 

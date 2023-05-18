@@ -52,6 +52,9 @@ div {
   background-color: var(--cornflower);
 }
 
+#Categorias{
+  background-color: var(#f4cab2);
+}
 #curso {
   background-color: white;
   width: 20%;
