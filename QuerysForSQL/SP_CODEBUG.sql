@@ -1,7 +1,7 @@
 use codebug;
 
 	#SP_UsuarioManage
-#call SP_UsuarioManage(OP,p_ID_Usuario,p_Nombre, p_ApPaterno ,p_ApMaterno,p_Email,p_Pass,p_Genero,p_FechaDeNac,p_Imagen,p_isMaestro);
+#call SP_UsuarioManage(OP,p_ID_Usuario,p_Nombre, p_ApPaterno ,p_ApMaterno,p_Email,p_Pass,p_Genero,p_FechaDeNac,p_Imagen,p_ImagenEx,p_isMaestro);
 DROP PROCEDURE IF EXISTS SP_UsuarioManage;
 DELIMITER //
 CREATE PROCEDURE SP_UsuarioManage(
@@ -308,9 +308,71 @@ DELIMITER ;
 
 
 	#SP_SelectUserExistentes
-    Drop Procedure if exists SP_SelectUserExistentes;
-    DELIMITER //
-    create procedure SP_SelectUserExistentes()
-    begin
-		select Nombre_Completo as Nombre,Email,Estado,Intentos,Rol from v_infodeusuariosactivos;
-    end
+Drop Procedure if exists SP_SelectUserExistentes;
+DELIMITER //
+create procedure SP_SelectUserExistentes()
+begin
+	select Nombre_Completo as Nombre,Email,Estado,Intentos,Rol from v_infodeusuariosactivos;
+end
+DELIMITER //
+    
+    
+    
+#SP_MensajeMandar
+DROP PROCEDURE IF EXISTS SP_MensajeMandar;
+DELIMITER //
+create procedure SP_MensajeMandar(
+	IN p_Conversacion Bigint,
+    IN p_Mensaje	varchar(140),
+    IN p_fecha		datetime
+)begin
+
+end;
+DELIMITER //
+
+	#SP_SelectUsuariosActivos
+#Call SP_SelectUsuariosActivos();
+DROP PROCEDURE IF EXISTS SP_SelectUsuariosActivos;
+DELIMITER //
+create procedure SP_SelectUsuariosActivos()
+begin
+	select ID_Usuario,Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos ;
+end //
+DELIMITER ;
+
+#SP_SelectUsuarioActivosExceptCurrentUser
+#Call SP_SelectUsuarioActivosExceptCurrentUser(p_userID)
+Drop procedure if exists SP_SelectUsuarioActivosExceptCurrentUser;
+DELIMITER //
+Create procedure SP_SelectUsuarioActivosExceptCurrentUser(
+	IN p_ID int
+)begin
+	select ID_Usuario, Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos where ID_Usuario <> p_ID;
+end //
+DELIMITER ;
+
+#SP_SelectBuscarUsuarioPChat()
+Drop procedure if exists SP_SelectBuscarUsuarioPChat;
+DELIMITER //
+Create procedure SP_SelectBuscarUsuarioPChat(
+	IN p_ID int,
+	IN p_nombre varchar(90)
+)begin
+	select ID_Usuario , Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos where  ID_Usuario <> p_ID and Nombre_completo LIKE concat('%',p_nombre,'%') ;
+end //
+DELIMITER ;
+
+#SP_SelectUSerFromIDForChat(p_ID)
+Drop procedure if exists SP_SelectUSerFromIDForChat;
+DELIMITER //
+Create procedure SP_SelectUSerFromIDForChat(
+	IN p_ID int
+)begin
+	select ID_Usuario , Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos where  ID_Usuario= p_ID ;
+end //
+DELIMITER ;
+
+call SP_SelectUSerFromIDForChat(2)
+
+
+

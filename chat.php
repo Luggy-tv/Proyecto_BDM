@@ -53,7 +53,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
   </nav>
 
   <section>
-    <div class="row mx-0 my-lg-0">
+    <div class="row d-flex mx-0 my-lg-0">
       <!-- Users box-->
       <div class="col-lg-4 py-0 px-0">
         <div class="bg-white">
@@ -88,9 +88,11 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
       </div>
 
       <!-- Chat Box-->
-      <div class="col-8 px-0">
+      <div class="col px-0">
+
         <div id="chatbox" class="px-4 py-5 chat-box">
-          <!-- Sender Message-->
+
+          <!-- Reciever Message-->
           <div class="media w-auto mb-3">
             <img src="Recursos/Open Peeps - Bust.png" alt="user" width="50" class="rounded-circle" />
             <div class="media-body ml-3">
@@ -103,7 +105,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             </div>
           </div>
 
-          <!-- Reciever Message-->
+          <!-- Sender Message-->
           <div class="media w-auto ml-auto mb-3">
             <div class="media-body">
               <div class="bg rounded py-2 px-3 mb-2">
@@ -115,70 +117,23 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             </div>
           </div>
 
-          <!-- Sender Message-->
-          <div class="media w-auto mb-3">
-            <img src="Recursos/Open Peeps - Bust.png" alt="user" width="50" class="rounded-circle" />
-            <div class="media-body ml-3">
-              <div class="bg-light rounded py-2 px-3 mb-2">
-                <p class="text-small mb-0 text-muted">
-                  El chatter vuelve a mandar un mensaje, esta vez un poco más
-                  largo para probar se extiende la burbuja dependiendo del
-                  largo del texto que se decida enviar. Podemos observar que
-                  sí es así
-                </p>
-              </div>
-              <p class="small text-muted">12:00 PM | Aug 13</p>
-            </div>
-          </div>
+          
 
-          <!-- Reciever Message-->
-          <div class="media w-auto ml-auto mb-3">
-            <div class="media-body">
-              <div class="bg rounded py-2 px-3 mb-2">
-                <p id="turesp" class="text-small mb-0 text-white">
-                  Tu respuesta una vez más
-                </p>
-              </div>
-              <p class="small text-muted">12:00 PM | Aug 13</p>
-            </div>
-          </div>
-
-          <!-- Sender Message-->
-          <div class="media w-auto mb-3">
-            <img src="Recursos/Open Peeps - Bust.png" alt="user" width="50" class="rounded-circle" />
-            <div class="media-body ml-3">
-              <div class="bg-light rounded py-2 px-3 mb-2">
-                <p class="text-small mb-0 text-muted">Otro texto de prueba</p>
-              </div>
-              <p class="small text-muted">12:00 PM | Aug 13</p>
-            </div>
-          </div>
-
-          <!-- Reciever Message-->
-          <div class="media w-auto ml-auto mb-3">
-            <div class="media-body">
-              <div class="bg rounded py-2 px-3 mb-2">
-                <p id="turesp" class="text-small mb-0 text-white">
-                  Otra respuesta de prueba
-                </p>
-              </div>
-              <p class="small text-muted">12:00 PM | Aug 13</p>
-            </div>
-          </div>
         </div>
 
         <!-- Typing area -->
-        <form action="#" class="bg-light">
+        <form id="typing-Area"action="#" class="bg-light">
           <div class="input-group">
-            <input type="text" placeholder="Type a message" aria-describedby="button-addon2"
+            <input id="InputField" type="text" placeholder="Type a message" aria-describedby="button-addon2"
               class="form-control rounded-0 border-0 py-4 bg-light" />
             <div class="input-group-append">
               <button id="button-addon2" type="submit" class="btn">
-                Enviar<i class="fa fa-paper-plane"></i>
+                Enviar
               </button>
             </div>
           </div>
         </form>
+
       </div>
     </div>
   </section>

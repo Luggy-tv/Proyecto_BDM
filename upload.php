@@ -43,8 +43,7 @@ if (isset($_POST['submit']) && isset($_FILES['imagen']) && $_SERVER["REQUEST_MET
                 if (in_array($img_ex_lc, $allowed_exs)) {
 
                     //print_r($img_temp_name_str);
-                    $sql = "call SP_UsuarioManage('A', 0, '$Nombre' ,  '$ApPaterno', '$ApMaterno', '$Email', '$Pass', '$Genero', $FechaDeNac, '$img_temp_name_str','$img_ex_lc', $isMaestro);";
-                    
+                    $sql = "call SP_UsuarioManage('A', 0, '$Nombre' ,'$ApPaterno'   ,'$ApMaterno'   , '$Email'  ,'$Pass', '$Genero', $FechaDeNac,'$img_ex_lc', '$img_temp_name_str', $isMaestro);";
                     // $new_img_name = uniqid("IMG-", true) . "." . $img_ex_lc;
 
                     //$path = getcwd() .  '\Videos\\' . GUID() . '.mp4';

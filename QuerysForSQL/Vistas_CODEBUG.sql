@@ -3,6 +3,7 @@ use codebug;
 DROP VIEW IF EXISTS v_InfoDeUsuariosActivos;
 CREATE VIEW v_InfoDeUsuariosActivos AS
     SELECT 
+		ID_Usuario,
         CONCAT(Nombre, ' ', ApPaterno, ' ', ApMaterno) AS Nombre_Completo,
         TIMESTAMPDIFF(YEAR,
             FechaDeNac,
@@ -23,7 +24,9 @@ CREATE VIEW v_InfoDeUsuariosActivos AS
             WHEN isMaestro = 1 THEN 'Maestro'
             ELSE 'Usuario Normal'
         END AS Rol,
-        isBlocked AS Intentos
+        isBlocked AS Intentos,
+        Imagen as Imagen,
+        ImagenEx as ImagenEx
     FROM
         usuario where Estatus = true;
 

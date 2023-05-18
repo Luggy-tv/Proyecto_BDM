@@ -29,15 +29,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <link rel="stylesheet" href="CSS/perfil.css">
 
-    <link rel="preload" as="image" href="profilePictures/ppimg1.png">
-    <link rel="preload" as="image" href="Recursos/tinypngs/html.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/bootstrap.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/database.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/mysql.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/mysql2.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/programador1.jpg">
-
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

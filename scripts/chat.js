@@ -1,41 +1,72 @@
+chatList = document.querySelector("#chatbox");
 userList = document.querySelector("#user-list");
-searchBar =document.querySelector("#searchBar");
+searchBar = document.querySelector("#searchBar");
 
-searchBar.onkeyup=()=>{
-  let searchTerm= searchBar.value;
-  if(searchTerm!=""){
-    var xhr = new XMLHttpRequest();
+form = document.querySelector("#typing-Area");
+inputField =form.querySelector("#InputField");
+sendBtn =form.querySelector("#button-addon2");
 
-    xhr.open("POST", "scripts/chatSearch.php", true);  
-    xhr.onload = function () {
-      if(xhr.readyState === XMLHttpRequest.DONE){
-        if(xhr.status ===200){
-          
-          let data = xhr.response;
-         console.log(data);
-        }
+
+function showConvo(id) {
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.open("POST", "scripts/chatMessages.php", true);
+  xhr.onload = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        let data = xhr.response;
+        chatList.innerHTML = data;
       }
-    };
-    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xhr.send("searchTerm=" +searchTerm);
-  }
+    }
+  };
+
+ xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("id=" + id);
 }
 
-setInterval(()=>{
-    
-    //AJAX
+searchBar.onkeyup = () => {
+  let searchTerm = searchBar.value;
+
+  if (searchTerm != "") {
+    searchBar.classList.add("active");
+  } else {
+    searchBar.classList.remove("active");
+  }
+
+  if (searchTerm != "") {
     var xhr = new XMLHttpRequest();
 
-    xhr.open("GET", "scripts/chatUsers.php", true);  
+    xhr.open("POST", "scripts/chatSearch.php", true);
     xhr.onload = function () {
-      if(xhr.readyState === XMLHttpRequest.DONE){
-        if(xhr.status ===200){
-          
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
           let data = xhr.response;
-          userList.innerHTML =data;
+          userList.innerHTML = data;
         }
       }
     };
-  
-    xhr.send();
-},500);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("searchTerm=" + searchTerm);
+  }
+};
+
+setInterval(() => {
+
+  //AJAX
+  var xhr = new XMLHttpRequest();
+
+  xhr.open("GET", "scripts/chatUsers.php", true);
+  xhr.onload = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        let data = xhr.response;
+        if (!searchBar.classList.contains("active")) {
+          userList.innerHTML = data;
+        }
+      }
+    }
+  };
+
+  xhr.send();
+}, 500);
