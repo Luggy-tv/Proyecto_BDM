@@ -71,10 +71,11 @@
     <section> <!-- DESCRIPCIÓN DEL CURSO E IMAGEN -->
         <div class="container">
             <div class="row">
-                <div class="col-7 my-1">
+                <div class="col-7 my-2 pe-5">
                     <p>Texto de prueba como desripción del curso bla bla bla tiene que ser bastante texto para que se forme un párrafo de más de dos lineas creo que aun necesito escribir más.</p>
                     <p>Mejor escribo también otro párrafo para ver cómo se ve todo.</p>
-                    <p>Categoría: tal, tal</p>
+                    <p id="Info">Categoría: Tal</p>
+                    <p id="Info">Puntuación por ususarios: x/5</p>
                 </div>
     
                 <div class="comprar col-5">
@@ -149,6 +150,51 @@
         </div>
     </section>
 
+    <section>
+        <div class="container my-5">
+            <h3 class="my-3">Opiniones de otros usuarios</h3>
+
+            <div id="comments">
+                <!-- Comentarios existentes -->
+                <div class="comment">
+                    <img class="profile-pic" src="Recursos/Open Peeps - Avatar (1).png" alt="John's Profile Picture">
+                    <h4 id="user">John Doe</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+
+                <div class="comment">
+                    <img class="profile-pic" src="Recursos/Open Peeps - Bust.png" alt="Jane's Profile Picture">
+                    <h4 id="user">Jane Smith</h4>
+                    <p>Nulla facilisi. Sed vitae dolor gravida, pulvinar leo id, molestie mauris.</p>
+                </div>
+
+            </div>
+
+            <script>
+                // JavaScript code for submitting the comment form
+                document.getElementById('comment-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Get the values from the form inputs
+                var name = document.getElementById('name').value;
+                var comment = document.getElementById('comment').value;
+
+                // Create a new comment element
+                var newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerHTML = '<img class="profile-pic" src="default_profile.jpg" alt="Profile Picture"><h3>' + name + '</h3><p>' + comment + '</p>';
+
+                // Append the new comment to the comment section
+                document.getElementById('comments').appendChild(newComment);
+
+                // Clear the form inputs
+                document.getElementById('name').value = '';
+                document.getElementById('comment').value = '';
+                });
+            </script>
+
+        </div>
+    </section>
 
 
     <section>
