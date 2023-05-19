@@ -10,12 +10,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                             <div class="d-flex align-items-center justify-content-between mb-1">
                             <h6 class="mb-0">' . $row['Nombre_Completo'] . '</h6>
                             </div>
-                            <p class="font-italic mb-0 text-small">
-                            Mensaje de prueba
-                            </p>
                         </div>
                         </div>
                     </a> ';
 }
-
 ?>

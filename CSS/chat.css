@@ -52,6 +52,14 @@ input::placeholder {
   color: white;
 }
 
+#button-addon3 {
+  
+  background-color: var(--salmon);
+  height: 100%;
+  border-radius: 0;
+  color: white;
+}
+
 .form-control {
   height: 1px;
 }
