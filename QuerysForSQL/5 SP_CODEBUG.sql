@@ -1,5 +1,4 @@
 use codebug;
-
 	#SP_UsuarioManage
 #call SP_UsuarioManage(OP,p_ID_Usuario,p_Nombre, p_ApPaterno ,p_ApMaterno,p_Email,p_Pass,p_Genero,p_FechaDeNac,p_Imagen,p_ImagenEx,p_isMaestro);
 DROP PROCEDURE IF EXISTS SP_UsuarioManage;
@@ -55,7 +54,6 @@ BEGIN
     end if;
 END //
 DELIMITER ;
-
 	#SP_UsuarioLoginUpdate
 #call SP_UsuarioLoginUpdate(p_ID_Usuario);
 DROP PROCEDURE IF EXISTS SP_UsuarioLoginUpdate;
@@ -75,7 +73,6 @@ begin
     
 end //
 DELIMITER ;
-
 	#SP_UsuarioAddAttempt
 #call SP_UsuarioAddAttempt(p_email);
 DROP PROCEDURE IF EXISTS SP_UsuarioAddAttempt;
@@ -93,7 +90,6 @@ begin
     
 end //
 DELIMITER ;
-
 	#SP_UsuarioUNBlock
 #call SP_UsuarioUNBlock(p_ID_Usuario);
 DROP PROCEDURE IF EXISTS SP_UsuarioUNBlock;
@@ -111,7 +107,6 @@ begin
     
 end //
 DELIMITER ;
-
 	#SP_SelectTables
 #call SP_SelectTables(op);
 DROP PROCEDURE IF EXISTS SP_SelectTables;
@@ -135,9 +130,8 @@ begin
     
 end //
 DELIMITER ;
-
 	#SP_SelectPassFromEmail
-#call SP_SelectPassFromEmail(p_email);
+	#call SP_SelectPassFromEmail(p_email);
 DROP PROCEDURE IF EXISTS SP_SelectPassFromEmail;
 DELIMITER //
 create procedure SP_SelectPassFromEmail(
@@ -147,9 +141,8 @@ begin
    select pass from usuario where Email=p_email;
 end //
 DELIMITER ;
-
 	#SP_SelectUserFromEmail
-#call SP_SelectUserFromEmail(p_email);
+	#call SP_SelectUserFromEmail(p_email);
 DROP PROCEDURE IF EXISTS SP_SelectUserFromEmail;
 DELIMITER //
 create procedure SP_SelectUserFromEmail(
@@ -159,9 +152,8 @@ begin
    select ID_usuario,Email from usuario where Email=p_email;
 end //
 DELIMITER ;
-
 	#SP_SelectTokenFromToken
-#call SP_SelectTokenFromToken(p_token);
+	#call SP_SelectTokenFromToken(p_token);
 DROP PROCEDURE IF EXISTS SP_SelectTokenFromToken;
 DELIMITER //
 create procedure SP_SelectTokenFromToken(
@@ -177,9 +169,8 @@ begin
     END IF;
 end //
 DELIMITER ;
-
 	#SP_SelectTokenFromEmail
-#Call SP_SelectTokenFromEmail(p_email);
+	#Call SP_SelectTokenFromEmail(p_email);
 DROP PROCEDURE IF EXISTS SP_SelectTokenFromEmail;
 DELIMITER //
 create procedure SP_SelectTokenFromEmail(
@@ -203,9 +194,8 @@ LIMIT 1;
     END IF;
 end //
 DELIMITER ;
-
 	#SP_UsuarioLogoutUpdate
-#Call SP_UsuarioLogoutUpdate(p_token);
+	#Call SP_UsuarioLogoutUpdate(p_token);
 DROP PROCEDURE IF EXISTS SP_UsuarioLogoutUpdate;
 DELIMITER //
 create procedure SP_UsuarioLogoutUpdate(
@@ -220,9 +210,8 @@ begin
 
 end //
 DELIMITER ;
-
 	#SP_SelectUserFromToken
-#Call SP_SelectUserFromToken(p_token);
+	#Call SP_SelectUserFromToken(p_token);
 DROP PROCEDURE IF EXISTS SP_SelectUserFromToken;
 DELIMITER //
 create procedure SP_SelectUserFromToken(
@@ -238,9 +227,8 @@ begin
     END IF;
 end //
 DELIMITER ;
-
 	#SP_SelectIDFromToken
-#Call SP_SelectIDFromToken(p_token);
+	#Call SP_SelectIDFromToken(p_token);
 DROP PROCEDURE IF EXISTS SP_SelectIDFromToken;
 DELIMITER //
 create procedure SP_SelectIDFromToken(
@@ -262,11 +250,10 @@ LIMIT 1;
     END IF;
 end //
 DELIMITER ;
-
 	#SP_CategoriaManage    
 DROP PROCEDURE IF EXISTS SP_CategoriaManage;
 DELIMITER //
-/* Call sp_categoriaManage(OP,p_IDCategoria,p_NombreDeCategoria,p_DescripcionDeCategoria,p_Usuario) */
+	#Call sp_categoriaManage(OP,p_IDCategoria,p_NombreDeCategoria,p_DescripcionDeCategoria,p_Usuario) 
 create procedure SP_CategoriaManage(
 	IN OP 						char		,
 	IN p_IDCategoria			int			,
@@ -296,7 +283,6 @@ begin
     
 end //	
 DELIMITER ;
-
 	#SP_SelectCategoriasExistentes
 Drop Procedure If Exists SP_SelectCategoriasExistentes;
 DELIMITER //
@@ -305,20 +291,15 @@ begin
 	select ID,Categoria,Descripcion,Creada from v_categoriasActivas;
 end //
 DELIMITER ;
-
-
 	#SP_SelectUserExistentes
 Drop Procedure if exists SP_SelectUserExistentes;
 DELIMITER //
 create procedure SP_SelectUserExistentes()
 begin
 	select Nombre_Completo as Nombre,Email,Estado,Intentos,Rol from v_infodeusuariosactivos;
-end
-DELIMITER //
-    
-    
-    
-#SP_MensajeMandar
+end; //
+DELIMITER ;
+	#SP_MensajeMandar
 DROP PROCEDURE IF EXISTS SP_MensajeMandar;
 DELIMITER //
 create procedure SP_MensajeMandar(
@@ -327,31 +308,28 @@ create procedure SP_MensajeMandar(
     IN p_fecha		datetime
 )begin
 
-end;
-DELIMITER //
-
+end; //
+DELIMITER ;
 	#SP_SelectUsuariosActivos
-#Call SP_SelectUsuariosActivos();
+	#Call SP_SelectUsuariosActivos();
 DROP PROCEDURE IF EXISTS SP_SelectUsuariosActivos;
 DELIMITER //
 create procedure SP_SelectUsuariosActivos()
 begin
 	select ID_Usuario,Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos ;
-end //
+end; //
 DELIMITER ;
-
-#SP_SelectUsuarioActivosExceptCurrentUser
-#Call SP_SelectUsuarioActivosExceptCurrentUser(p_userID)
+	#SP_SelectUsuarioActivosExceptCurrentUser
+	#Call SP_SelectUsuarioActivosExceptCurrentUser(p_userID)
 Drop procedure if exists SP_SelectUsuarioActivosExceptCurrentUser;
 DELIMITER //
 Create procedure SP_SelectUsuarioActivosExceptCurrentUser(
 	IN p_ID int
 )begin
 	select ID_Usuario, Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos where ID_Usuario <> p_ID;
-end //
+end; //
 DELIMITER ;
-
-#SP_SelectBuscarUsuarioPChat()
+	#SP_SelectBuscarUsuarioPChat()
 Drop procedure if exists SP_SelectBuscarUsuarioPChat;
 DELIMITER //
 Create procedure SP_SelectBuscarUsuarioPChat(
@@ -361,8 +339,7 @@ Create procedure SP_SelectBuscarUsuarioPChat(
 	select ID_Usuario , Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos where  ID_Usuario <> p_ID and Nombre_completo LIKE concat('%',p_nombre,'%') ;
 end //
 DELIMITER ;
-
-#SP_SelectUSerFromIDForChat(p_ID)
+	#SP_SelectUSerFromIDForChat(p_ID)
 Drop procedure if exists SP_SelectUSerFromIDForChat;
 DELIMITER //
 Create procedure SP_SelectUSerFromIDForChat(
@@ -371,8 +348,7 @@ Create procedure SP_SelectUSerFromIDForChat(
 	select ID_Usuario , Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos where  ID_Usuario= p_ID ;
 end //
 DELIMITER ;
-
-#SP_SelectUSerFromIDForChat(p_ID)
+	#SP_SelectUSerFromIDForChat(p_ID)
 Drop procedure if exists SP_SelectUSerFromIDForChat;
 DELIMITER //
 Create procedure SP_SelectUSerFromIDForChat(
@@ -381,8 +357,7 @@ Create procedure SP_SelectUSerFromIDForChat(
 	select ID_Usuario , Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos where  ID_Usuario= p_ID ;
 end //
 DELIMITER ;
-
-#SP_MensajesAgregar(p_Receptor,p_Emisor,Mensaje);
+	#SP_MensajesAgregar(p_Receptor,p_Emisor,Mensaje);
 Drop procedure if exists SP_MensajesAgregar;
 DELIMITER //
 Create procedure SP_MensajesAgregar(
@@ -395,8 +370,7 @@ Create procedure SP_MensajesAgregar(
 	insert into mensajes(Mensaje,Emisor,Receptor,Fecha) values(p_mensaje,p_emisor,p_Receptor,fecha);
 end //
 DELIMITER ;
-
-#call SP_SelectMensajesFromUsers(p_receptor,p_Emisor)
+	#call SP_SelectMensajesFromUsers(p_receptor,p_Emisor)
 Drop procedure if exists SP_SelectMensajesFromUsers;
 DELIMITER //
 Create procedure SP_SelectMensajesFromUsers(
@@ -406,7 +380,45 @@ Create procedure SP_SelectMensajesFromUsers(
 	select Emisor,Receptor,Mensaje,hora_minuto,Dia from v_mensajesdeconversacion where emisor =p_emisor and receptor=p_receptor or emisor=p_receptor and receptor=p_emisor order by fecha;
 end //
 DELIMITER ;
-
-
-
+	#CALL SP_CursoManage(OP,p_id_curso,p_docente,p_titulo,p_descripcion,p_precio,p_imagen,p_imagenEX,p_categoria);
+drop procedure if exists  SP_CursoManage;
+DELIMITER //
+create procedure SP_CursoManage(
+ IN OP			char,
+ IN p_id_curso 	  int,
+ IN p_docente 	  int,
+ IN p_titulo 	  varchar(50),
+ IN p_descripcion varchar(200),
+ IN p_precio	  float,
+ IN p_imagen	  mediumblob,
+ IN p_imagenEX	  varchar(10),
+ IN p_categoria	  int
+ )
+ begin
+ IF OP = 'A' THEN
+		INSERT INTO curso (id_curso  , 	docente  ,titulo   ,descripcion	 ,precio  , imagen  , imagenEX  , categoria  )
+		VALUES			  (p_id_curso,p_docente  ,p_titulo ,p_descripcion,p_precio, p_imagen, p_imagenEX, p_categoria);   
+	END IF;
+    
+    IF OP = 'B' then
+		update curso
+        set
+			descripcion	= ifnull(p_descripcion,descripcion),
+            precio		= ifnull(p_precio,precio),
+            imagen		= ifnull(p_imagen,imagen),
+            imagenEX	= ifnull(p_imagenEX,imagenEX)
+		where
+			id_curso=p_id_curso;
+    end if;
+    
+	IF OP = 'C' then
+		update curso
+        set
+			Disponible = false
+		where
+			id_curso=p_id_curso;
+    end if;
+    
+ end; // 
+ DELIMITER ;
 

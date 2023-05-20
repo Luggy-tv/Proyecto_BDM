@@ -9,7 +9,9 @@ WHERE TABLE_SCHEMA = 'codebug';
 
 call SP_UsuarioManage('z'	,1		,'Alfonso'	, 'Martinez' 	,'Martinez'	,'luis@mail.com'	, 'Lui_12345678','M'	,20000123  ,'','png'	, NULL);
 call SP_UsuarioManage('z'	,2		,'Daniela'	, 'Montejo' 	,'Lezama'	,'daniela@mail.com'	, 'Vel_12345678','F'	,20001102  ,'','png'	, NULL);
-call SP_UsuarioManage('z'	,3		,'Irving'	, 'Rangel' 		,'Olivares'	,'Irving@mail.com'	, 'Irv_12345678','M'	,20010321  ,'','png'	, NULL);
+call SP_UsuarioManage('z'	,3		,'Irving'	, 'Rangel' 		,'Olivares'	,'irving@mail.com'	, 'Irv_12345678','M'	,20010321  ,'','png'	, NULL);
+call SP_UsuarioManage('a'	,4		,'Silvia'	, 'Martinez' 	,'De Luna'	,'silvia@mail.com'	, 'Sil_12345678','F'	,19701014  ,'','png'	, true);
+call SP_UsuarioManage('a'	,4		,'Carmina'	, 'Orta' 		,'Becerra'	,'mina@mail.com'	, 'Min_12345678','F'	,20010610  ,'','png'	, false);
 
 select * from usuario;
 

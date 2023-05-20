@@ -3,9 +3,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
 } else {
-    include_once("scripts/userClass.php");
-    $usuario = SetUserFromToken();
-
     include_once("scripts/categoriasClass.php");
     $listaCategorias = setCategoriasLista();
 }
@@ -52,8 +49,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         </div> -->
     </div>
 
-
-
     <div class="container bg-opacity-100 bg-white my-5 rounded shadow p-md-2">
         <div class="row">
 
@@ -63,36 +58,53 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
         </div>
         <div class="infoCurso">
-            <form id="form-cursoinfo" action="" method="post">
+            <form id="form-cursoinfo" action="" method="post" enctype="multipart/form-data">
                 <div class="row gx-3 mx-5">
 
-
+                    <!-- Nombre Curso -->
                     <div class="col-7 mb-4">
-                        <label for="nombre" class="from-label">Nombre del curso</label>
+                        <label for="nombreCurso" class="from-label">Nombre del curso</label>
                         <input minlength="1" maxlength="50" id="nombreCurso" type="text" class="form-control"
                             name="nombreCurso" placeholder="Curso" required>
                     </div>
 
+                    <!-- Nombre Categoria  -->
                     <div class="col-5 form-group">
                         <label for="categoria" class="from-label ">Categoría</label>
                         <select name="categoria" id="categoria" class="form-control">
                             <?php foreach ($listaCategorias as $categoria): ?>
-                                <?php echo "<option value='value" . $categoria['ID'] . "'> " . $categoria['Categoria'] . "</option>"; ?>
+                                <?php echo "<option value='" . $categoria['ID'] . "'> " . $categoria['Categoria'] . "</option>"; ?>
                             <?php endforeach; ?>
                         </select>
                     </div>
 
-                    <div class="col-6 mb-4 ">
-                        <label for="imagen" class="form-label">Imagen del curso</label>
-                        <input type="file" class="form-control" name="imagenDeCurso" id="imagenDeCurso"
-                            accept=".png, .jpg, .jpeg">
+                    <!-- Descripcionde curso -->
+                    <div class="col-12 mb-4 ">
+                        <label for="descCurso" class="form-label">Descripcion de Curso</label>
+                        <textarea name="descCurso" id="descCurso" type="text" class="form-control" minlength="10"
+                            maxlength="200" required></textarea>
+
                     </div>
 
-                    
-                    <div class="col-6 mb-4 ">
-                        <label for="imagen" class="form-label">Precio de Curso</label>
-                        <input id="precioCurso" type="text" class="form-control"
-                            name="nombreCurso" placeholder="$$$" required>
+                    <!-- Precio de curso  -->
+                    <div class="col-4 mb-4 ">
+                        <label for="precioCurso" class="form-label">Precio de Curso</label>
+                        <input id="precioCurso" name="precioCurso" type="text" class="form-control"
+                            placeholder="$$$.$$$" required>
+                    </div>
+
+                    <!-- Cantidad de Modulos  -->
+                    <div class="col-4 mb-4 ">
+                        <label for="numModulos" class="form-label">Cantidad de Modulos</label>
+                        <input id="numModulos" name="numModulos" type="number" class="form-control" placeholder="5"
+                            required>
+                    </div>
+
+                    <!-- Imagen de Curso  -->
+                    <div class="col-4 mb-4 ">
+                        <label for="imagenDeCurso" class="form-label">Imagen del curso</label>
+                        <input type="file" class="form-control" name="imagenDeCurso" id="imagenDeCurso"
+                            accept=".png, .jpg, .jpeg" required>
                     </div>
 
                     <div class="col-12 py-2">
@@ -109,49 +121,51 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
             <div class="modulo1">
                 <div class="row my-3 gx-3 mx-5">
+
                     <h4 class="mb-3">Agregar modulo</h4>
+                    <!-- nombre modulo  -->
                     <div class="col-5 mb-4">
                         <label for="modulo" class="from-label">Nombre del módulo</label>
                         <input minlength="1" maxlength="50" id="modulo" type="text" class="form-control" name="modulo"
                             placeholder="Módulo" required>
                     </div>
-
+                    <!-- Descripcion modulo  -->
                     <div class="col-7 mb-4">
                         <label for="modulo" class="from-label">Descripción del módulo</label>
                         <input minlength="1" maxlength="100" id="modulo" type="text" class="form-control" name="modulo"
                             placeholder="Módulo" required>
                     </div>
-
+                    <!-- video  -->
                     <div class="col-6 mb-4 ">
                         <label for="videoCurso" class="form-label">Video</label>
                         <input type="file" class="form-control" name="videoCurso" id="videoCurso" accept=".mp4">
                     </div>
-
+                    <!-- Precio Modulo  -->
                     <div class="col-6 mb-4 ">
-                        <label for="imgModulo" class="form-label">Imagen del módulo</label>
-                        <input type="file" class="form-control" name="imgModulo" id="imgModulo"
-                            accept=".png, jpeg, jpg">
+                        <label for="precioModulo" class="form-label">Precio Modulo</label>
+                        <input id="precioModulo" name="precioModulo" type="number" class="form-control"
+                            placeholder="$$$.$$$" required>
                     </div>
-
+                    <!-- Adjunto de modulo  -->
                     <div class="col-5 mb-4 ">
                         <label for="adjModulo" class="form-label">Archivo adjunto del módulo (Opcional)</label>
                         <input type="file" class="form-control" name="adjModulo" id="adjModulo" accept=".pdf, .docx">
                     </div>
-
+                    <!-- descripcion de archov adjunto -->
                     <div class="col-7 mb-4">
                         <label for="adjModuloDesc" class="from-label mb-2">Descripción del archivo adjunto
                             (Opcional)</label>
                         <input minlength="1" maxlength="100" id="adjModuloDesc" type="text" class="form-control"
-                            name="adjModuloDesc" placeholder="Módulo" required>
+                            name="adjModuloDesc" placeholder="Archivo adjunto">
                     </div>
 
                 </div>
 
                 <div class="row  my-3 gx-3 mx-5">
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                         <button type="submit" name="submit" class="btn btn-primary btn-lg" id="genOtroMod">Generar otro
                             módulo</button>
-                    </div>
+                    </div> -->
 
                     <div class="col-6">
                         <button type="submit" name="submit" class="btn btn-primary btn-lg" id="genMod">Guardar
@@ -166,7 +180,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         </div>
 
     </div>
-
+    <script src="scripts/crearCurso.js"></script>
 </body>
 
 </html>
