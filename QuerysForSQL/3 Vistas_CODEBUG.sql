@@ -3,7 +3,7 @@ use codebug;
 DROP VIEW IF EXISTS v_InfoDeUsuariosActivos;
 CREATE VIEW v_InfoDeUsuariosActivos AS
     SELECT 
-		ID_Usuario,
+        ID_Usuario,
         CONCAT(Nombre, ' ', ApPaterno, ' ', ApMaterno) AS Nombre_Completo,
         TIMESTAMPDIFF(YEAR,
             FechaDeNac,
@@ -25,10 +25,12 @@ CREATE VIEW v_InfoDeUsuariosActivos AS
             ELSE 'Usuario Normal'
         END AS Rol,
         isBlocked AS Intentos,
-        Imagen as Imagen,
-        ImagenEx as ImagenEx
+        Imagen AS Imagen,
+        ImagenEx AS ImagenEx
     FROM
-        usuario where Estatus = true;
+        usuario
+    WHERE
+        Estatus = TRUE;
 
 drop view if exists v_CategoriasActivas;
 CREATE VIEW v_CategoriasActivas AS
@@ -41,5 +43,20 @@ CREATE VIEW v_CategoriasActivas AS
         Categoria
     WHERE
         estatus = TRUE;
+        
+        drop view if exists v_MensajesDeConversacion;
+CREATE VIEW v_MensajesDeConversacion AS
+Select
+Emisor,
+Receptor,
+Mensaje,
+DATE_FORMAT(Fecha, '%H:%i') AS hora_minuto,
+date_format(Fecha,'%b-%d') AS Dia,
+fecha as fecha
+from
+	Mensajes
+
+        
+        
 
 

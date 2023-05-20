@@ -372,7 +372,41 @@ Create procedure SP_SelectUSerFromIDForChat(
 end //
 DELIMITER ;
 
-call SP_SelectUSerFromIDForChat(2)
+#SP_SelectUSerFromIDForChat(p_ID)
+Drop procedure if exists SP_SelectUSerFromIDForChat;
+DELIMITER //
+Create procedure SP_SelectUSerFromIDForChat(
+	IN p_ID int
+)begin
+	select ID_Usuario , Nombre_Completo,Rol,Imagen,ImagenEx from v_infodeusuariosactivos where  ID_Usuario= p_ID ;
+end //
+DELIMITER ;
+
+#SP_MensajesAgregar(p_Receptor,p_Emisor,Mensaje);
+Drop procedure if exists SP_MensajesAgregar;
+DELIMITER //
+Create procedure SP_MensajesAgregar(
+	IN p_Receptor int,
+    IN p_Emisor int,
+    IN p_Mensaje varchar(140)
+)begin
+	declare fecha datetime;
+    set fecha = now();
+	insert into mensajes(Mensaje,Emisor,Receptor,Fecha) values(p_mensaje,p_emisor,p_Receptor,fecha);
+end //
+DELIMITER ;
+
+#call SP_SelectMensajesFromUsers(p_receptor,p_Emisor)
+Drop procedure if exists SP_SelectMensajesFromUsers;
+DELIMITER //
+Create procedure SP_SelectMensajesFromUsers(
+	IN p_Receptor int,
+    IN p_Emisor int
+)begin
+	select Emisor,Receptor,Mensaje,hora_minuto,Dia from v_mensajesdeconversacion where emisor =p_emisor and receptor=p_receptor or emisor=p_receptor and receptor=p_emisor order by fecha;
+end //
+DELIMITER ;
+
 
 
 

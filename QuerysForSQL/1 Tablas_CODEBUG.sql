@@ -2,22 +2,22 @@ create database if not exists Codebug;
 use codebug;
 
 /* 
-DROPS ALL TABLES
+DROPS ALL TABLEScategoriadecurso
 
 drops db
 drop database codebug;
 
-
+calificaciondecurso
 drop table adjuntoDeCurso;
 drop table niveldecurso;
-drop table categoriaDeCurso;
 drop table diploma; 
 drop table calificacionDeCurso;
 drop table UsuarioEnCurso;
 drop table curso;
 drop table categoria;
+
 drop table mensajes;
-drop table conversacion;
+
 drop table usuarioLogins;
 drop table usuario;
 */
@@ -57,15 +57,18 @@ create table if not exists curso(
 	ID_Curso 		int auto_increment		comment 'Identificador de cada curso es autogenerado y comienza a partir del 1',
     docente 		int not null			comment 'Llave foranea que identifica el usuario que da la clase',
     titulo 			varchar(50) not null	comment 'Titulo del curso',
-    CantDeNiveles 	int unsigned not null	comment 'Cantidad de niveles/clases que tiene el curso',
 	Descripcion		varchar(50) not null	comment 'Descripcion del curso',
     Precio			float not null			comment 'Precio que tiene el curso completo',
 	Imagen			BLOB not null			comment 'Imagen que identifica al curso',
+    ImagenEX		varchar(10) not null     comment 'Extension de la imagen que identifica al curso',
     Disponible		bit						comment 'Bit que identifica si el curso esta disponible para ser comprado o no. 1=Esta activo y puede ser comprado por los usuarios estudiantes, 0= El curso esta inactivo y no puede ser comprado por usuarios estudiantes. Si algun estudiante ya compró el curso y este fue desactivado este seguirá siendo accesible para los que ya lo adquirieron.',
+	Categoria		int						comment 'Llave foranea que referencia a la categoria que pertenece el curso',
     constraint	PK_Curso
 		Primary key (ID_Curso),
 	constraint FK_Docente
-		foreign key (docente) references usuario(ID_Usuario)	
+		foreign key (docente) references usuario(ID_Usuario),
+	constraint FK_CategoriaDelCurso
+		foreign key (Categoria) references categoria(ID_Categoria)
 )Engine=InnoDB;
 
 create table if not exists nivelDeCurso( 
@@ -74,10 +77,12 @@ create table if not exists nivelDeCurso(
     Video			blob not null			comment 'Video del nivel',
 	Descripcion		varchar(140)			comment 'Descripcion del nivel',
     PrecioNivel		float					comment 'Precio de nivel, puede ser gratis',
+   
 	constraint PK_NivelDeCurso
 		primary key (ID_NivelDeCurso),
 	constraint FK_Curso
 		foreign key (Curso) references curso(ID_Curso)
+        
 )Engine=InnoDB;
 
 create table if not exists adjuntoDeCurso(
@@ -102,18 +107,6 @@ create table if not exists categoria(
 		primary key (ID_Categoria)
 )Engine=InnoDB;
 
-create table if not exists categoriaDeCurso(
-	ID_CategoriaDeCurso		bigint auto_increment 	comment 'Identificador de cada curso que se le adjunta a una categoría, es autogenerado y comienza a partir del 1',
-    Categoria				int						comment 'Llave foranea que hace referencia a la categoria que se le agrega al curso',
-    Curso					int						comment 'Llave foranea que hace referencia al curso que se le esta agregando la categoria',
-    constraint PK_CategoriaDeCurso
-		primary key (ID_CategoriaDeCurso),
-	constraint FK_CategoriaQueSeAsigna
-		foreign key (Categoria) references categoria(ID_Categoria),
-	constraint FK_CursoAlQueSeLeAsigna
-		foreign key (Curso) references curso(ID_Curso)
-)Engine=InnoDB;
-
 create table if not exists diploma(
 	ID_Diploma 			bigint auto_increment	comment 'Identificador del diploma dado al finalizar un curso, es autogenerado y comienza a partir del 1',
     Usuario 			int						comment 'Llave foranea que hace referencia al usuario que recibe el diploma',
@@ -130,28 +123,18 @@ create table if not exists diploma(
 		foreign key (CursoCursado) references codebug.curso(ID_Curso)
 )Engine=InnoDB;
 
-create table if not exists conversacion(
-	ID_Conversacion bigint auto_increment			comment'Identificador de conversacion es autogenerado y comienza a partir del 1',
-    Emisor			int not null					comment 'Llave foranea que hace referencia al usuario que emite los mensajes',
-    Receptor		int not null					comment 'Llave foranea que hace referencia al usuario que recibe los mensajes',
-    constraint PK_IDConversacion
-		primary key (ID_Conversacion),
-    constraint FK_EmisorMensaje
-		foreign key (Emisor)references codebug.usuario(ID_Usuario),
-	constraint FK_ReceptorMensaje
-		foreign key (Receptor) references codebug.usuario(ID_Usuario)
-    
-)Engine=InnoDB;
-
 create table if not exists mensajes(
 	ID_Mensaje		bigint auto_increment			comment 'Identifiacdor del mensaje, es autogenerado y comienza a partir del 1',
     Fecha			datetime						comment 'Fecha en la que se envia el mensaje',
-    Mensaje			varchar(140)					comment 'Mensaje enviado por el emisor',
-    Conversacion	bigint							comment 'Llave foranea que hace referencia a la conversacion entre el emisor y receptor',
+    Mensaje			varchar(140)					comment 'Mensaje enviado por el emisor', 
+    Emisor			int not null					comment 'Llave foranea que hace referencia al usuario que emite los mensajes',
+    Receptor		int not null					comment 'Llave foranea que hace referencia al usuario que recibe los mensajes',
     constraint PK_Mensaje
 		primary key (ID_Mensaje),
-	constraint FK_Conversacion
-		foreign key (Conversacion) references codebug.conversacion(ID_Conversacion)
+	 constraint FK_EmisorMensaje
+		foreign key (Emisor)references codebug.usuario(ID_Usuario),
+	constraint FK_ReceptorMensaje
+		foreign key (Receptor) references codebug.usuario(ID_Usuario)
 )Engine=InnoDB;
 
 create table if not exists calificacionDeCurso(

@@ -74,6 +74,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                     </p>
                     <!--<a id="btn-loadNewPfp" class="btn btn-primary px-2 py-1" href="#">Actualizar foto de perfil</a>-->
                     <a id="btn-editProfile" class="btn btn-primary px-2 py-1" href="editperfil.php">Editar perfil</a>
+                    <a id="btn-crearCurso" class="btn btn-primary px-2 py-1" href="crearCurso.php">Crear Curso</a>
                 </div>
             </div>
         </div>
