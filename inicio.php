@@ -239,7 +239,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     <section>
         <div class="container">
             <h2 id="second">Cursos mejor calificados</h2>
-
             <!-- Nuestros cursos-->
             <section>
                 <div id="cursos" class="row h-100">

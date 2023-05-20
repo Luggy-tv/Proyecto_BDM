@@ -147,3 +147,7 @@ h2 {
 .carousel-indicators {
   bottom: 100px;
 }
+
+.thumb-content{
+  height: 35vh;
+}
