@@ -32,7 +32,10 @@ if (isset($_FILES['imagenDeCurso'])) {
 
             if (in_array($img_ex_lc, $allowed_exs)) {
                 include("cursoClass.php");
+                
                 if (addCurso($nombreCurso, $descripcionCurso, $precioCurso, $img_ex_lc, $img_temp_name_str, $idCategoria)) {
+
+                    
 
                     $response = array(
                         'success' => true,

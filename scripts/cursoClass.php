@@ -33,4 +33,15 @@ function addCurso( $titulo, $descripcion, $precio, $imagenEx, $imagen, $categori
     return $result;
 }
 
+function getCursoFromTituloAndCurrUser($titulo){
+    include("config.php");
+    include("userClass.php");
+    $id_usuario = getIDFromToken();
+    $sql="CALL SP_SelectCursoFromTituloAndCurrentUser('$titulo',$id_usuario);";
+    $result = mysqli_query($conn, $sql);
+    $ = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+
 ?>

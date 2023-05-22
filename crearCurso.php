@@ -117,7 +117,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
         <hr class="mt-3 mb-1 px-5">
 
-        <div class="modulos" style="display: none;">
+        <div class="modulos">
 
             <div class="modulo1">
                 <div class="row my-3 gx-3 mx-5">
