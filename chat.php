@@ -66,7 +66,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
           </div>
           
 
-          <div class="messages-box">
+          <div class="messages-box ">
             <div class="list-group" id="user-list">
               <!-- <a id="chatact" href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
                 <div class="media">
@@ -86,58 +86,13 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
           </div>
         </div>
       </div>
-
       <!-- Chat Box-->
-      <div class="col px-0">
-
-        <div id="chatbox" class="px-4 py-5 chat-box">
-
-          <!-- Reciever Message-->
-          <div class="media w-auto mb-3">
-            <img src="Recursos/Open Peeps - Bust.png" alt="user" width="50" class="rounded-circle" />
-            <div class="media-body ml-3">
-              <div class="bg-light rounded py-2 px-3 mb-2">
-                <p class="text-small mb-0 text-muted">
-                  Mensaje de prueba con chatter
-                </p>
-              </div>
-              <p class="small text-muted">12:00 PM | Aug 13</p>
-            </div>
-          </div>
-
-          <!-- Sender Message-->
-          <div class="media w-auto ml-auto mb-3">
-            <div class="media-body">
-              <div class="bg rounded py-2 px-3 mb-2">
-                <p id="turesp" class="text-small mb-0 text-white">
-                  Tu respuesta a ese mensaje
-                </p>
-              </div>
-              <p class="small text-muted">12:00 PM | Aug 13</p>
-            </div>
-          </div>
-
-          
-
-        </div>
-
-        <!-- Typing area -->
-        <form id="typing-Area"action="#" class="bg-light">
-          <div class="input-group">
-            <input id="InputField" type="text" placeholder="Type a message" aria-describedby="button-addon2"
-              class="form-control rounded-0 border-0 py-4 bg-light" />
-            <div class="input-group-append">
-              <button id="button-addon2" type="submit" class="btn">
-                Enviar
-              </button>
-            </div>
-          </div>
-        </form>
+      <div class=" chatbox col-lg-8 px-0 h-100" id="chatlist">
 
       </div>
     </div>
   </section>
-
+  <!-- <script src='scripts/chat-msg.js'></script> -->
   <script src="scripts/chat.js"></script>
 </body>
 

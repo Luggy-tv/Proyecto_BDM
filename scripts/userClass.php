@@ -63,7 +63,6 @@ function SetUserFromToken()
 
 function getIDFromToken()
 {
-
     include("config.php");
     $sessionToken = $_COOKIE['sessionToken'];
     $sql = "call SP_SelectIDFromToken('$sessionToken');";
@@ -74,9 +73,4 @@ function getIDFromToken()
     return $ID_Usuario;
 
 }
-
-function setUsuariosList(){
-    
-}
-
 ?>
