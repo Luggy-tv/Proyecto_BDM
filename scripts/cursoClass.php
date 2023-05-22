@@ -39,7 +39,7 @@ function getCursoFromTituloAndCurrUser($titulo){
     $id_usuario = getIDFromToken();
     $sql="CALL SP_SelectCursoFromTituloAndCurrentUser('$titulo',$id_usuario);";
     $result = mysqli_query($conn, $sql);
-    $ = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
     return $result;
 }
 
