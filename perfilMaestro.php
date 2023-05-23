@@ -59,7 +59,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <!--Imagen y nombre de perfil-->
     <section>
-        <div class="container-fluid bg-light w-100">
+        <div class="container-fluid py-5 bg-light ">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
@@ -82,14 +82,12 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <!--TUS CURSOS-->
     <section>
-        <div id="cursos" class="row h-100 pb-4">
-            <h2 class="my-2 text-center fw-bold">Tus cursos</h2>
-
+        <div id="cursos" class="row pb-4">
+            <h2 class="my-3 text-center fw-bold">Tus cursos</h2>
             <div class="container-xl">
                 <div class="row">
                     <div class="col-md-10 mx-auto bg-light rounded-1 my-auto">
                         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-
 
                             <!-- Wrapper for carousel items -->
                             <div class="carousel-inner">
@@ -217,8 +215,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <!--KARDEX-->
     <section>
-        <div id="kardex" class="row h-100 pb-4">
-            <h2 class="my-2 text-center fw-bold">Reportes de Cursos</h2>
+        <div id="kardex" class="row pb-4 py-3">
+            <h2 class="my-2 text-center fw-bold pb-3">Reportes de Cursos</h2>
             <div class="container-xl ">
                 <div class="row">
 

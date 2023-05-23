@@ -23,38 +23,50 @@
 
 
 <body>
-    <nav class="navbar navbar-dark navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.html">Codebug</a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div id="navcol-1" class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-
-                    <div class="dropdown">
-                        <button class="dropbtn" onclick="myFunction()">Cursos por categoría
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content" id="myDropdown">
-                            <a href="#">Back end</a>
-                            <a href="#">Front end</a>
-                            <a href="#">Diseño</a>
+    <section> <!--NAVBAR-->
+        <nav class="navbar navbar-dark navbar-expand-md">
+            <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
+                    <span class="visually-hidden">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div id="navcol-1" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
+                        
+                        <div class="dropdown"> <!---->
+                            <button class="dropbtn" onclick="myFunction()">Cursos por categoría
+                              <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content" id="myDropdown">
+                              <a href="#">Back end</a>
+                              <a href="#">Front end</a>
+                              <a href="#">Diseño</a>
+                            </div>
                         </div>
-                    </div>
-
-                    <li class="nav-item"><a class="nav-link link-light" href="#">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html"
-                            style="border-left-style: none;">Mensajes</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php"
-                            style="border-left-style: none;">Perfil</a></li>
-
+    
+                        <li class="nav-item"><a class="nav-link link-light" href="chat.html" style="border-left-style: none;">Mensajes</a></li>
+                        <li class="nav-item"><a class="nav-link link-light" href="perfil.html" style="border-left-style: none;">Perfil</a></li>
+    
+                    </ul>
+                </div>
+    
+                <div class="cart nav-item">
+                <a class="nav-link link-light" href="#">
+                    <span>Carrito de compras</span>
+                </a>
+                <ul class="product-list pt-3 px-5">
+                    <h3>Carrito de compras</h3>
+                    <li>Product A - 000.00</li>
+                    <li>Product B - $000.00</li>
+                    <li>Product C - $000.00</li>
+                    <li><a href="buy/formulario.php" class="checkout-button">Checkout</a></li>
                 </ul>
+                </div>
+                
             </div>
-
-        </div>
-    </nav>
+        </nav>
+       </section> <!--TERMINA NAVBAR-->
 
     <section>
         <div class="container">
