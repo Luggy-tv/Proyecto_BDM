@@ -27,7 +27,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="CSS/perfil.css">
+        <link rel="stylesheet" href="CSS/perfil.css?v=<?php echo time(); ?>">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -38,30 +38,54 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 </head>
 
 <body>
-    <!--NAV BAR-->
+<section> <!--NAVBAR-->
     <nav class="navbar navbar-dark navbar-expand-md">
-        <div class="container-fluid">
-
-            <a class="navbar-brand link-light" href="inicio.php">Codebug</a>
-
+        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.html">Codebug</a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.php">Mensajes</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="#">Mas Cursos</a></li>
+                    
+                    <div class="dropdown"> <!---->
+                        <button class="dropbtn" onclick="myFunction()">Cursos por categoría
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content" id="myDropdown">
+                          <a href="#">Back end</a>
+                          <a href="#">Front end</a>
+                          <a href="#">Diseño</a>
+                        </div>
+                    </div>
+
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.html" style="border-left-style: none;">Mensajes</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="perfil.html" style="border-left-style: none;">Perfil</a></li>
+
                 </ul>
             </div>
 
+            <div class="cart nav-item">
+            <a class="nav-link link-light" href="#">
+                <span>Carrito de compras</span>
+            </a>
+            <ul class="product-list pt-3 px-5">
+                <h3>Carrito de compras</h3>
+                <li>Product A - 000.00</li>
+                <li>Product B - $000.00</li>
+                <li>Product C - $000.00</li>
+                <li><a href="buy/formulario.php" class="checkout-button">Checkout</a></li>
+            </ul>
+            </div>
+            
         </div>
     </nav>
+   </section> <!--TERMINA NAVBAR-->
 
     <!--Imagen y nombre de perfil-->
     <section>
-        <div class="container-fluid bg-light w-100">
+        <div class="container-fluid bg-light py-5">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
@@ -82,8 +106,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <!--TUS CURSOS-->
     <section>
-        <div id="cursos" class="row h-100 pb-4">
-            <h2 class="my-2 text-center fw-bold">Tus cursos</h2>
+        <div id="cursos" class="row pb-4">
+            <h2 class="my-3 text-center fw-bold">Tus cursos</h2>
 
             <div class="container-xl">
                 <div class="row">
@@ -217,7 +241,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <!--KARDEX-->
     <section>
-        <div id="kardex" class="row h-100 pb-4">
+        <div id="kardex" class="row pb-4 py-3">
             <h2 class="my-2 text-center fw-bold">Tu Kardex</h2>
             <div class="container-xl ">
                 <div class="row">

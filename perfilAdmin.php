@@ -69,7 +69,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <!--Imagen y nombre de perfil-->
     <section>
-        <div class="container-fluid bg-light w-100 my-4">
+        <div class="container-fluid bg-light py-5">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
@@ -219,7 +219,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <!--USUARIOS-->
     <section>
-        <div id="kardex" class="row h-auto pb-4">
+        <div id="kardex" class="row h-auto pb-4 px-5">
             <h2 class="my-2 text-center fw-bold">Usuarios</h2>
             <!-- tabla de usuarios -->
             <div class="container ">
