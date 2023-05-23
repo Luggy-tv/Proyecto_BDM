@@ -1,3 +1,17 @@
+<?php
+if (isset($_GET['id'])){
+
+    $cursoID = $_GET['id'];
+    // print_r($_GET['id']);
+    include("scripts/cursoClass.php");
+    $cursoYModulos = getCursoForCursoInfo($cursoID);
+}
+else{
+    header("HTTP/1.1 400 Bad Request");
+    die("Se produjo un error al conectar con el curso favor de regresar a la pantalla anterior.");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +38,7 @@
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.php">Codebug</a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
@@ -45,7 +59,7 @@
                     </div>
 
                     <li class="nav-item"><a class="nav-link link-light" href="#">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html"
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.php"
                             style="border-left-style: none;">Mensajes</a></li>
                     <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php"
                             style="border-left-style: none;">Perfil</a></li>
@@ -60,7 +74,7 @@
         <div class="container">
             <div class="row mt-5 mb-3 text-align">
                 <h4>Información del curso</h4>
-                <h1>Nombre del curso</h1>
+                <h1><?php echo $cursoYModulos[0]['titulo']?></h1>
                 <hr style="height: 2px;">
                 
             </div>
@@ -73,16 +87,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-7 my-2 pe-5">
-                    <p>Texto de prueba como desripción del curso bla bla bla tiene que ser bastante texto para que se forme un párrafo de más de dos lineas creo que aun necesito escribir más.</p>
-                    <p>Mejor escribo también otro párrafo para ver cómo se ve todo.</p>
-                    <p id="Info">Categoría: Tal</p>
+                    <p><?php echo $cursoYModulos[0]['Curso_Descripcion']?></p>
+                    <p id="Info">Categoría: <?php echo $cursoYModulos[0]['nombre_categoria']?> </p>
                     <p id="Info">Puntuación por ususarios: x/5</p>
                 </div>
     
                 <div class="comprar col-5">
                    <div class="my-3 py-3 mx-3 px-3">
                     <h5>Adquiere este curso por</h5>
-                    <h1>$000.00</h1>
+                    <h1><?php echo $cursoYModulos[0]['precio_Curso']?></h1>
                     
                     <a id="btn-comprarCurso" href="" class="btn mx-2">
                         <span>
@@ -108,13 +121,15 @@
                     <br>
                 </div>
             </div>
+
+            <?php  foreach ($cursoYModulos as $curso): ?>
             
             <div class="row mx-3"> <!-- UNO -->
                 <div class="col-7 my-3">
-                    <h4>Modulo 1</h4>
-                    <h5>Breve desripción del módulo</h5>
+                    <h4><?php echo $curso['nombreNivel']?></h4>
+                    <h5><?php echo $curso['Nivel_Descripcion']?> </h5>
                 </div>
-
+                
                 <div class="col-5 my-3">
                     <a id="btn-comprarModulo" href="" class="btn mx-2">
                         Agregar este modulo al carrito   
@@ -122,32 +137,7 @@
                 </div>
             </div>
 
-            <div class="row mx-3"> <!-- DOS -->
-                <div class="col-7 my-3">
-                    <h4>Modulo 2</h4>
-                    <h5>Breve desripción del módulo</h5>
-                </div>
-
-                <div class="col-5 my-3">
-                    <a id="btn-comprarModulo" href="" class="btn mx-2">
-                        Agregar este modulo al carrito   
-                    </a>
-                </div>
-            </div>
-
-            <div class="row mx-3"> <!-- TRES -->
-                <div class="col-7 my-3">
-                    <h4>Modulo 3</h4>
-                    <h5>Breve desripción del módulo</h5>
-                </div>
-
-                <div class="col-5 my-3">
-                    <a id="btn-comprarModulo" href="" class="btn mx-2">
-                        Agregar este modulo al carrito   
-                    </a>
-                </div>
-            </div>
-
+            <?php endforeach ?>
         </div>
     </section>
 

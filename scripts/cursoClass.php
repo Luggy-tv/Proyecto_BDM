@@ -24,33 +24,46 @@ class Curso
 
 }
 
-function addCurso( $titulo, $descripcion, $precio, $imagenEx, $imagen, $categoria){
+function addCurso($titulo, $descripcion, $precio, $imagenEx, $imagen, $categoria)
+{
     include("config.php");
     include("userClass.php");
     $id_usuario = getIDFromToken();
-    $sql="CALL SP_CursoManage('a',0,$id_usuario,'$titulo','$descripcion','$precio','$imagen','$imagenEx',$categoria);";
+    $sql = "CALL SP_CursoManage('a',0,$id_usuario,'$titulo','$descripcion','$precio','$imagen','$imagenEx',$categoria);";
     $result = mysqli_query($conn, $sql);
     return $result;
 }
 
-function getCursoFromTituloAndCurrUser($titulo){
+function getCursoFromTituloAndCurrUser($titulo)
+{
     include("config.php");
     include("userClass.php");
     $id_usuario = getIDFromToken();
-    $sql="CALL SP_SelectCursoFromTituloAndCurrentUser('$titulo',$id_usuario);";
+    $sql = "CALL SP_SelectCursoFromTituloAndCurrentUser('$titulo',$id_usuario);";
     $result = mysqli_query($conn, $sql);
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
     return $result;
 }
 
-function addModulo($ID_curso,$videoDireccion,$videoDescripcion,$precioModulo){
+function getCursoForCursoInfo($id)
+{
     include("config.php");
-    $sql= "Call SP_nivelDeCursoManage('A',0,$ID_curso,'$videoDireccion','$videoDescripcion','$precioModulo')";
+    $sql = "call sp_selectDetalleCurso($id);";
+    $result = mysqli_query($conn, $sql);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function addModulo($ID_curso, $videoDireccion, $videoDescripcion, $precioModulo,$nombreModulo)
+{
+    include("config.php");
+    $sql = "Call SP_nivelDeCursoManage('A',0,$ID_curso,'$videoDireccion','$nombreModulo','$videoDescripcion','$precioModulo')";
     $result = mysqli_query($conn, $sql);
     return $result;
 }
 
-function addAdjunto($nivelCursoID,$descripcion,$adjunto){
+function addAdjunto($nivelCursoID, $descripcion, $adjunto)
+{
     include("config.php");
     $sql = "call SP_adjuntoDeCursoManage('A',0,$nivelCursoID,'$descripcion','$adjunto');";
     $result = mysqli_query($conn, $sql);

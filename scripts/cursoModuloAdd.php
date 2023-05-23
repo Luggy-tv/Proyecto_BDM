@@ -88,7 +88,7 @@ if (isset($_FILES['videoModulo'])) {
     //Se sube a la base de datos y se guarda la direccion del modulo
     include("cursoClass.php");
     $row = getCursoFromTituloAndCurrUser($nombreCurso);
-    $result = addModulo($row[0]['id_Curso'], $destination, $descripcionModulo, $precioModulo);
+    $result = addModulo($row[0]['id_Curso'], $destination, $descripcionModulo, $precioModulo,$nombreModulo);
     if ($result) {
 
         if ($adjFlag == 2) {
