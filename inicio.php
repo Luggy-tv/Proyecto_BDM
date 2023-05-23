@@ -25,7 +25,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="CSS/inicio.css">
+        <link rel="stylesheet" href="CSS/inicio.css?v=<?php echo time(); ?>">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -90,15 +90,13 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         <div class="container bg-light my-5">
             <div class="row mx-5">
                 <div class="col-lg-12 mt-5">
-                    <h2>Mis cursos</h2>
+                    <h2>Cursos más vendidos</h2>
                     <hr id="hr">
                 </div>
             </div>
-
-
             <!-- Nuestros cursos-->
             <section>
-                <div id="cursos" class="row h-100 text-center ">
+                <div id="cursos" class="row text-center ">
 
                     <div class="container-xl">
                         <div class="row">
@@ -238,11 +236,10 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
     <section>
         <div class="container">
-            <h2 id="second">Cursos mejor calificados</h2>
+            <h2 id="second" class="mx-5">Cursos mejor calificados</h2>
             <!-- Nuestros cursos-->
             <section>
-                <div id="cursos" class="row h-100">
-
+                <div id="cursos" class="row">
                     <div class="container-xl">
                         <div class="row">
                             <div class="col-md-12 mx-auto">
@@ -315,7 +312,111 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                 </div>
             </section>
 
+        </div>
+    </section>
 
+    <section class="recientes bg-light">
+        <div class="container py-3">
+            <h2 class="pt-5 mx-5">Cursos más recientes</h2>
+            <!-- Nuestros cursos-->
+            <section class="my-3">
+                <div id="cursos" class="row">
+
+                    <div class="container-xl">
+                        <div class="row">
+                            <div class="col-md-12 mx-auto">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+
+
+                                    <!-- Wrapper for carousel items -->
+                                    <div class="carousel-inner ">
+                                        <div class="carousel-item active">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="thumb-wrapper">
+                                                        <div class="img-box">
+                                                            <img src="Recursos/tinypngs/html.jpg" class="img-fluid"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="thumb-content">
+                                                            <h4>Aprende HTML desde cero</h4>
+                                                            <p>En este curso de nivel básico aprenderás todo lo que
+                                                                necesitas para
+                                                                comenzar a diseñar páginas web usando HTML 5</p>
+                                                            <a href="#" class="btn btn-primary">Ver más <i
+                                                                    class="fa fa-angle-right"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="thumb-wrapper">
+                                                        <div class="img-box">
+                                                            <img src="Recursos/tinypngs/mysql.jpg" class="img-fluid"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="thumb-content">
+                                                            <h4>MySQL para principiantes</h4>
+                                                            <p>Aprende a usar una de las bases de datos de código
+                                                                abierto más utilizadas en el mundo</p>
+                                                            <a href="#" class="btn btn-primary">Ver más <i
+                                                                    class="fa fa-angle-right"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="thumb-wrapper">
+                                                        <div class="img-box">
+                                                            <img src="Recursos/tinypngs/programador1.jpg"
+                                                                class="img-fluid" alt="">
+                                                        </div>
+                                                        <div class="thumb-content">
+                                                            <h4>Introducción a la progrmación web</h4>
+                                                            <p>Empieza a crear tus propias páginas web desde cero con
+                                                                este curso introductorio donde aprenderás todo lo
+                                                                necesario para comenzar</p>
+                                                            <a href="#" class="btn btn-primary">Ver más <i
+                                                                    class="fa fa-angle-right"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <section id="busqueda"> <!--Busqueda-->
+        <div class="container py-5 px-3">
+            <h3 class="mx-4">Búsqueda de cursos</h3>
+            <hr>
+            <div class="search">
+                    <form>
+                        <input type="text" placeholder="Buscar curso">
+                        <button type="submit">Ir</button>
+
+                    </form>
+            </div>
+            <div id="cuadroBusqueda" class="container my-3 mx-3 px-5 py-3">
+                <div>
+                    <a href="">
+                        <h4>Nombre del curso</h4>
+                    </a>
+                    <p id="busquedaText">Texto descriptivo breve acerca del contenido del curso.</p>
+                    <p id="busquedaText">Impartido por Fulanito Detal</p>
+                    </div>
+                
+            </div>
         </div>
     </section>
 
