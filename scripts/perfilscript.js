@@ -13,7 +13,7 @@ document.getElementById("form-addcat").addEventListener("submit", function (e) {
   let inputDesc = document.getElementById("DescCategoria").value;
 
   if (validateText(inputNombre, inputDesc)) {
-    
+
     var formData = new FormData(document.getElementById("form-addcat"));
 
     var xhr = new XMLHttpRequest();
@@ -21,8 +21,9 @@ document.getElementById("form-addcat").addEventListener("submit", function (e) {
     xhr.open("POST", "scripts/categoriaAgregar.php", true);
 
     xhr.onload = function () {
-
       if (xhr.status === 200) {
+
+        // console.log(xhr.responseText);
 
         var response = JSON.parse(xhr.responseText);
 
@@ -41,7 +42,6 @@ document.getElementById("form-addcat").addEventListener("submit", function (e) {
 });
 
 function actualizarTabla(response) {
-
   $("#exampleModal").modal("hide");
 
   var form = document.getElementById("form-addcat");
@@ -56,6 +56,12 @@ function actualizarTabla(response) {
 }
 
 function validateText(nombre, desc) {
+  if (nombre === "" || desc === "") {
+    invalidMsg +=
+    "- Por favor, completa ambos campos.";
+    return false;
+  }
+
   if (nameRegex.test(nombre) && nameRegex.test(desc)) {
     return true;
   } else {
@@ -77,7 +83,8 @@ function generarContenidoTabla(data) {
 
   data.forEach(function (categoria) {
     contenidoTabla += "<tr>";
-    contenidoTabla += "<td scope='row' id='"+categoria.ID+"'>" + categoria.ID + "</td>";
+    contenidoTabla +=
+      "<td scope='row' id='" + categoria.ID + "'>" + categoria.ID + "</td>";
     contenidoTabla += "<td>" + categoria.Categoria + "</td>";
     contenidoTabla += "<td>" + categoria.Descripcion + "</td>";
     contenidoTabla += "<td>" + categoria.Creada + "</td>";
@@ -113,3 +120,27 @@ function eliminarFila(id) {
 
   xhr.send(data);
 }
+
+function mostrarError(mensaje) {
+  let errorMsgHTML = document.getElementById("error-msg");
+  errorMsgHTML.innerHTML = "";
+  errorMsgHTML.innerHTML +=
+    `
+  <div class="container bg-opacity-100 bg-danger rounded mt-2 mb-2 p-md-2">
+    <div class="col-12 text-md-center my-2">
+      <h4 class="fw-bold">
+      ` +
+    mensaje +
+    `
+      </h4>
+    </div>
+  </div>`;
+}
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // console.log("El HTML Se ha cargado.");
+});

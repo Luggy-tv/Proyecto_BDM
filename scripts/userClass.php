@@ -19,7 +19,7 @@ class Usuario
         $this->apellidoMat = $apellidoMat;
         $this->Email = $Email;
         $this->Imagen = $Imagen;
-        $this->ImagenEx=$ImagenEx;
+        $this->ImagenEx = $ImagenEx;
         $this->isBlocked = $isBlocked;
         $this->isAdmin = $isAdmin;
         $this->isMaestro = $isMaestro;
@@ -45,7 +45,7 @@ function SetUserFromToken()
     //     header("HTTP/1.1 400 Bad Request");
     //     die("Se produjo un error de solicitud. Para poder entrar a esta pagina inicie sesion nuevamente.");
     // }
-    
+
     $usuario = new Usuario(
         $usuario_data[0]['Nombre'],
         $usuario_data[0]['ApPaterno'],
@@ -72,5 +72,14 @@ function getIDFromToken()
 
     return $ID_Usuario;
 
+}
+
+function getUserList()
+{
+    include("config.php");
+    $sql = " call SP_SelectUserExistentes(); ";
+    $result = mysqli_query($conn, $sql);
+    $userList = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $userList;
 }
 ?>
