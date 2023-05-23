@@ -58,6 +58,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
         </div>
         <div class="infoCurso">
+
             <form id="form-cursoinfo" action="" method="post" enctype="multipart/form-data">
                 <div class="row gx-3 mx-5">
 
@@ -115,8 +116,12 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                 </div>
             </form>
         </div>
+
         <div class="modulos" id="formularioRepetido">
-                      
+
+        </div>
+        <div class="row" id="return-btn">
+            
         </div>
     </div>
     <script src="scripts/crearCurso.js"></script>

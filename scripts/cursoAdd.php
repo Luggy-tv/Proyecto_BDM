@@ -34,9 +34,6 @@ if (isset($_FILES['imagenDeCurso'])) {
                 include("cursoClass.php");
                 
                 if (addCurso($nombreCurso, $descripcionCurso, $precioCurso, $img_ex_lc, $img_temp_name_str, $idCategoria)) {
-
-                    
-
                     $response = array(
                         'success' => true,
                         'message' => 'Curso subido a la base de datos',

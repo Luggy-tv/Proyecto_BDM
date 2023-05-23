@@ -43,5 +43,20 @@ function getCursoFromTituloAndCurrUser($titulo){
     return $result;
 }
 
+function addModulo($ID_curso,$videoDireccion,$videoDescripcion,$precioModulo){
+    include("config.php");
+    $sql= "Call SP_nivelDeCursoManage('A',0,$ID_curso,'$videoDireccion','$videoDescripcion','$precioModulo')";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function addAdjunto($nivelCursoID,$descripcion,$adjunto){
+    include("config.php");
+    $sql = "call SP_adjuntoDeCursoManage('A',0,$nivelCursoID,'$descripcion','$adjunto');";
+    $result = mysqli_query($conn, $sql);
+}
+
+// $row=getCursoFromTituloAndCurrUser("Gatos 3");
+// print_r($row[0]['id_Curso']);
 
 ?>
