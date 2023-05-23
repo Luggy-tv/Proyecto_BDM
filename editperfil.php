@@ -73,7 +73,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
         <div class="row">
             <div class="col-1">
-                <!--<a href="perfil.html" class="link-dark pt-3">
+                <!--<a href="scripts/perfilRedir.php" class="link-dark pt-3">
                     <i class="fa fa-arrow-left "></i>
                     Regresar
                 </a>-->

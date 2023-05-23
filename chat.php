@@ -34,7 +34,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 <body>
 <section> <!--NAVBAR-->
         <nav class="navbar navbar-dark navbar-expand-md">
-            <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+            <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.php">Codebug</a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                     <span class="visually-hidden">Toggle navigation</span>
                     <span class="navbar-toggler-icon"></span>
@@ -54,8 +54,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                             </div>
                         </div>
     
-                        <li class="nav-item"><a class="nav-link link-light" href="chat.html" style="border-left-style: none;">Mensajes</a></li>
-                        <li class="nav-item"><a class="nav-link link-light" href="perfil.html" style="border-left-style: none;">Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link link-light" href="chat.php" style="border-left-style: none;">Mensajes</a></li>
+                        <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php" style="border-left-style: none;">Perfil</a></li>
     
                     </ul>
                 </div>
