@@ -12,11 +12,17 @@
 
 h1 {
   font-weight: bold;
+  color: #172542;
 }
 
 h2 {
   font-weight: bold;
   color: var(--salmon);
+}
+
+h3 {
+  font-weight: bold;
+  color: #172542;
 }
 
 p {
@@ -42,10 +48,6 @@ body {
   width: 100%;
   background-color: var(--salmon);
   opacity: 100;
-}
-
-h1 {
-  color: #172542;
 }
 
 #curso {
@@ -96,7 +98,9 @@ h1 {
 .carousel .thumb-content {
   padding: 15px;
   font-size: 13px;
+  height: 35vh;
 }
+
 .carousel-control-prev,
 .carousel-control-next {
   height: 44px;
@@ -173,4 +177,54 @@ h1 {
 
 .show {
   display: block;
+}
+
+
+.search{
+  width: 100%;
+  size: 100%;
+  align-items: center;
+  margin-right: 0s;
+}
+
+.search form{
+  width: 100%;
+  margin: 0;
+  size: 100%;
+
+}
+
+.search input{
+  width: 90%;
+  padding: 1vh;
+  border: 1px solid #ddd;
+  outline: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+.search button{
+  background-color: #9863f3;
+  padding: 1vh;
+  width: 5%;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+}
+
+#busqueda{
+  background-color: #9ad1ef;
+}
+
+#cuadroBusqueda{
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+#busquedaText{
+  margin: 0%;
 }

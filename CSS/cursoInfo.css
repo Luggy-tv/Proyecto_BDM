@@ -145,6 +145,7 @@
   }
 
   .btn:hover{
+    background-color: #4eaaed;
     color:#c8bdf9;
 
   }
@@ -175,5 +176,35 @@
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
+  }
+
+  .search{
+    display: flex;
+    align-items: center;
+    margin-right: 0s;
+  }
+
+  .search form{
+    display: flex;
+    margin: 0;
+
+  }
+
+  .search input{
+    padding: 2px;
+    border: 1px solid #ddd;
+    outline: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: 15px;
+    font-size: 16px;
+  }
+  
+  .search button{
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    font-size: 16px;
   }
 
