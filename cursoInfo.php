@@ -37,35 +37,6 @@ else{
 
 
 <body>
-<<<<<<< HEAD:cursoInfo.php
-    <nav class="navbar navbar-dark navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.php">Codebug</a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div id="navcol-1" class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-
-                    <div class="dropdown">
-                        <button class="dropbtn" onclick="myFunction()">Cursos por categoría
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content" id="myDropdown">
-                            <a href="#">Back end</a>
-                            <a href="#">Front end</a>
-                            <a href="#">Diseño</a>
-                        </div>
-                    </div>
-
-                    <li class="nav-item"><a class="nav-link link-light" href="#">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.php"
-                            style="border-left-style: none;">Mensajes</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php"
-                            style="border-left-style: none;">Perfil</a></li>
-
-=======
     <section> <!--NAVBAR-->
         <nav class="navbar navbar-dark navbar-expand-md">
             <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.php">Codebug</a>
@@ -104,7 +75,6 @@ else{
                     <li>Product B - $000.00</li>
                     <li>Product C - $000.00</li>
                     <li><a href="buy/formulario.php" class="checkout-button">Checkout</a></li>
->>>>>>> velvet_branch(remote):cursoInfo.html
                 </ul>
                 </div>
                 
@@ -202,30 +172,6 @@ else{
                 </div>
 
             </div>
-
-            <script>
-                // JavaScript code for submitting the comment form
-                document.getElementById('comment-form').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent form submission
-
-                // Get the values from the form inputs
-                var name = document.getElementById('name').value;
-                var comment = document.getElementById('comment').value;
-
-                // Create a new comment element
-                var newComment = document.createElement('div');
-                newComment.className = 'comment';
-                newComment.innerHTML = '<img class="profile-pic" src="default_profile.jpg" alt="Profile Picture"><h3>' + name + '</h3><p>' + comment + '</p>';
-
-                // Append the new comment to the comment section
-                document.getElementById('comments').appendChild(newComment);
-
-                // Clear the form inputs
-                document.getElementById('name').value = '';
-                document.getElementById('comment').value = '';
-                });
-            </script>
-
         </div>
     </section>
 

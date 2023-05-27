@@ -236,13 +236,21 @@ function enviarFormulario(event, indice) {
 
     xhr.open("POST", "scripts/cursoModuloAdd.php", true);
 
+  
+
     xhr.onload = function () {
       if (xhr.status === 200) {
         // console.log(xhr.responseText);
 
+
+        console.log(xhr.responseText);
+
         var response = JSON.parse(xhr.responseText);
 
         if (response.success) {
+          
+
+          
           document.getElementById("submitMod-btn" + indice).disabled = true;
           document.getElementById("nombreModulo" + indice).disabled = true;
           document.getElementById("descModulo" + indice).disabled = true;
@@ -316,7 +324,7 @@ function actualizarReturnBtn() {
     returnBtnHTML.className = "col-12 py-2";
     returnBtnHTML.innerHTML = `
     <div class="col-12 py-2">
-      <a id="btn-crearCurso" class="btn btn-primary btn-lg" href="scripts/perfilRedir.php">Regresar a perefil</a>
+      <a id="btn-crearCurso" class="btn btn-primary btn-lg" href="scripts/perfilRedir.php">Regresar a perfil</a>
     </div>
     `;
     document.getElementById("return-btn").appendChild(returnBtnHTML);

@@ -1,13 +1,13 @@
 <?php
 if (isset($_FILES['videoModulo'])) {
 
-    $adjFlag = 0;
-
     include("config.php");
     $nombreCurso = mysqli_real_escape_string($conn, $_POST['nombreCurso']);
     $nombreModulo = mysqli_real_escape_string($conn, $_POST["nombreModulo"]);
     $descripcionModulo = mysqli_real_escape_string($conn, $_POST["descModulo"]);
     $precioModulo = mysqli_real_escape_string($conn, $_POST["precioModulo"]);
+
+    $adjuntoModuloDescipcion = mysqli_real_escape_string($conn, $_POST['adjModuloDesc']);
 
     $videoFile = $_FILES['videoModulo'];
     $videoFile_type = $_FILES['videoModulo']['type'];
@@ -35,14 +35,10 @@ if (isset($_FILES['videoModulo'])) {
         $adjuntoModulo_tmp_name = $_FILES['adjuntoModulo']['tmp_name'];
         $adjuntoModulo_error = $_FILES['adjuntoModulo']['error'];
         $adjuntoModulo_size = $_FILES['adjuntoModulo']['size'];
-        $adjFlag++;
+
     }
 
-    if ($_POST['adjModuloDesc'] != "") {
 
-        $adjuntoModuloDescipcion = mysqli_real_escape_string($conn, $_POST['adjModuloDesc']);
-        $adjFlag++;
-    }
 
     if ($adjFlag == 1) {
         $response = array(
@@ -73,7 +69,7 @@ if (isset($_FILES['videoModulo'])) {
     }
     $uploadDirectory = '../Videos_Modulos/';
     $newFileName = uniqid() . '_' . $videoFile_name;
-    $destination = $uploadDirectory . $newFileName;
+     $destination = $uploadDirectory . $newFileName;
     //Se mueve al nuevo directorio
     if (!move_uploaded_file($videoFile_tmp_name, $destination)) {
         $response = array(
@@ -88,31 +84,20 @@ if (isset($_FILES['videoModulo'])) {
     //Se sube a la base de datos y se guarda la direccion del modulo
     include("cursoClass.php");
     $row = getCursoFromTituloAndCurrUser($nombreCurso);
-    $result = addModulo($row[0]['id_Curso'], $destination, $descripcionModulo, $precioModulo,$nombreModulo);
+    $result = addModulo($row[0]['id_Curso'], $destination, $descripcionModulo, $precioModulo, $nombreModulo);
     if ($result) {
 
-        if ($adjFlag == 2) {
-            $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            $nivelCursoID = $row[0]['ultimo_id'];
+        $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $nivelCursoID = $row[0]['ultimo_id'];
 
-            $uploadDirectory = '../Adjuntos/';
-            $newFileName = uniqid() . '_' . $adjuntoModulo_name;
-            $destination = $uploadDirectory . $newFileName;
-            
-            move_uploaded_file($adjuntoModulo_tmp_name, $destination);
+        $uploadDirectory = '../Adjuntos/';
 
-            addAdjunto($nivelCursoID,$adjuntoModuloDescipcion,$destination);
+        $newFileName = uniqid() . '_' . $adjuntoModulo_name;
+        $destination = $uploadDirectory . $newFileName;
 
-            $response = array(
-                'success' => true,
-                'message' => "Modulo y adjunto subido, contunua con el siguiente."
-            );
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            exit;
+        move_uploaded_file($adjuntoModulo_tmp_name, $destination);
 
-        }
-
+        addAdjunto($nivelCursoID, $adjuntoModuloDescipcion, $destination);
 
 
         $response = array(
@@ -122,6 +107,7 @@ if (isset($_FILES['videoModulo'])) {
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;
+
 
     } else {
         $response = array(
