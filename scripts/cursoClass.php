@@ -54,15 +54,8 @@ function getCursoForCursoInfo($id)
     return $result;
 }
 
-function getCursoForEditCurso($id){
-    include("config.php");
-    $sql = "call sp_selectDetalleCurso($id);";
-    $result = mysqli_query($conn, $sql);
-    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    return $result;
-}
-
-function getAdjuntosFromCurso($id){
+function getCursoForEditCurso($id)
+{
     include("config.php");
     $sql = "call sp_selectDetalleCurso($id);";
     $result = mysqli_query($conn, $sql);
@@ -156,6 +149,58 @@ function getMejorCalificados()
     }
 
     return $listaCursosmasVendidos;
+}
+
+function editCurso($idCurso, $nuevoTitulo, $nuevoDescripcion, $nuevoPrecio, $nuevoImagen, $nuevoImagenEx, $nuevoCategoria)
+{
+    include("config.php");
+    $sql = "Call SP_CursoManage('B',$idCurso,0,'$nuevoTitulo','$nuevoDescripcion',$nuevoPrecio,'$nuevoImagen','$nuevoImagenEx',$nuevoCategoria);";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    return $result;
+}
+
+function editModulo($id_Modulo, $nuevoTitulo, $nuevoDescripcion, $nuevoPrecio, $nuevoVideo)
+{
+    include("config.php");
+    $sql = "call SP_nivelDeCursoManage('B', $id_Modulo, 0 ,'$nuevoVideo','$nuevoTitulo','$nuevoDescripcion',$nuevoPrecio);";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function editAdjunto($id_Adjunto,$nuevoDescripcion,$nuevoAdjunto){
+    include("config.php");
+    $sql= "Call SP_adjuntoDeCursoManage('B',$id_Adjunto,0,'$nuevoDescripcion','$nuevoAdjunto');";
+    $result = mysqli_query($conn,$sql);
+    mysqli_close($conn);
+    return $result;
+}
+
+function getAdjuntoIdFromNivelId($id_Nivel)
+{
+    include("config.php");
+    $sql = "call sp_SelectAdjuntoFromNivelID($id_Nivel);";
+    $result = mysqli_query($conn, $sql);
+    
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $adjuntoId = $row['ID_AdjuntoDeCurso'];
+        mysqli_free_result($result);
+        mysqli_close($conn);
+        return $adjuntoId;
+    } else {
+        mysqli_close($conn);
+        return false;
+    }
+}
+
+function deslistarCurso($id_Curso){
+    include("config.php");
+    $sql= "CALL SP_CursoManage('C',$id_Curso,0,0,0,0,0,0,0);";
+    $result = mysqli_query($conn,$sql);
+    mysqli_close($conn);
+    return $result;
 }
 
 

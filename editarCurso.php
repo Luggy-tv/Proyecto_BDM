@@ -5,7 +5,7 @@ if (isset($_GET['id'])) {
     // print_r($_GET['id']);
     include("scripts/cursoClass.php");
     $cursoYModulos = getCursoForEditCurso($cursoID);
-    print_r($cursoYModulos);
+    // print_r($cursoYModulos);
 
     include_once("scripts/categoriasClass.php");
     $listaCategorias = setCategoriasLista();
@@ -36,6 +36,7 @@ if (isset($_GET['id'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -67,21 +68,22 @@ if (isset($_GET['id'])) {
 
         </div>
         <div class="infoCurso">
-            <form id="form-cursoinfo" action="" method="post" enctype="multipart/form-data">
+            <form id="form-editcursoinfo" action="" method="post" enctype="multipart/form-data">
                 <div class="row gx-3 mx-5">
 
                     <!-- escondidos -->
                     <!-- ID categoria  -->
                     <!-- Cantidad de Modulos  -->
-                    <input type="hidden" name="numModulos" id="numModulos" value="<?php echo "lol" ?>">
+                    <!-- <input type="hidden" name="numModulos" id="numModulos" value="<?php echo "lol" ?>"> -->
                     <!-- id curso -->
-                    <input type="hidden" name="idCurso" id="idCurso" value="<?php echo "lol " ?>">
+                    <input type="hidden" name="idCurso" id="idCurso"
+                        value="<?php echo $cursoYModulos[0]['ID_Curso'] ?>">
 
                     <!-- Nombre Curso -->
                     <div class="col-7 mb-4">
-                        <label for="nombreCurso" class="from-label">Nombre del curso</label>
-                        <input minlength="1" maxlength="50" id="nombreCurso" type="text" class="form-control"
-                            name="nombreCurso" placeholder="<?php echo $cursoYModulos[0]['titulo'] ?>" required>
+                        <label for="editNombreCurso" class="from-label">Nombre del curso</label>
+                        <input minlength="1" maxlength="50" id="editNombreCurso" type="text" class="form-control"
+                            name="editNombreCurso" placeholder="<?php echo $cursoYModulos[0]['titulo'] ?>" required>
                     </div>
 
                     <!-- Nombre Categoria  -->
@@ -97,24 +99,24 @@ if (isset($_GET['id'])) {
 
                     <!-- Descripcionde curso -->
                     <div class="col-12 mb-4 ">
-                        <label for="descCurso" class="form-label">Descripcion de Curso</label>
-                        <textarea name="descCurso" id="descCurso" type="text" class="form-control" minlength="10"
-                            maxlength="200" placeholder="<?php echo $cursoYModulos[0]['Curso_Descripcion'] ?>"
-                            required></textarea>
+                        <label for="editDescCurso" class="form-label">Descripcion de Curso</label>
+                        <textarea name="editDescCurso" id="editDescCurso" type="text" class="form-control"
+                            minlength="10" maxlength="200"
+                            placeholder="<?php echo $cursoYModulos[0]['Curso_Descripcion'] ?>" required></textarea>
 
                     </div>
 
                     <!-- Precio de curso  -->
                     <div class="col-6 mb-4 ">
-                        <label for="precioCurso" class="form-label">Precio de Curso</label>
-                        <input id="precioCurso" name="precioCurso" type="text" class="form-control"
+                        <label for="editPrecioCurso" class="form-label">Precio de Curso</label>
+                        <input id="editPrecioCurso" name="editPrecioCurso" type="text" class="form-control"
                             placeholder="<?php echo $cursoYModulos[0]['precio_Curso'] ?>" required>
                     </div>
 
                     <!-- Imagen de Curso  -->
                     <div class="col-6 mb-4 ">
-                        <label for="imagenDeCurso" class="form-label">Nueva imagen del curso</label>
-                        <input type="file" class="form-control" name="imagenDeCurso" id="imagenDeCurso"
+                        <label for="editImagenDeCurso" class="form-label">Nueva imagen del curso</label>
+                        <input type="file" class="form-control" name="editImagenDeCurso" id="editImagenDeCurso"
                             accept=".png, .jpg, .jpeg" required>
                     </div>
 
@@ -126,60 +128,78 @@ if (isset($_GET['id'])) {
                 </div>
             </form>
         </div>
+
         <div class="modulos">
             <?php foreach ($cursoYModulos as $modulo): ?>
                 <div class="modulo">
+
                     <hr class="mt-1 mb-1 px-5">
-                    <form action="" method="POST" id="form-moduloinfo<?php echo $modulo['Modulo_ID'] ?>" enctype="multipart/form-data">
+                    <form action="" method="POST" id="form-moduloinfo<?php echo $modulo['Modulo_ID'] ?>"
+                        enctype="multipart/form-data">
 
                         <div id="error-<?php echo $modulo['Modulo_ID'] ?>">
                         </div>
 
                         <div id="success-<?php echo $modulo['Modulo_ID'] ?>">
                         </div>
+
                         <div class="row my-3 gx-3 mx-5">
                             <h4 class="mt-2 mb-3">Editar modulo </h4>
-                            
+
                             <div class="col-5 mb-4">
-                                <label for="nombreModulo<?php echo $modulo['Modulo_ID'] ?>" class="form-label">Nombre del módulo</label>
-                                <input minlength="1" maxlength="50" id="nombreModulo<?php echo $modulo['Modulo_ID'] ?>" type="text" class="form-control"
-                                    name="nombreModulo" placeholder="<?php echo $modulo['nombreNivel'] ?>" required>
+                                <label for="editNombreModulo<?php echo $modulo['Modulo_ID'] ?>" class="form-label">Nombre
+                                    del módulo</label>
+                                <input minlength="1" maxlength="50" id="editNombreModulo<?php echo $modulo['Modulo_ID'] ?>"
+                                    type="text" class="form-control" name="editNombreModulo"
+                                    placeholder="<?php echo $modulo['nombreNivel'] ?>" required>
                             </div>
-                            
+
                             <div class="col-7 mb-4">
-                                <label for="descModulo<?php echo $modulo['Modulo_ID'] ?>" class="form-label">Descripción del módulo</label>
-                                <input minlength="1" maxlength="100" id="descModulo<?php echo $modulo['Modulo_ID'] ?>" type="text" class="form-control"
-                                    name="descModulo" placeholder="<?php echo $modulo['Nivel_Descripcion'] ?>" required>
+                                <label for="editDescripcionModulo<?php echo $modulo['Modulo_ID'] ?>"
+                                    class="form-label">Descripción del módulo</label>
+                                <input minlength="1" maxlength="100"
+                                    id="editDescripcionModulo<?php echo $modulo['Modulo_ID'] ?>" type="text"
+                                    class="form-control" name="editDescripcionModulo"
+                                    placeholder="<?php echo $modulo['Nivel_Descripcion'] ?>" required>
                             </div>
-                            
+
                             <div class="col-5 mb-4">
-                                <label for="videoModulo<?php echo $modulo['Modulo_ID'] ?>" class="form-label">Video</label>
-                                <input type="file" class="form-control" name="videoModulo" id="videoModulo<?php echo $modulo['Modulo_ID'] ?>"
-                                    accept=".mp4,.mov">
+                                <label for="editVideoModulo<?php echo $modulo['Modulo_ID'] ?>"
+                                    class="form-label">Video</label>
+                                <input type="file" class="form-control" name="editVideoModulo"
+                                    id="editVideoModulo<?php echo $modulo['Modulo_ID'] ?>" accept=".mp4,.mov" required>
                             </div>
-                            
+
                             <div class="col-7 mb-4">
-                                <label for="precioModulo<?php echo $modulo['Modulo_ID'] ?>" class="form-label">Precio Módulo</label>
-                                <input id="precioModulo<?php echo $modulo['Modulo_ID'] ?>" name="precioModulo" type="text" class="form-control"
-                                    placeholder="<?php echo $modulo['precio_Nivel'] ?>" required>
+                                <label for="editPrecioModulo<?php echo $modulo['Modulo_ID'] ?>" class="form-label">Precio
+                                    Módulo</label>
+                                <input id="editPrecioModulo<?php echo $modulo['Modulo_ID'] ?>" name="editPrecioModulo"
+                                    type="text" class="form-control" placeholder="<?php echo $modulo['precio_Nivel'] ?>"
+                                    required>
                             </div>
-                            
+
                             <div class="col-5 mb-4">
-                                <label for="adjModulo<?php echo $modulo['Modulo_ID'] ?>" class="form-label">Archivo adjunto del módulo (Opcional)</label>
-                                <input type="file" class="form-control" name="adjModulo" id="adjModulo<?php echo $modulo['Modulo_ID'] ?>"
-                                    accept=".pdf, .docx">
+                                <label for="editAdjModulo<?php echo $modulo['Modulo_ID'] ?>" class="form-label">Archivo
+                                    adjunto del módulo (Opcional)</label>
+                                <input type="file" class="form-control" name="editAdjModulo"
+                                    id="editAdjModulo<?php echo $modulo['Modulo_ID'] ?>" accept=".pdf, .docx">
                             </div>
-                            
+
                             <div class="col-7 mb-4">
-                                <label for="adjModuloDesc<?php echo $modulo['Modulo_ID'] ?>" class="form-label mb-2">Descripción del archivo adjunto
+                                <label for="editAdjModuloDescripcion<?php echo $modulo['Modulo_ID'] ?>"
+                                    class="form-label mb-2">Descripción del archivo adjunto
                                     (Opcional)</label>
-                                <input minlength="1" maxlength="100" id="adjModuloDesc<?php echo $modulo['Modulo_ID'] ?>" type="text" class="form-control"
-                                    name="adjModuloDesc" placeholder="Archivo adjunto">
+                                <input minlength="1" maxlength="100"
+                                    id="editAdjModuloDescripcion<?php echo $modulo['Modulo_ID'] ?>" type="text"
+                                    class="form-control" name="editAdjModuloDescripcion"
+                                    placeholder="Descripcion de adjunto">
                             </div>
 
                             <div class="col">
-                                <button type="button" name="submit" class="btn btn-primary btn-lg" id="submitMod-btn<?php echo $modulo['Modulo_ID'] ?>"
-                                    onclick="enviarFormulario(event, <?php echo $modulo['Modulo_ID'] ?>)">Editar datos de modulo</button>
+                                <button type="button" name="submit" class="btn btn-primary btn-lg"
+                                    id="submitMod-btn<?php echo $modulo['Modulo_ID'] ?>"
+                                    onclick="enviarFormulario(event, <?php echo $modulo['Modulo_ID'] ?>)">Editar datos de
+                                    modulo</button>
                             </div>
 
                         </div>
@@ -190,11 +210,36 @@ if (isset($_GET['id'])) {
             <?php endforeach; ?>
 
         </div>
+
         <div class="row" id="return-btn">
             <div class="col-16 py-2">
                 <a id="btn-crearCurso" class="btn btn-primary btn-lg"
                     href="scripts/cursoRedir.php?id=<?php echo $cursoID ?>">
                     Regresar a pagina del curso</a>
+            </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" id="delist-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" <?php if(!$cursoYModulos[0]['disponible']) echo "disabled"?> >
+            Deslistar Curso
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">¿Deslistar Curso?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       Esta seguro que quiere deslistar el curso? Al momento de deslistar el curso usted no podra volverlo a activar asimismo tampoco lo podran comprar nuevos estudiantes. Para los estudiantes que ya lo compraron les aparecera en el kardex y el desglose del curso le seguira apareciento a usted.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" onclick="deslistarCurso(event,<?php echo $cursoYModulos[0]['ID_Curso'] ?>)" class="btn btn-primary">Eliminar Curso</button>
+                    </div>
+                </div>
             </div>
         </div>
 

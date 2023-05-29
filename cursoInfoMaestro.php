@@ -3,8 +3,14 @@ if (isset($_GET['id'])){
 
     $cursoID = $_GET['id'];
     // print_r($_GET['id']);
+
     include("scripts/cursoClass.php");
     $cursoYModulos = getCursoForCursoInfo($cursoID);
+    
+    include("scripts/userClass.php");
+    $ID_Usuario = getIDFromToken();
+
+    // print_r($cursoYModulos);
 }
 else{
     header("HTTP/1.1 400 Bad Request");
@@ -90,6 +96,7 @@ else{
                 <p><?php echo $cursoYModulos[0]['Curso_Descripcion']?></p>
                     <p id="Info">Categoría: <?php echo $cursoYModulos[0]['nombre_categoria']?> </p>
                     <p id="Info">Puntuación por ususarios: x/5</p>
+                    <p id="Info">Impartido por: <?php echo $cursoYModulos[0]['Nombre_Completo']?></p>
                 </div>
     
                 <div class="comprar col-5">
@@ -189,6 +196,7 @@ else{
     </section>
 
     <section>
+        <!-- <?php if($cursoYModulos[0]['id_Docente']===$ID_Usuario): ?> -->
         <div class="container my-5">
             <h3>Funciones como maestro</h3>
             <hr style="height: 2px;">
@@ -197,6 +205,7 @@ else{
             </a>
 
         </div>
+        <?php endif?>
     </section>
 
 

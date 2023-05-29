@@ -102,6 +102,7 @@ else{
                     <p><?php echo $cursoYModulos[0]['Curso_Descripcion']?></p>
                     <p id="Info">Categoría: <?php echo $cursoYModulos[0]['nombre_categoria']?> </p>
                     <p id="Info">Puntuación por ususarios: x/5</p>
+                    <p id="Info">Impartido por: <?php echo $cursoYModulos[0]['Nombre_Completo']?></p>
                 </div>
     
                 <div class="comprar col-5">

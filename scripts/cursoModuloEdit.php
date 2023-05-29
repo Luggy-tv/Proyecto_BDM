@@ -1,15 +1,11 @@
 <?php
-if (isset($_FILES['videoModulo'])) {
-
+if (isset($_FILES["videoModulo"])) {
     include("config.php");
-    $nombreCurso = mysqli_real_escape_string($conn, $_POST['nombreCurso']);
+
+    $id_Modulo = $_POST["id_Modulo"];
     $nombreModulo = mysqli_real_escape_string($conn, $_POST["nombreModulo"]);
-    $descripcionModulo = mysqli_real_escape_string($conn, $_POST["descModulo"]);
+    $descripcionModulo = mysqli_real_escape_string($conn, $_POST["descripcionModulo"]);
     $precioModulo = mysqli_real_escape_string($conn, $_POST["precioModulo"]);
-
-
-    $adjuntoModuloDescipcion = mysqli_real_escape_string($conn, $_POST['adjModuloDesc']);
-
 
     $videoFile = $_FILES['videoModulo'];
     $videoFile_type = $_FILES['videoModulo']['type'];
@@ -18,7 +14,6 @@ if (isset($_FILES['videoModulo'])) {
     $videoFile_error = $_FILES['videoModulo']['error'];
     $videoFile_size = $_FILES['videoModulo']['size'];
 
-    //Hubo un error en el video
     if ($videoFile_error !== 0) {
         $response = array(
             'success' => false,
@@ -29,8 +24,10 @@ if (isset($_FILES['videoModulo'])) {
         exit;
     }
 
-    //Defincion de adjuntos
     if (isset($_FILES['adjuntoModulo'])) {
+
+        $descripcionAdjModulo = mysqli_real_escape_string($conn, $_POST['descripcionAdjModulo']);
+
         $adjuntoModulo = $_FILES['adjuntoModulo'];
         $adjuntoModulo_type = $_FILES['adjuntoModulo']['type'];
         $adjuntoModulo_name = $_FILES['adjuntoModulo']['name'];
@@ -40,26 +37,14 @@ if (isset($_FILES['videoModulo'])) {
 
     } else {
         $adjuntoModulo = null;
+        $descripcionAdjModulo = null;
     }
-
-
-
-
-    // $response = array(
-    //     'success' => false,
-    //     'message' => 'Si se añade un adjunto se tiene que agregar, ambas cosas la descripcion y el archivo. Favor de agregarlo'
-    // );
-    // header('Content-Type: application/json');
-    // echo json_encode($response);
-    // exit;
-
 
 
     $allowedExtensions = array('mp4', 'mov');
 
     $fileExtension = strtolower(pathinfo($videoFile_name, PATHINFO_EXTENSION));
 
-    //Se checa si es mp4 o mov
     if (!in_array($fileExtension, $allowedExtensions)) {
 
         $response = array(
@@ -76,7 +61,6 @@ if (isset($_FILES['videoModulo'])) {
     $newFileName = uniqid() . '_' . $videoFile_name;
     $destination = $uploadDirectory . $newFileName;
 
-    //Se mueve al nuevo directorio
 
     if (!move_uploaded_file($videoFile_tmp_name, $destination)) {
         $response = array(
@@ -88,52 +72,101 @@ if (isset($_FILES['videoModulo'])) {
         exit;
     }
 
-    //Se sube a la base de datos y se guarda la direccion del modulo
     include("cursoClass.php");
-    $row = getCursoFromTituloAndCurrUser($nombreCurso);
 
-    $result = addModulo($row[0]['id_Curso'], $destination, $descripcionModulo, $precioModulo, $nombreModulo);
+    $result = editModulo($id_Modulo, $nombreModulo, $descripcionModulo, $precioModulo, $destination);
 
     if ($result) {
 
         if (isset($_FILES['adjuntoModulo'])) {
 
-            $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-            $nivelCursoID = $row[0]['ultimo_id'];
+            $ID_adjunto = getAdjuntoIdFromNivelId($id_Modulo);
 
-            $uploadDirectory = '../Adjuntos/';
+            if ($ID_adjunto != 0) {
 
-            $newFileName = uniqid() . '_' . $adjuntoModulo_name;
+                $uploadDirectory = '../Adjuntos/';
 
-            $destination = $uploadDirectory . $newFileName;
+                $newFileName = uniqid() . '_' . $adjuntoModulo_name;
 
-            move_uploaded_file($adjuntoModulo_tmp_name, $destination);
+                $destination = $uploadDirectory . $newFileName;
 
-            addAdjunto($nivelCursoID, $adjuntoModuloDescipcion, $destination);
+                move_uploaded_file($adjuntoModulo_tmp_name, $destination);
+
+                if (editAdjunto($ID_adjunto, $descripcionAdjModulo, $destination)) {
+                    $response = array(
+                        'success' => true,
+                        'message' => "Se ha actualizado correctamente el modulo y el adjunto se ha editado"
+                    );
+                    header('Content-Type: application/json');
+                    echo json_encode($response);
+                    exit;
+                } else {
+                    $response = array(
+                        'success' => false,
+                        'message' => "Error en la edicion del adjunto"
+                    );
+                    header('Content-Type: application/json');
+                    echo json_encode($response);
+                    exit;
+                }
+
+
+
+            } else {
+
+
+                $uploadDirectory = '../Adjuntos/';
+
+                $newFileName = uniqid() . '_' . $adjuntoModulo_name;
+
+                $destination = $uploadDirectory . $newFileName;
+
+                move_uploaded_file($adjuntoModulo_tmp_name, $destination);
+
+                if (addAdjunto($id_Modulo, $adjuntoModuloDescipcion, $destination)) {
+                    $response = array(
+                        'success' => true,
+                        'message' => "Se ha actualizado correctamente el modulo y el adjunto se ha creado"
+                    );
+                    header('Content-Type: application/json');
+                    echo json_encode($response);
+                    exit;
+                } else {
+                    $response = array(
+                        'success' => false,
+                        'message' => "Error en añadir el adjunto favor de volver lo a mandar"
+                    );
+                    header('Content-Type: application/json');
+                    echo json_encode($response);
+                    exit;
+
+                }
+            }
+
+
         }
-
-
-
 
         $response = array(
             'success' => true,
-            'message' =>  "Se ha añadido correctamente el modulo."
+            'message' => "Se ha actualizado correctamente el modulo"
         );
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;
-
 
     } else {
+
         $response = array(
             'success' => false,
-            'message' => 'Hubo un error con la coneccion a la base de datos, favor de volver a intentarlo'
+            'message' => "Hubo un error en la coneccion a la base de datos favor de volver a mandar la informacion"
         );
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;
+
     }
+
 
 } else {
     $response = array(

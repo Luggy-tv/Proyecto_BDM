@@ -20,6 +20,7 @@ cursoform.addEventListener("submit", function (e) {
   e.preventDefault();
 
   if (validateInputsCurso()) {
+    
     var formData = new FormData(document.getElementById("form-cursoinfo"));
     //AJAX
     var xhr = new XMLHttpRequest();
@@ -34,7 +35,9 @@ cursoform.addEventListener("submit", function (e) {
           showSuccesMesage(response.message);
           actualizarModulos(document.getElementById("numModulos").value);
           returnflagLimit = document.getElementById("numModulos").value;
+
           //console.log(xhr.responseText);
+
         } else {
           invalidMsg = "";
           showErrorMessage(response.message);
@@ -161,7 +164,7 @@ function actualizarModulos(cantModulos) {
         </div>
         <div class="col-7 mb-4">
           <label for="adjModuloDesc${i}" class="form-label mb-2">Descripción del archivo adjunto (Opcional)</label>
-          <input minlength="1" maxlength="100" id="adjModuloDesc${i}" type="text" class="form-control" name="adjModuloDesc" placeholder="Archivo adjunto">
+          <input minlength="1" maxlength="100" id="adjModuloDesc${i}" type="text" class="form-control" name="adjModuloDesc${i}" placeholder="Archivo adjunto">
         </div>
           <div class="col">
             <button type="button" name="submit" class="btn btn-primary btn-lg" id="submitMod-btn${i}" onclick="enviarFormulario(event, ${i})">Guardar Módulo</button>
@@ -215,10 +218,10 @@ function enviarFormulario(event, indice) {
     var formData = new FormData();
 
     formData.append("nombreModulo", nombreModulo);
+    
     formData.append("descModulo", descripcionModulo);
-    formData.append("precioModulo", precioModulo);
 
-    formData.append("adjModuloDesc", adjModDescModulo);
+    formData.append("precioModulo", precioModulo);
 
     formData.append("nombreCurso", nombreCurso);
 
@@ -230,6 +233,10 @@ function enviarFormulario(event, indice) {
 
     formData.append("adjuntoModulo", adjModulo);
 
+    formData.append("adjModuloDesc", adjModDescModulo);
+
+    console.log(adjModDescModulo);
+
     //AJAX
 
     var xhr = new XMLHttpRequest();
@@ -240,8 +247,6 @@ function enviarFormulario(event, indice) {
 
     xhr.onload = function () {
       if (xhr.status === 200) {
-        // console.log(xhr.responseText);
-
 
         console.log(xhr.responseText);
 
@@ -259,8 +264,11 @@ function enviarFormulario(event, indice) {
 
           document.getElementById("adjModulo" + indice).disabled = true;
           document.getElementById("videoModulo" + indice).disabled = true;
+
           showSuccesMesageModulo(response.message, indice);
+          
           actualizarReturnBtn();
+
         } else {
           invalidMsg = "";
           showErrorMessageModulo(response.message, indice);
@@ -332,7 +340,7 @@ function actualizarReturnBtn() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // console.log("El HTML  deadsas.");
+  console.log("El HTML  deadsas.");
   // disableform(cursoform);
-  // actualizarModulos(2);
+  actualizarModulos(2);
 });
