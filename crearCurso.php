@@ -58,6 +58,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
         </div>
         <div class="infoCurso">
+
             <form id="form-cursoinfo" action="" method="post" enctype="multipart/form-data">
                 <div class="row gx-3 mx-5">
 
@@ -96,8 +97,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                     <!-- Cantidad de Modulos  -->
                     <div class="col-4 mb-4 ">
                         <label for="numModulos" class="form-label">Cantidad de Modulos</label>
-                        <input id="numModulos" name="numModulos" type="number" class="form-control" placeholder="5"
-                            required>
+                        <input id="numModulos" min="1" max="10" name="numModulos" type="number" class="form-control"
+                            placeholder="5" required>
                     </div>
 
                     <!-- Imagen de Curso  -->
@@ -108,77 +109,21 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                     </div>
 
                     <div class="col-12 py-2">
-                        <button type="submit" name="submit" class="btn btn-primary btn-lg">Generar curso</button>
+                        <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg">Generar
+                            curso</button>
                     </div>
 
                 </div>
             </form>
         </div>
 
-        <hr class="mt-3 mb-1 px-5">
-
-        <div class="modulos">
-
-            <div class="modulo1">
-                <div class="row my-3 gx-3 mx-5">
-
-                    <h4 class="mb-3">Agregar modulo</h4>
-                    <!-- nombre modulo  -->
-                    <div class="col-5 mb-4">
-                        <label for="modulo" class="from-label">Nombre del módulo</label>
-                        <input minlength="1" maxlength="50" id="modulo" type="text" class="form-control" name="modulo"
-                            placeholder="Módulo" required>
-                    </div>
-                    <!-- Descripcion modulo  -->
-                    <div class="col-7 mb-4">
-                        <label for="modulo" class="from-label">Descripción del módulo</label>
-                        <input minlength="1" maxlength="100" id="modulo" type="text" class="form-control" name="modulo"
-                            placeholder="Módulo" required>
-                    </div>
-                    <!-- video  -->
-                    <div class="col-6 mb-4 ">
-                        <label for="videoCurso" class="form-label">Video</label>
-                        <input type="file" class="form-control" name="videoCurso" id="videoCurso" accept=".mp4">
-                    </div>
-                    <!-- Precio Modulo  -->
-                    <div class="col-6 mb-4 ">
-                        <label for="precioModulo" class="form-label">Precio Modulo</label>
-                        <input id="precioModulo" name="precioModulo" type="number" class="form-control"
-                            placeholder="$$$.$$$" required>
-                    </div>
-                    <!-- Adjunto de modulo  -->
-                    <div class="col-5 mb-4 ">
-                        <label for="adjModulo" class="form-label">Archivo adjunto del módulo (Opcional)</label>
-                        <input type="file" class="form-control" name="adjModulo" id="adjModulo" accept=".pdf, .docx">
-                    </div>
-                    <!-- descripcion de archov adjunto -->
-                    <div class="col-7 mb-4">
-                        <label for="adjModuloDesc" class="from-label mb-2">Descripción del archivo adjunto
-                            (Opcional)</label>
-                        <input minlength="1" maxlength="100" id="adjModuloDesc" type="text" class="form-control"
-                            name="adjModuloDesc" placeholder="Archivo adjunto">
-                    </div>
-
-                </div>
-
-                <div class="row  my-3 gx-3 mx-5">
-                    <!-- <div class="col-6">
-                        <button type="submit" name="submit" class="btn btn-primary btn-lg" id="genOtroMod">Generar otro
-                            módulo</button>
-                    </div> -->
-
-                    <div class="col-6">
-                        <button type="submit" name="submit" class="btn btn-primary btn-lg" id="genMod">Guardar
-                            Modulo</button>
-                    </div>
-                </div>
-
-
-
-            </div>
+        <div class="modulos" id="formularioRepetido">
 
         </div>
-
+        
+        <div class="row" id="return-btn">
+            
+        </div>
     </div>
     <script src="scripts/crearCurso.js"></script>
 </body>

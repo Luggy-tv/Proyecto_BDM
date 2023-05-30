@@ -24,24 +24,184 @@ class Curso
 
 }
 
-function addCurso( $titulo, $descripcion, $precio, $imagenEx, $imagen, $categoria){
+function addCurso($titulo, $descripcion, $precio, $imagenEx, $imagen, $categoria)
+{
     include("config.php");
     include("userClass.php");
     $id_usuario = getIDFromToken();
-    $sql="CALL SP_CursoManage('a',0,$id_usuario,'$titulo','$descripcion','$precio','$imagen','$imagenEx',$categoria);";
+    $sql = "CALL SP_CursoManage('a',0,$id_usuario,'$titulo','$descripcion','$precio','$imagen','$imagenEx',$categoria);";
     $result = mysqli_query($conn, $sql);
     return $result;
 }
 
-// function getCursoFromTituloAndCurrUser($titulo){
-//     include("config.php");
-//     include("userClass.php");
-//     $id_usuario = getIDFromToken();
-//     $sql="CALL SP_SelectCursoFromTituloAndCurrentUser('$titulo',$id_usuario);";
-//     $result = mysqli_query($conn, $sql);
-//     $ = mysqli_fetch_all($result, MYSQLI_ASSOC);
-//     return $result;
-// }
+function getCursoFromTituloAndCurrUser($titulo)
+{
+    include("config.php");
+    include("userClass.php");
+    $id_usuario = getIDFromToken();
+    $sql = "CALL SP_SelectCursoFromTituloAndCurrentUser('$titulo',$id_usuario);";
+    $result = mysqli_query($conn, $sql);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function getCursoForCursoInfo($id)
+{
+    include("config.php");
+    $sql = "call sp_selectDetalleCurso($id);";
+    $result = mysqli_query($conn, $sql);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function getCursoForEditCurso($id)
+{
+    include("config.php");
+    $sql = "call sp_selectDetalleCurso($id);";
+    $result = mysqli_query($conn, $sql);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function addModulo($ID_curso, $videoDireccion, $videoDescripcion, $precioModulo, $nombreModulo)
+{
+    include("config.php");
+    $sql = "Call SP_nivelDeCursoManage('A',0,$ID_curso,'$videoDireccion','$nombreModulo','$videoDescripcion','$precioModulo')";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function addAdjunto($nivelCursoID, $descripcion, $adjunto)
+{
+    include("config.php");
+    $sql = "call SP_adjuntoDeCursoManage('A',0,$nivelCursoID,'$descripcion','$adjunto');";
+    $result = mysqli_query($conn, $sql);
+}
+
+function getMasRecientes()
+{
+
+    include("config.php");
+    $sql = "Call SP_SelectCursoForHome('C');";
+    $result = mysqli_query($conn, $sql);
+    $listaCursosmasVendidos = array();
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $curso = new Curso(
+            $row['id_Curso'],
+            '',
+            $row['titulo_curso'],
+            $row['descripcion_curso'],
+            '',
+            $row['imagenEX'],
+            $row['imagen'],
+            ''
+        );
+        $listaCursosmasVendidos[] = $curso;
+    }
+
+    return $listaCursosmasVendidos;
+}
+
+function getMasVendidos()
+{
+    include("config.php");
+    $sql = "Call SP_SelectCursoForHome('C');";
+    $result = mysqli_query($conn, $sql);
+    $listaCursosmasVendidos = array();
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $curso = new Curso(
+            $row['id_Curso'],
+            '',
+            $row['titulo_curso'],
+            $row['descripcion_curso'],
+            '',
+            $row['imagenEX'],
+            $row['imagen'],
+            ''
+        );
+        $listaCursosmasVendidos[] = $curso;
+    }
+
+    return $listaCursosmasVendidos;
+}
+
+function getMejorCalificados()
+{
+    include("config.php");
+    $sql = "Call SP_SelectCursoForHome('C');";
+    $result = mysqli_query($conn, $sql);
+    $listaCursosmasVendidos = array();
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $curso = new Curso(
+            $row['id_Curso'],
+            '',
+            $row['titulo_curso'],
+            $row['descripcion_curso'],
+            '',
+            $row['imagenEX'],
+            $row['imagen'],
+            ''
+        );
+        $listaCursosmasVendidos[] = $curso;
+    }
+
+    return $listaCursosmasVendidos;
+}
+
+function editCurso($idCurso, $nuevoTitulo, $nuevoDescripcion, $nuevoPrecio, $nuevoImagen, $nuevoImagenEx, $nuevoCategoria)
+{
+    include("config.php");
+    $sql = "Call SP_CursoManage('B',$idCurso,0,'$nuevoTitulo','$nuevoDescripcion',$nuevoPrecio,'$nuevoImagen','$nuevoImagenEx',$nuevoCategoria);";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    return $result;
+}
+
+function editModulo($id_Modulo, $nuevoTitulo, $nuevoDescripcion, $nuevoPrecio, $nuevoVideo)
+{
+    include("config.php");
+    $sql = "call SP_nivelDeCursoManage('B', $id_Modulo, 0 ,'$nuevoVideo','$nuevoTitulo','$nuevoDescripcion',$nuevoPrecio);";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function editAdjunto($id_Adjunto,$nuevoDescripcion,$nuevoAdjunto){
+    include("config.php");
+    $sql= "Call SP_adjuntoDeCursoManage('B',$id_Adjunto,0,'$nuevoDescripcion','$nuevoAdjunto');";
+    $result = mysqli_query($conn,$sql);
+    mysqli_close($conn);
+    return $result;
+}
+
+function getAdjuntoIdFromNivelId($id_Nivel)
+{
+    include("config.php");
+    $sql = "call sp_SelectAdjuntoFromNivelID($id_Nivel);";
+    $result = mysqli_query($conn, $sql);
+    
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $adjuntoId = $row['ID_AdjuntoDeCurso'];
+        mysqli_free_result($result);
+        mysqli_close($conn);
+        return $adjuntoId;
+    } else {
+        mysqli_close($conn);
+        return false;
+    }
+}
+
+function deslistarCurso($id_Curso){
+    include("config.php");
+    $sql= "CALL SP_CursoManage('C',$id_Curso,0,0,0,0,0,0,0);";
+    $result = mysqli_query($conn,$sql);
+    mysqli_close($conn);
+    return $result;
+}
 
 
 ?>

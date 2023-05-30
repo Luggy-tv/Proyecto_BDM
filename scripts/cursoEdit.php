@@ -1,20 +1,20 @@
 <?php
+if (isset($_FILES['editImagenDeCurso'])) {
 
-if (isset($_FILES['imagenDeCurso'])) {
     include("config.php");
-    $nombreCurso = mysqli_real_escape_string($conn, $_POST["nombreCurso"]);
+    $id_Curso = mysqli_real_escape_string($conn, $_POST["idCurso"]);
+    $nombreCurso = mysqli_real_escape_string($conn, $_POST["editNombreCurso"]);
     $idCategoria = mysqli_real_escape_string($conn, $_POST["categoria"]);
-    $descripcionCurso = mysqli_real_escape_string($conn, $_POST["descCurso"]);
-    $precioCurso = mysqli_real_escape_string($conn, $_POST["precioCurso"]);
-    $numModulos = mysqli_real_escape_string($conn, $_POST["numModulos"]);
+    $descripcionCurso = mysqli_real_escape_string($conn, $_POST["editDescCurso"]);
+    $precioCurso = mysqli_real_escape_string($conn, $_POST["editPrecioCurso"]);
 
-    $imagen = $_FILES["imagenDeCurso"];
-    $img_type = $_FILES['imagenDeCurso']['type'];
-    $img_size = $_FILES['imagenDeCurso']['size'];
-    $img_name = $_FILES['imagenDeCurso']['name'];
-    $img_temp_name = $_FILES['imagenDeCurso']['tmp_name'];
-    $img_temp_name_str = mysqli_real_escape_string($conn, file_get_contents($_FILES['imagenDeCurso']['tmp_name']));
-    $img_error = $_FILES['imagenDeCurso']['error'];
+    $imagen = $_FILES["editImagenDeCurso"];
+    $img_type = $_FILES['editImagenDeCurso']['type'];
+    $img_size = $_FILES['editImagenDeCurso']['size'];
+    $img_name = $_FILES['editImagenDeCurso']['name'];
+    $img_temp_name = $_FILES['editImagenDeCurso']['tmp_name'];
+    $img_temp_name_str = mysqli_real_escape_string($conn, file_get_contents($_FILES['editImagenDeCurso']['tmp_name']));
+    $img_error = $_FILES['editImagenDeCurso']['error'];
 
     if ($img_error === 0) {
         if ($img_size > 1000000) {
@@ -24,24 +24,27 @@ if (isset($_FILES['imagenDeCurso'])) {
             );
             header('Content-Type: application/json');
             echo json_encode($response);
+            exit;
+
         } else {
+
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_lc = strtolower($img_ex);
 
             $allowed_exs = array("jpg", "jpeg", "png");
 
             if (in_array($img_ex_lc, $allowed_exs)) {
+
                 include("cursoClass.php");
-                
-                if (addCurso($nombreCurso, $descripcionCurso, $precioCurso, $img_ex_lc, $img_temp_name_str, $idCategoria)) {
+                if (editCurso($id_Curso, $nombreCurso, $descripcionCurso, $precioCurso, $img_temp_name_str, $img_ex_lc, $idCategoria)) {
                     $response = array(
                         'success' => true,
-                        'message' => 'Curso subido a la base de datos',
-                        'data'    => ''
+                        'message' => 'Curso editado, si quiere ver los datos editados favor de recargar la pagina'
                     );
                     header('Content-Type: application/json');
                     echo json_encode($response);
-                }else{
+
+                } else {
                     $response = array(
                         'success' => false,
                         'message' => 'Hubo un error con la base de datos al subir el curso porfavor de volver a intentarlo'
@@ -49,6 +52,7 @@ if (isset($_FILES['imagenDeCurso'])) {
                     header('Content-Type: application/json');
                     echo json_encode($response);
                 }
+
             } else {
                 $response = array(
                     'success' => false,
@@ -58,6 +62,7 @@ if (isset($_FILES['imagenDeCurso'])) {
                 echo json_encode($response);
             }
         }
+
     } else {
         $response = array(
             'success' => false,
@@ -65,6 +70,7 @@ if (isset($_FILES['imagenDeCurso'])) {
         );
         header('Content-Type: application/json');
         echo json_encode($response);
+        exit;
     }
 } else {
     $response = array(
@@ -73,6 +79,8 @@ if (isset($_FILES['imagenDeCurso'])) {
     );
     header('Content-Type: application/json');
     echo json_encode($response);
+    exit;
 }
+
 
 ?>

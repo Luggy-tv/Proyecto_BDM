@@ -3,12 +3,23 @@
 if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
-  }else{
+} else {
     include_once("scripts/userClass.php");
     $usuario = SetUserFromToken();
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
     $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
-  }
+
+    // print_r($usuario);
+
+    include("scripts/cursoClass.php");
+
+    $listaMasVendidos = getMasVendidos();
+    $listaMejorCalificados = getMejorCalificados();
+    $listaMasRecientes = getMasRecientes();
+
+
+
+}
 
 ?>
 
@@ -45,51 +56,57 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 </head>
 
 <body>
-<section> <!--NAVBAR-->
-    <nav class="navbar navbar-dark navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.html">Codebug</a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
-                <span class="visually-hidden">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div id="navcol-1" class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-                    
-                    <div class="dropdown"> <!---->
-                        <button class="dropbtn" onclick="myFunction()">Cursos por categoría
-                          <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content" id="myDropdown">
-                          <a href="#">Back end</a>
-                          <a href="#">Front end</a>
-                          <a href="#">Diseño</a>
+    <section> <!--NAVBAR-->
+        <nav class="navbar navbar-dark navbar-expand-md">
+            <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.php">Codebug</a>
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
+                    <span class="visually-hidden">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="navcol-1" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
+
+                        <div class="dropdown">
+                            <button class="dropbtn" onclick="myFunction()">Cursos por categoría
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content" id="myDropdown">
+                                <a href="#">Back end</a>
+                                <a href="#">Front end</a>
+                                <a href="#">Diseño</a>
+                            </div>
                         </div>
+
+                        <li class="nav-item"><a class="nav-link link-light" href="chat.php"
+                                style="border-left-style: none;">Mensajes</a></li>
+                        <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php"
+                                style="border-left-style: none;">Perfil</a></li>
+
+                    </ul>
+                </div>
+
+                <?php if (!$usuario->isMaestro && !$usuario->isAdmin): ?>
+
+                    <div class="cart nav-item">
+                        <a class="nav-link link-light" href="buy/formulario.php">
+                            <span>Carrito de compras</span>
+                        </a>
+                        <ul class="product-list pt-3 px-5">
+                            <h3>Carrito de compras</h3>
+                            <div id="carritoContainer">
+                                
+                            </div>
+                            <li><a href="buy/formulario.php" class="checkout-button">Haz click para ir al Checkout</a></li>
+                        </ul>
                     </div>
 
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html" style="border-left-style: none;">Mensajes</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="perfil.html" style="border-left-style: none;">Perfil</a></li>
+                <?php endif ?>
 
-                </ul>
             </div>
-
-            <div class="cart nav-item">
-            <a class="nav-link link-light" href="#">
-                <span>Carrito de compras</span>
-            </a>
-            <ul class="product-list pt-3 px-5">
-                <h3>Carrito de compras</h3>
-                <li>Product A - 000.00</li>
-                <li>Product B - $000.00</li>
-                <li>Product C - $000.00</li>
-                <li><a href="buy/formulario.php" class="checkout-button">Checkout</a></li>
-            </ul>
-            </div>
-            
-        </div>
-    </nav>
-   </section> <!--TERMINA NAVBAR-->
-
+        </nav>
+    </section> <!--TERMINA NAVBAR-->
+    <!-- Bienvenido -->
     <section>
         <div class="container">
             <div class="row my-5 text-align">
@@ -99,7 +116,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             </div>
 
         </div>
-
+        <!-- Cursos Mas vendidos-->
         <div class="container bg-light my-5">
             <div class="row mx-5">
                 <div class="col-lg-12 mt-5">
@@ -107,7 +124,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                     <hr id="hr">
                 </div>
             </div>
-            <!-- Nuestros cursos-->
+
             <section>
                 <div id="cursos" class="row text-center ">
 
@@ -119,7 +136,9 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
                                     <!-- Wrapper for carousel items -->
                                     <div class="carousel-inner ">
+
                                         <div class="carousel-item active">
+
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="thumb-wrapper">
@@ -128,7 +147,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                                                 alt="">
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>Aprende HTML desde cero</h4>
+                                                            <h4>Curso 1</h4>
                                                             <p>En este curso de nivel básico aprenderás todo lo que
                                                                 necesitas para
                                                                 comenzar a diseñar páginas web usando HTML 5</p>
@@ -145,7 +164,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                                                 alt="">
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>Bootstrap: Todo lo que debes saber</h4>
+                                                            <h4>Curso 2</h4>
                                                             <p>Aprende a utilizar este framework front-end empleado para
                                                                 desarrollar aplicaciones web y sitios mobile first</p>
                                                             <a href="#" class="btn btn-primary">Ver más <i
@@ -161,7 +180,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                                                 alt="">
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>Fundamentos de las bases de datos</h4>
+                                                            <h4>Curso 3</h4>
                                                             <p>Con este curso desarrollarás conceptos fundamentales para
                                                                 el uso eficaz y eficiente de distintos softwares de
                                                                 gestión de datos</p>
@@ -174,7 +193,9 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                         </div>
 
                                         <div class="carousel-item">
+
                                             <div class="row">
+
                                                 <div class="col-sm-4">
                                                     <div class="thumb-wrapper">
                                                         <div class="img-box">
@@ -182,7 +203,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                                                 alt="">
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>MySQL para principiantes</h4>
+                                                            <h4>Cruso 4</h4>
                                                             <p>Aprende a usar una de las bases de datos de código
                                                                 abierto más utilizadas en el mundo</p>
                                                             <a href="#" class="btn btn-primary">Ver más <i
@@ -198,7 +219,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                                                 alt="">
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>MySQL nivel avanzado</h4>
+                                                            <h4>Curso 5</h4>
                                                             <p>Comienza a usar MySQL de forma profesional con esta
                                                                 continuación de nuestra serie de cursos de MySQL, ahora
                                                                 con enfoque avanzado</p>
@@ -215,7 +236,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                                                 class="img-fluid" alt="">
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>Introducción a la progrmación web</h4>
+                                                            <h4>Curso 6</h4>
                                                             <p>Empieza a crear tus propias páginas web desde cero con
                                                                 este curso introductorio donde aprenderás todo lo
                                                                 necesario para comenzar</p>
@@ -224,7 +245,9 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
+
                                         </div>
 
 
@@ -247,10 +270,10 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         </div>
     </section>
 
+    <!-- Mejor Calificados -->
     <section>
         <div class="container">
             <h2 id="second" class="mx-5">Cursos mejor calificados</h2>
-            <!-- Nuestros cursos-->
             <section>
                 <div id="cursos" class="row">
                     <div class="container-xl">
@@ -263,59 +286,45 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                     <div class="carousel-inner ">
                                         <div class="carousel-item active">
                                             <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/html.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Aprende HTML desde cero</h4>
-                                                            <p>En este curso de nivel básico aprenderás todo lo que
-                                                                necesitas para
-                                                                comenzar a diseñar páginas web usando HTML 5</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/mysql.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>MySQL para principiantes</h4>
-                                                            <p>Aprende a usar una de las bases de datos de código
-                                                                abierto más utilizadas en el mundo</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php if (!empty($listaMejorCalificados)): ?>
 
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/programador1.jpg"
-                                                                class="img-fluid" alt="">
+                                                    <?php foreach ($listaMejorCalificados as $curso):
+                                                        $imagen_base64 = base64_encode($curso->imagen);
+                                                        ?>
+
+                                                        <div class="col-sm-4">
+                                                            <div class="thumb-wrapper">
+                                                                <div class="img-box">
+                                                                    <img src="data:image/<?php echo $curso->imagenEx ?>;base64,<?php echo $imagen_base64 ?>"
+                                                                        class="img-fluid">
+                                                                </div>
+                                                                <div class="thumb-content">
+                                                                    <h4>
+                                                                        <?php echo $curso->titulo ?>
+                                                                    </h4>
+                                                                    <p>
+                                                                        <?php echo $curso->descripcion ?>
+                                                                    </p>
+                                                                    <a href="scripts/cursoRedir.php?id=<?php echo $curso->ID_Curso ?>"
+                                                                        class="btn btn-primary">Ver más <i
+                                                                            class="fa fa-angle-right"></i></a>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Introducción a la progrmación web</h4>
-                                                            <p>Empieza a crear tus propias páginas web desde cero con
-                                                                este curso introductorio donde aprenderás todo lo
-                                                                necesario para comenzar</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                                                    <?php endforeach; ?>
+
+                                                <?php else: ?>
+                                                    <p class="text-center mt-2">No se encontraron cursos.</p>
+                                                <?php endif ?>
+
                                             </div>
                                         </div>
 
                                     </div>
+
+
 
                                 </div>
                             </div>
@@ -328,6 +337,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         </div>
     </section>
 
+    <!-- Mas recientes -->
     <section class="recientes bg-light">
         <div class="container py-3">
             <h2 class="pt-5 mx-5">Cursos más recientes</h2>
@@ -345,55 +355,36 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                     <div class="carousel-inner ">
                                         <div class="carousel-item active">
                                             <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/html.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Aprende HTML desde cero</h4>
-                                                            <p>En este curso de nivel básico aprenderás todo lo que
-                                                                necesitas para
-                                                                comenzar a diseñar páginas web usando HTML 5</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/mysql.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>MySQL para principiantes</h4>
-                                                            <p>Aprende a usar una de las bases de datos de código
-                                                                abierto más utilizadas en el mundo</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php if (!empty($listaMejorCalificados)): ?>
+                                                    <?php foreach ($listaMasRecientes as $curso):
+                                                        $imagen_base64 = base64_encode($curso->imagen);
+                                                        ?>
 
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/programador1.jpg"
-                                                                class="img-fluid" alt="">
+                                                        <div class="col-sm-4">
+                                                            <div class="thumb-wrapper">
+                                                                <div class="img-box">
+                                                                    <img src="data:image/<?php echo $curso->imagenEx ?>;base64,<?php echo $imagen_base64 ?> "
+                                                                        class="img-fluid">
+                                                                </div>
+                                                                <div class="thumb-content">
+                                                                    <h4>
+                                                                        <?php echo $curso->titulo ?>
+                                                                    </h4>
+                                                                    <p>
+                                                                        <?php echo $curso->descripcion ?>
+                                                                    </p>
+                                                                    <a href="scripts/cursoRedir.php?id=<?php echo $curso->ID_Curso ?>"
+                                                                        class="btn btn-primary">Ver más <i
+                                                                            class="fa fa-angle-right"></i></a>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Introducción a la progrmación web</h4>
-                                                            <p>Empieza a crear tus propias páginas web desde cero con
-                                                                este curso introductorio donde aprenderás todo lo
-                                                                necesario para comenzar</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    <?php endforeach; ?>
+                                                <?php else: ?>
+                                                    <p class="text-center mt-2">No se encontraron cursos.</p>
+                                                <?php endif ?>
+
                                             </div>
                                         </div>
 
@@ -409,26 +400,17 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         </div>
     </section>
 
-    <section id="busqueda"> <!--Busqueda-->
+    <!--Busqueda-->
+    <section id="busqueda">
         <div class="container py-5 px-3">
             <h3 class="mx-4">Búsqueda de cursos</h3>
             <hr>
             <div class="search">
-                    <form>
-                        <input type="text" placeholder="Buscar curso">
-                        <button type="submit">Ir</button>
-
-                    </form>
+                <input type="text" placeholder="Buscar curso" name="searchBar" id="searchBar">
             </div>
-            <div id="cuadroBusqueda" class="container my-3 mx-3 px-5 py-3">
-                <div>
-                    <a href="">
-                        <h4>Nombre del curso</h4>
-                    </a>
-                    <p id="busquedaText">Texto descriptivo breve acerca del contenido del curso.</p>
-                    <p id="busquedaText">Impartido por Fulanito Detal</p>
-                    </div>
-                
+            <div id="cuadroBusqueda" class="container my-3 mx-3 px-5 py-3" style="display:none;">
+
+
             </div>
         </div>
     </section>
@@ -439,9 +421,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             <p class="lead link-light">© 2023 Copyright: Codebug.com</p>
         </div>
     </footer>
-
-
-
+    <script src="scripts/inicio.js"></script>
 </body>
 
 </html>

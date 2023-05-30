@@ -55,7 +55,7 @@
 
         <!--Inicia columna con transparencia-->
         <div class="text-center mt-4">
-          <a href="landing.html">
+          <a href="index.html">
             <img src="Recursos/Intellibug_placeholder.png" width="15%" alt="">
           </a>
         </div>

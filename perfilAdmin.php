@@ -3,12 +3,16 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
 } else {
-    include_once("scripts/userClass.php");
+    
+    include("scripts/userClass.php");
     $usuario = SetUserFromToken();
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
 
     include_once("scripts/categoriasClass.php");
     $listaCategorias = setCategoriasLista();
+
+    $listaUsuarios = getUserList();
+
 }
 ?>
 
@@ -85,187 +89,55 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         </div>
     </section>
 
-    <!--TUS CURSOS-->
-    <section>
-        <div id="cursos" class="row h-auto pb-4">
-            <h2 class="my-2 text-center fw-bold">Tus cursos</h2>
-
-            <div class="container-xl">
-                <div class="row">
-                    <div class="col-md-10 mx-auto bg-light rounded-1 my-auto">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-
-
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="" class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Aprende HTML desde cero</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Consectetur, dolor!</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="" class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Bootstrap: Todo lo que debes saber</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
-                                                        provident.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="" class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Fundamentos de las bases de datos</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error,
-                                                        fugiat.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="" class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>MySQL para principiantes</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                                                        dolorem!</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="" class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>MySQL nivel avanzado</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                                                        eveniet.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="" class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Introducción a la progrmación web</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-                                                        impedit?</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <!-- Carousel controls -->
-                            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
     <!--USUARIOS-->
     <section>
         <div id="kardex" class="row h-auto pb-4 px-5">
             <h2 class="my-2 text-center fw-bold">Usuarios</h2>
+            <!-- tabla de usuarios -->
             <div class="container ">
                 <div class="row">
                     <div class="col-1"></div>
+
                     <div class="col-10 bg-light rounded-3 p-0">
                         <table class="table table-striped bg-light rounded-3 p-3">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nombres</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Intentos</th>
-                                    <th scope="col">Desbloquear</th>
-                                    <th scope="col">Dar de baja</th>
+                                    <th scope="col" class="text-center">ID</th>
+                                    <th scope="col" class="text-center">Nombres</th>
+                                    <th scope="col" class="text-center">Estado</th>
+                                    <th scope="col" class="text-center">Intentos</th>
+                                    <th scope="col" class="text-center">Rol</th>
+                                    <th scope="col" class="text-center">Desbloquear</th>
+                                    <th scope="col" class="text-center">Dar de baja</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Luis Alfonso</td>
-                                    <td>Activo</td>
-                                    <td>1</td>
-                                    <td><button class="btn p-0" disabled> <i class="fa fa-unlock"
-                                                aria-hidden="true"></i> </button></td>
-                                    <td><button class="btn p-0"> <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </button></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Velvet Daniela</td>
-                                    <td>Bloqueado</td>
-                                    <td>15</td>
-                                    <td><button class="btn p-0"> <i class="fa fa-unlock" aria-hidden="true"></i>
-                                        </button></td>
-                                    <td><button class="btn p-0"> <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </button></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Irving Jaret</td>
-                                    <td>Bloqueado</td>
-                                    <td>15</td>
-                                    <td><button class="btn p-0"> <i class="fa fa-unlock" aria-hidden="true"></i>
-                                        </button></td>
-                                    <td><button class="btn p-0"> <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </button></td>
-                                </tr>
-
+                                <?php foreach ($listaUsuarios as $usuario): ?>
+                                    <tr>
+                                        <td scope="row" id="fila-<?php echo $usuario['ID'] ?>"  class="text-center">
+                                            <?php echo $usuario['ID'] ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $usuario['Nombre'] ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $usuario['Estado'] ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $usuario['Intentos'] ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo $usuario['Rol'] ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn p-0" onclick="desbloquearUsuario( <?php echo $usuario['ID'] ?> )"> <i class="fa fa-unlock" aria-hidden="true"></i></button>
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn p-0" onclick="eliminarUsuario( <?php echo $usuario['ID'] ?> )"> <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -302,6 +174,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                             <!-- categoriaAgregar -->
                             <form method="post" id="form-addcat" action="">
                                 <div class="modal-body">
+                                    <div id="error-msg">
+                                    </div>
                                     <div class="mb-3">
                                         <label for="NomCategoria" class="form-label">Nombre De Categoria:</label>
                                         <input name="NomCategoria" id="NomCategoria" type="text" class="form-control"
@@ -353,7 +227,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                             <?php echo $categoria["Creada"]; ?>
                                         </td>
                                         <td class="text-center">
-                                            <button class="btn p-0" onclick="eliminarFila(<?php echo $categoria['ID']; ?>)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <button class="btn p-0" onclick="eliminarFila(<?php echo $categoria['ID']; ?>)"> <i
+                                                    class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

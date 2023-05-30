@@ -46,3 +46,12 @@ function addCategoria($nombre,$descripcion){
     $result = mysqli_query($conn, $sql);
     mysqli_close($conn);
 }
+
+function checkCategoria($nombre){
+    include("config.php");
+    $sql= "call sp_selectCategoriasfromnombre('$nombre');";
+    $result = mysqli_query($conn, $sql);
+    $existeCategoria = (mysqli_num_rows($result) > 0);
+    mysqli_close($conn);
+    return $existeCategoria;
+}
