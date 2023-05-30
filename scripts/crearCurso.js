@@ -1,5 +1,6 @@
 const nameRegex = /^[a-zA-Z\s+#&%$\d]*$/;
 const precioRegex = /^\d+(\.\d+)?$/;
+const descipcionRegex= /^[\w\s+#&%$,.;:¡!?()-]*$/;
 const numModulosRegex = /^\d+$/;
 
 let invalidMsg = [];
@@ -64,7 +65,7 @@ function validateInputsCurso() {
       "\n- El nombre del curso contiene caracteres especiales no aplicables favor de volverlo a ingresar\n";
     // console.log(nombreCurso);
   }
-  if (!nameRegex.test(descCurso)) {
+  if (!descipcionRegex.test(descCurso)) {
     flag = false;
     invalidMsg +=
       "\n- La descripcion del curso contiene caracteres especiales no aplicables favor de volverlo a ingresar\n";
@@ -297,7 +298,7 @@ function validateInputsModulo(
     // console.log(nombreModulo);
   }
 
-  if (!nameRegex.test(descripcionModulo)) {
+  if (!descipcionRegex.test(descripcionModulo)) {
     flag = false;
     invalidMsg +=
       "\n- La descripcion del modulo contiene caracteres especiales no aplicables favor de volverlo a ingresar\n";
@@ -340,7 +341,7 @@ function actualizarReturnBtn() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("El HTML  deadsas.");
+  // console.log("El HTML  deadsas.");
   // disableform(cursoform);
-  actualizarModulos(2);
+  // actualizarModulos(2);
 });

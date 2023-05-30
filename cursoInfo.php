@@ -1,12 +1,12 @@
 <?php
-if (isset($_GET['id'])){
+if (isset($_GET['id'])) {
 
     $cursoID = $_GET['id'];
     // print_r($_GET['id']);
     include("scripts/cursoClass.php");
     $cursoYModulos = getCursoForCursoInfo($cursoID);
-}
-else{
+    // print_r($cursoYModulos);
+} else {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error al conectar con el curso favor de regresar a la pantalla anterior.");
 }
@@ -14,6 +14,7 @@ else{
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +26,7 @@ else{
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        
+
     <link rel="stylesheet" href="CSS/cursoInfo.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
@@ -33,6 +34,13 @@ else{
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+        crossorigin="anonymous"></script>
 </head>
 
 
@@ -44,86 +52,104 @@ else{
                     <span class="visually-hidden">Toggle navigation</span>
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
+
                 <div id="navcol-1" class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-                        
+
                         <div class="dropdown"> <!---->
                             <button class="dropbtn" onclick="myFunction()">Cursos por categoría
-                              <i class="fa fa-caret-down"></i>
+                                <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="dropdown-content" id="myDropdown">
-                              <a href="#">Back end</a>
-                              <a href="#">Front end</a>
-                              <a href="#">Diseño</a>
+                                <a href="#">Back end</a>
+                                <a href="#">Front end</a>
+                                <a href="#">Diseño</a>
                             </div>
                         </div>
-    
-                        <li class="nav-item"><a class="nav-link link-light" href="chat.php" style="border-left-style: none;">Mensajes</a></li>
-                        <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php" style="border-left-style: none;">Perfil</a></li>
-    
+
+                        <li class="nav-item"><a class="nav-link link-light" href="chat.php"
+                                style="border-left-style: none;">Mensajes</a></li>
+                        <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php"
+                                style="border-left-style: none;">Perfil</a></li>
+
                     </ul>
                 </div>
-    
+
                 <div class="cart nav-item">
-                <a class="nav-link link-light" href="#">
-                    <span>Carrito de compras</span>
-                </a>
-                <ul class="product-list pt-3 px-5">
-                    <h3>Carrito de compras</h3>
-                    <li>Product A - 000.00</li>
-                    <li>Product B - $000.00</li>
-                    <li>Product C - $000.00</li>
-                    <li><a href="buy/formulario.php" class="checkout-button">Checkout</a></li>
-                </ul>
+                    <a class="nav-link link-light" href="buy/formulario.php">
+                        <span>Carrito de compras</span>
+                    </a>
+
+                    <ul class="product-list pt-3 px-5">
+                        <h3>Carrito de compras</h3>
+                        <div id="carritoContainer">
+
+                        </div>
+                        <!-- <li>Product A - 000.00</li>
+                        <li>Product B - $000.00</li>
+                        <li>Product C - $000.00</li> -->
+                        <li><a href="buy/formulario.php" class="checkout-button">Haz click para ir al Checkout</a></li>
+                    </ul>
                 </div>
-                
+
             </div>
         </nav>
-       </section> <!--TERMINA NAVBAR-->
+    </section> <!--TERMINA NAVBAR-->
 
     <section>
         <div class="container">
             <div class="row mt-5 mb-3 text-align">
                 <h4>Información del curso</h4>
-                <h1><?php echo $cursoYModulos[0]['titulo']?></h1>
+                <h1>
+                    <?php echo $cursoYModulos[0]['titulo'] ?>
+                </h1>
                 <hr style="height: 2px;">
-                
+
             </div>
         </div>
     </section>
 
-    
+
 
     <section> <!-- DESCRIPCIÓN DEL CURSO E IMAGEN -->
         <div class="container">
             <div class="row">
                 <div class="col-7 my-2 pe-5">
-                    <p><?php echo $cursoYModulos[0]['Curso_Descripcion']?></p>
-                    <p id="Info">Categoría: <?php echo $cursoYModulos[0]['nombre_categoria']?> </p>
+                    <p>
+                        <?php echo $cursoYModulos[0]['Curso_Descripcion'] ?>
+                    </p>
+                    <p id="Info">Categoría:
+                        <?php echo $cursoYModulos[0]['nombre_categoria'] ?>
+                    </p>
                     <p id="Info">Puntuación por ususarios: x/5</p>
-                    <p id="Info">Impartido por: <?php echo $cursoYModulos[0]['Nombre_Completo']?></p>
+                    <p id="Info">Impartido por:
+                        <?php echo $cursoYModulos[0]['Nombre_Completo'] ?>
+                    </p>
                 </div>
-    
+
                 <div class="comprar col-5">
-                   <div class="my-3 py-3 mx-3 px-3">
-                    <h5>Adquiere este curso por</h5>
-                    <h1><?php echo $cursoYModulos[0]['precio_Curso']?></h1>
-                    
-                    <a id="btn-comprarCurso" href="" class="btn mx-2">
-                        <span>
-                            <img class="addIcon" src="Recursos/icons8-add-shopping-cart-96.png"></img>
-                        </span>
-                        Agregar al carrito   
-                    </a>
-                   </div>
-                </div>  
+                    <div class="my-3 py-3 mx-3 px-3">
+                        <h5>Adquiere este curso por</h5>
+                        <h1>
+                            <?php echo $cursoYModulos[0]['precio_Curso'] ?>
+                        </h1>
+
+                        <a id="btn-comprarCurso"
+                            onclick=" agregarAlCarrito( '<?php echo $cursoID ?>',' <?php echo $cursoYModulos[0]['titulo'] ?>' , '<?php echo $cursoYModulos[0]['precio_Curso_num'] ?>' )"
+                            class="btn mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <span>
+                                <img class="addIcon" src="Recursos/icons8-add-shopping-cart-96.png"></img>
+                            </span>
+                            Agregar al carrito
+                        </a>
+                    </div>
+                </div>
             </div>
 
         </div>
     </section>
 
-    
+
 
     <section class=" bg-light"> <!-- MODULOS E INFORMACIÓN DE COMPRA -->
         <div class="container bg-light pb-3">
@@ -135,20 +161,24 @@ else{
                 </div>
             </div>
 
-            <?php  foreach ($cursoYModulos as $curso): ?>
-            
-            <div class="row mx-3"> <!-- UNO -->
-                <div class="col-7 my-3">
-                    <h4><?php echo $curso['nombreNivel']?></h4>
-                    <h5><?php echo $curso['Nivel_Descripcion']?> </h5>
+            <?php foreach ($cursoYModulos as $curso): ?>
+
+                <div class="row mx-3"> <!-- UNO -->
+                    <div class="col-7 my-3">
+                        <h4>
+                            <?php echo $curso['nombreNivel'] ?>
+                        </h4>
+                        <h5>
+                            <?php echo $curso['Nivel_Descripcion'] ?>
+                        </h5>
+                    </div>
+
+                    <div class="col-5 my-3">
+                        <!-- <a id="btn-comprarModulo" href="" class="btn mx-2">
+                            Agregar este modulo al carrito
+                        </a> -->
+                    </div>
                 </div>
-                
-                <div class="col-5 my-3">
-                    <a id="btn-comprarModulo" href="" class="btn mx-2">
-                        Agregar este modulo al carrito   
-                    </a>
-                </div>
-            </div>
 
             <?php endforeach ?>
         </div>
@@ -180,11 +210,32 @@ else{
     <section>
         <footer id="Footer" class="footer text center">
             <div class="text-center p-3">
-              <p class="lead link-light">© 2023 Copyright: Codebug.com</p>
+                <p class="lead link-light">© 2023 Copyright: Codebug.com</p>
             </div>
-          </footer>
-        </body>
-    </section>
-    
+        </footer>
 </body>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">¡Aviso!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Se ha agregado el curso al carrito.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="scripts/cursoInfo.js"></script>
+
+</body>
+
 </html>

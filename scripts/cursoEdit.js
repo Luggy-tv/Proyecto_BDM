@@ -273,7 +273,7 @@ function deslistarCurso(event,indice){
       if (response.success) {
         showSuccesMesage(response.message);
         document.getElementById("delist-btn").disabled = true;
-        
+
       } else {
         invalidMsg = "";
         showErrorMessage(response.message);
@@ -290,7 +290,7 @@ function deslistarCurso(event,indice){
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Cargado 2:04");
+  // console.log("Cargado 2:04");
   // disableform(cursoform);
   // actualizarModulos(2);
 });

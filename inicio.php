@@ -9,6 +9,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
     $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
 
+    // print_r($usuario);
+
     include("scripts/cursoClass.php");
 
     $listaMasVendidos = getMasVendidos();
@@ -84,18 +86,22 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                     </ul>
                 </div>
 
-                <div class="cart nav-item">
-                    <a class="nav-link link-light" href="#">
-                        <span>Carrito de compras</span>
-                    </a>
-                    <ul class="product-list pt-3 px-5">
-                        <h3>Carrito de compras</h3>
-                        <li>Product A - 000.00</li>
-                        <li>Product B - $000.00</li>
-                        <li>Product C - $000.00</li>
-                        <li><a href="buy/formulario.php" class="checkout-button">Checkout</a></li>
-                    </ul>
-                </div>
+                <?php if (!$usuario->isMaestro && !$usuario->isAdmin): ?>
+
+                    <div class="cart nav-item">
+                        <a class="nav-link link-light" href="buy/formulario.php">
+                            <span>Carrito de compras</span>
+                        </a>
+                        <ul class="product-list pt-3 px-5">
+                            <h3>Carrito de compras</h3>
+                            <div id="carritoContainer">
+                                
+                            </div>
+                            <li><a href="buy/formulario.php" class="checkout-button">Haz click para ir al Checkout</a></li>
+                        </ul>
+                    </div>
+
+                <?php endif ?>
 
             </div>
         </nav>
