@@ -17,13 +17,12 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     $listaMejorCalificados = getMejorCalificados();
     $listaMasRecientes = getMasRecientes();
 
-
-
 }
 
 ?>
 
 <html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -43,14 +42,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-    <link rel="preload" as="image" href="Recursos/tinypngs/html.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/bootstrap.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/database.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/mysql.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/mysql2.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/programador1.jpg">
-
 
 
 </head>
@@ -89,15 +80,15 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                 <?php if (!$usuario->isMaestro && !$usuario->isAdmin): ?>
 
                     <div class="cart nav-item">
-                        <a class="nav-link link-light" href="buy/formulario.php">
+                        <a class="nav-link link-light" href="buy/checkout.php">
                             <span>Carrito de compras</span>
                         </a>
                         <ul class="product-list pt-3 px-5">
                             <h3>Carrito de compras</h3>
                             <div id="carritoContainer">
-                                
+
                             </div>
-                            <li><a href="buy/formulario.php" class="checkout-button">Haz click para ir al Checkout</a></li>
+                            <li><a href="buy/checkout.php" class="checkout-button">Haz click para ir al Checkout</a></li>
                         </ul>
                     </div>
 
@@ -133,133 +124,48 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                             <div class="col-md-10 mx-auto">
                                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
 
-
                                     <!-- Wrapper for carousel items -->
                                     <div class="carousel-inner ">
-
                                         <div class="carousel-item active">
-
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/html.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Curso 1</h4>
-                                                            <p>En este curso de nivel básico aprenderás todo lo que
-                                                                necesitas para
-                                                                comenzar a diseñar páginas web usando HTML 5</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/bootstrap.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Curso 2</h4>
-                                                            <p>Aprende a utilizar este framework front-end empleado para
-                                                                desarrollar aplicaciones web y sitios mobile first</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/database.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Curso 3</h4>
-                                                            <p>Con este curso desarrollarás conceptos fundamentales para
-                                                                el uso eficaz y eficiente de distintos softwares de
-                                                                gestión de datos</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="carousel-item">
-
                                             <div class="row">
 
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/mysql.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Cruso 4</h4>
-                                                            <p>Aprende a usar una de las bases de datos de código
-                                                                abierto más utilizadas en el mundo</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php if (!empty($listaMejorCalificados)): ?>
 
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/mysql2.jpg" class="img-fluid"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Curso 5</h4>
-                                                            <p>Comienza a usar MySQL de forma profesional con esta
-                                                                continuación de nuestra serie de cursos de MySQL, ahora
-                                                                con enfoque avanzado</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    <?php foreach ($listaMejorCalificados as $curso):
+                                                        $imagen_base64 = base64_encode($curso->imagen);
+                                                        ?>
 
-                                                <div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src="Recursos/tinypngs/programador1.jpg"
-                                                                class="img-fluid" alt="">
+                                                        <div class="col-sm-4">
+                                                            <div class="thumb-wrapper">
+                                                                <div class="img-box">
+                                                                    <img src="data:image/<?php echo $curso->imagenEx ?>;base64,<?php echo $imagen_base64 ?>"
+                                                                        class="img-fluid">
+                                                                </div>
+                                                                <div class="thumb-content">
+                                                                    <h4>
+                                                                        <?php echo $curso->titulo ?>
+                                                                    </h4>
+                                                                    <p>
+                                                                        <?php echo $curso->descripcion ?>
+                                                                    </p>
+                                                                    <a href="scripts/cursoRedir.php?id=<?php echo $curso->ID_Curso ?>"
+                                                                        class="btn btn-primary">Ver más <i
+                                                                            class="fa fa-angle-right"></i></a>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="thumb-content">
-                                                            <h4>Curso 6</h4>
-                                                            <p>Empieza a crear tus propias páginas web desde cero con
-                                                                este curso introductorio donde aprenderás todo lo
-                                                                necesario para comenzar</p>
-                                                            <a href="#" class="btn btn-primary">Ver más <i
-                                                                    class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                                                    <?php endforeach; ?>
+
+                                                <?php else: ?>
+                                                    <p class="text-center mt-2">No se encontraron cursos.</p>
+                                                <?php endif ?>
 
                                             </div>
-
                                         </div>
-
 
                                     </div>
 
-                                    <!-- Carousel controls -->
-                                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                                        <i class="fa fa-angle-left"></i>
-                                    </a>
-                                    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -425,3 +331,4 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 </body>
 
 </html>
+

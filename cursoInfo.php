@@ -5,6 +5,7 @@ if (isset($_GET['id'])) {
     // print_r($_GET['id']);
     include("scripts/cursoClass.php");
     $cursoYModulos = getCursoForCursoInfo($cursoID);
+    
     // print_r($cursoYModulos);
 } else {
     header("HTTP/1.1 400 Bad Request");
@@ -76,7 +77,7 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <div class="cart nav-item">
-                    <a class="nav-link link-light" href="buy/formulario.php">
+                    <a class="nav-link link-light" href="buy/checkout.php">
                         <span>Carrito de compras</span>
                     </a>
 
@@ -88,7 +89,7 @@ if (isset($_GET['id'])) {
                         <!-- <li>Product A - 000.00</li>
                         <li>Product B - $000.00</li>
                         <li>Product C - $000.00</li> -->
-                        <li><a href="buy/formulario.php" class="checkout-button">Haz click para ir al Checkout</a></li>
+                        <li><a href="buy/checkout.php" class="checkout-button">Haz click para ir al Checkout</a></li>
                     </ul>
                 </div>
 
@@ -174,9 +175,9 @@ if (isset($_GET['id'])) {
                     </div>
 
                     <div class="col-5 my-3">
-                        <!-- <a id="btn-comprarModulo" href="" class="btn mx-2">
-                            Agregar este modulo al carrito
-                        </a> -->
+                        <a id="btn-comprarModulo" href="curso.php?idCur=<?php echo  $curso['ID_Curso'] ;?>&idMod=<?php echo $curso["Modulo_ID"];?>" class="btn mx-2">
+                           Empezar modulo
+                        </a>
                     </div>
                 </div>
 

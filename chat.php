@@ -71,7 +71,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             <li>Product A - 000.00</li>
             <li>Product B - $000.00</li>
             <li>Product C - $000.00</li>
-            <li><a href="buy/formulario.php" class="checkout-button">Checkout</a></li>
+            <li><a href="buy/checkout.php" class="checkout-button">Checkout</a></li>
           </ul>
         </div> -->
 

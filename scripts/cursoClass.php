@@ -203,5 +203,14 @@ function deslistarCurso($id_Curso){
     return $result;
 }
 
+function getModuloDetail($idModulo){
+    include("config.php");
+    $sql="CALL sp_SelectModuloDetalle($idModulo)";
+    $result=mysqli_query($conn,$sql);
+    mysqli_close($conn);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return  $result;
+}
+
 
 ?>
