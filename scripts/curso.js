@@ -84,7 +84,6 @@ videos.forEach(selected_video => {
         for (all_videos of videos) {
             all_videos.classList.remove('active');
             all_videos.querySelector('img').src = 'images/play.svg';
-
         }
 
         selected_video.classList.add('active');

@@ -69,7 +69,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                 </div>
 
                 <div class="cart nav-item">
-                    <a class="nav-link link-light" href="buy/formulario.php">
+                    <a class="nav-link link-light" href="buy/checkout.php">
                         <span>Carrito de compras</span>
                     </a>
                     <ul class="product-list pt-3 px-5">
@@ -77,7 +77,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                         <div id="carritoContainer">
 
                         </div>
-                        <li><a href="buy/formulario.php" class="checkout-button">Haz click para ir al Checkout</a></li>
+                        <li><a href="buy/checkout.php" class="checkout-button">Haz click para ir al Checkout</a></li>
                     </ul>
                 </div>
 

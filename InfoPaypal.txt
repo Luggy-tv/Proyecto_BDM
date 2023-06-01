@@ -16,12 +16,10 @@ App name
 Codebug
 
 Client ID
-Ac2vNhwHKF52iA704X4HtG-HfYKpBQu-dzf_GU2D
-LupFwmNb8LU3FjXZsSKjaOj8HBPSTif1rnBUjUjp
+Ac2vNhwHKF52iA704X4HtG-HfYKpBQu-dzf_GU2DLupFwmNb8LU3FjXZsSKjaOj8HBPSTif1rnBUjUjp
 
 Secret key 1
-ECF1Laqe3jdsFQHMpOdisIlsRblLkAQODry72_2k
-ydQYgzhdN3KvyqHYBcrBJmYIuuR0UkHBC0QJHwdl
+ECF1Laqe3jdsFQHMpOdisIlsRblLkAQODry72_2kydQYgzhdN3KvyqHYBcrBJmYIuuR0UkHBC0QJHwdl
 
 -------------------------------------------------------------------------------------------------
 
@@ -29,3 +27,18 @@ Sandbox
 
 sb-7gkgx26048793@business.example.com
 C>@?5Be8
+
+
+------------------------------------------------------------------------------------------------
+
+Otro correo de sandbox
+
+sb-ufmqu26048794@personal.example.com
+Ho#f5qR.
+
+
+
+------------------------------------------------------------------------------------------------
+Token de identidad para recepcion de datos: 
+
+0Z1UfBzXOrBdSv_ib1oNgssXMik8jJtaM1FqfLC0otLM976r0R94Ng3BmLW

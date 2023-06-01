@@ -76,6 +76,11 @@ if (isset($_FILES['videoModulo'])) {
     $newFileName = uniqid() . '_' . $videoFile_name;
     $destination = $uploadDirectory . $newFileName;
 
+    // $videoPath = "../video_Modulos/Nombre_Video";
+    // $videoPath = str_replace("../", "", $videoPath);
+
+
+
     //Se mueve al nuevo directorio
 
     if (!move_uploaded_file($videoFile_tmp_name, $destination)) {
@@ -118,7 +123,7 @@ if (isset($_FILES['videoModulo'])) {
 
         $response = array(
             'success' => true,
-            'message' =>  "Se ha añadido correctamente el modulo."
+            'message' => "Se ha añadido correctamente el modulo."
         );
         header('Content-Type: application/json');
         echo json_encode($response);
