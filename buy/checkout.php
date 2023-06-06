@@ -11,9 +11,13 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     include("paypalconfig.php");
     $usuario = SetUserFromToken();
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
+    $carritoHasItems = false;
+    if (isset($_COOKIE['carrito'])) {
+        $cookieData = $_COOKIE['carrito'];
+        $dataArray = json_decode($cookieData, true);
+        $carritoHasItems = true;
+    }
 
-    $cookieData = $_COOKIE['carrito'];
-    $dataArray = json_decode($cookieData, true);
 
     // print_r($dataArray);
 
@@ -59,7 +63,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             </div>
         </nav>
     </section> <!--TERMINA NAVBAR-->
-    <!-- Bienvenido -->
+
 
     <section>
         <div class="container">
@@ -68,59 +72,69 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             </div>
 
         </div>
-        <!-- Cursos Mas vendidos-->
+
+        <!-- Tabla de Orden -->
         <div class="container bg-light mt-2 mb-5 px-3 py-4">
-            <div class="row mx-5 justify-content-center">
-                <table class="table bg-light rounded-3 mx-5">
 
-                    <tr>
-                        <th scope="col" class="text-center">#</th>
-                        <th scope="col" class="text-center">Titulo Curso</th>
-                        <th scope="col" class="text-center">Precio</th>
-                        <!-- <th scope="col">Eliminar</th> -->
-                    </tr>
-                    <?php
-                    $totalPrecio = 0;
-                    foreach ($dataArray as $curso):
-                        $totalPrecio += $curso['precio']; ?>
+            <?php if ($carritoHasItems) { ?>
+
+                <div class="row mx-5 justify-content-center">
+                    <table class="table bg-light rounded-3 mx-5">
                         <tr>
-                            <td scope="row" class="text-center">
-                                <?php echo $curso['identificador']; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $curso['nombre']; ?>
-                            </td>
-                            <td class="text-center">
-                                <?php echo $curso['precio']; ?>
-                            </td>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col" class="text-center">Titulo Curso</th>
+                            <th scope="col" class="text-center">Precio</th>
+                            <th scope="col" class="text-center">Eliminar</th>
                         </tr>
-                    <?php endforeach; ?>
-                    <tr>
-                        <td scope="row" class="table-active"></td>
-                        <td class="text-end table-active">Total:</td>
-                        <td class="text-center table-active">$
-                            <?php echo $totalPrecio; ?>
-                        </td>
-                    </tr>
+                        <?php
+                        $totalPrecio = 0;
+                        foreach ($dataArray as $curso):
+                            $id =$curso['identificador'];
+                            $totalPrecio += $curso['precio']; ?>
+                            <tr>
+                                <td scope="row" class="text-center">
+                                    <?php echo $curso['identificador']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $curso['nombre']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $curso['precio']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-primary" onclick="eliminarDecarrito(<?php echo $id ?>)"> Quitar de Carrito</button>
 
-
-
-                </table>
-            </div>
-            <div class="row mx-5">
-                <div class="col-lg-12 ">
-                    <hr id="hr">
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <tr>
+                            <td scope="row" class="table-active"></td>
+                            <td class="text-end table-active">Total:</td>
+                            <td class="text-center table-active">$
+                                <?php echo $totalPrecio; ?>
+                            </td>
+                            <td scope="row" class="table-active"></td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
-            <div class="row gap-2">
-                <div class="col-12">
-                    <?php include('paypalcheckout.php'); ?>
-                </div>
 
-            </div>
+                <div class="row mx-5">
+                    <div class="col-lg-12 ">
+                        <hr id="hr">
+                    </div>
+                </div>
+                <div class="row my-2 mx-auto">
+                    <div class="col-12">
+                        <?php include('paypalcheckout.php'); ?>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <h1 class="text-center">Tu carrito esta vacio! </h1>
+            <?php } ?>
 
 
         </div>
+
     </section>
 
 
@@ -131,7 +145,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             <p class="lead link-light">© 2023 Copyright: Codebug.com</p>
         </div>
     </footer>
-    <script src="../scripts/checkout.js"></script>
+
+    <script src="../scripts/checkout.js" ></script>
 </body>
 
 </html>

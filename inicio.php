@@ -96,7 +96,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
             </div>
         </nav>
-    </section> <!--TERMINA NAVBAR-->
+    </section> 
+    <!--TERMINA NAVBAR-->
     <!-- Bienvenido -->
     <section>
         <div class="container">

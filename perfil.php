@@ -10,6 +10,9 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     $usuario = SetUserFromToken();
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
     //$userImg = imagecreatefromstring($usuario->Imagen);
+    include("scripts/cursoClass.php");
+
+    $listaMasVendidos = getMasVendidos();
 }
 ?>
 
@@ -259,56 +262,18 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Aprende HTML desde cero</td>
-                                    <td>2/5</td>
-                                    <td><button class="btn p-0"
-                                            onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" disabled>
-                                            <i class="fa fa-download"></i> Descargar</button></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bootstrap: Todo lo que debes saber</td>
-                                    <td>1/8</td>
-                                    <td><button class="btn p-0"
-                                            onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" disabled>
-                                            <i class="fa fa-download"></i> Descargar</button></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Fundamentos de las bases de datos</td>
-                                    <td>0/10</td>
-                                    <td><button class="btn p-0"
-                                            onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" disabled>
-                                            <i class="fa fa-download"></i> Descargar</button></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>MySQL para principiantes</td>
-                                    <td>15/15</td>
-                                    <td><button class="btn p-0"
-                                            onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')"> <i
-                                                class="fa fa-download"></i> Descargar</button></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>MySQL nivel avanzado</td>
-                                    <td>5/20</td>
-                                    <td><button class="btn p-0"
-                                            onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')" disabled>
-                                            <i class="fa fa-download"></i> Descargar</button></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td>Introducción a la progrmación web</td>
-                                    <td>10/10</td>
-                                    <td><button class="btn p-0"
-                                            onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')"> <i
-                                                class="fa fa-download"></i> Descargar</button></td>
-                                </tr>
-
+                                <?php if (!empty($listaMasVendidos)): ?>
+                                    <?php foreach ($listaMasVendidos as $curso): ?>
+                                        <tr>
+                                            <th scope="row"><?php echo $curso->ID_Curso ?></th>
+                                            <td><?php echo $curso->titulo ?></td>
+                                            <td>0/10</td>
+                                            <td><button class="btn p-0"
+                                                    onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')"> <i
+                                                        class="fa fa-download"></i> Descargar</button></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
