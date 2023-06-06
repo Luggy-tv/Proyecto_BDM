@@ -5,7 +5,9 @@ if (isset($_GET['id'])) {
     // print_r($_GET['id']);
     include("scripts/cursoClass.php");
     $cursoYModulos = getCursoForCursoInfo($cursoID);
-    
+
+    $userTieneCurso= true;
+
     // print_r($cursoYModulos);
 } else {
     header("HTTP/1.1 400 Bad Request");
@@ -111,8 +113,8 @@ if (isset($_GET['id'])) {
     </section>
 
 
-
-    <section> <!-- DESCRIPCIÓN DEL CURSO E IMAGEN -->
+    <!-- DESCRIPCIÓN DEL CURSO E IMAGEN -->
+    <section>
         <div class="container">
             <div class="row">
                 <div class="col-7 my-2 pe-5">
@@ -122,37 +124,41 @@ if (isset($_GET['id'])) {
                     <p id="Info">Categoría:
                         <?php echo $cursoYModulos[0]['nombre_categoria'] ?>
                     </p>
-                    <p id="Info">Puntuación por ususarios: x/5</p>
+                    <!-- <p id="Info">Puntuación por ususarios: x/5</p> -->
                     <p id="Info">Impartido por:
                         <?php echo $cursoYModulos[0]['Nombre_Completo'] ?>
                     </p>
                 </div>
 
-                <div class="comprar col-5">
-                    <div class="my-3 py-3 mx-3 px-3">
-                        <h5>Adquiere este curso por</h5>
-                        <h1>
-                            <?php echo $cursoYModulos[0]['precio_Curso'] ?>
-                        </h1>
+                <?php if ($userTieneCurso): ?>
+                    <div class="comprar col-5">
+                        <div class="my-3 py-3 mx-3 px-3">
+                            <h5>Adquiere este curso por</h5>
+                            <h1>
+                                <?php echo $cursoYModulos[0]['precio_Curso'] ?>
+                            </h1>
 
-                        <a id="btn-comprarCurso"
-                            onclick=" agregarAlCarrito( '<?php echo $cursoID ?>',' <?php echo $cursoYModulos[0]['titulo'] ?>' , '<?php echo $cursoYModulos[0]['precio_Curso_num'] ?>' )"
-                            class="btn mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <span>
-                                <img class="addIcon" src="Recursos/icons8-add-shopping-cart-96.png"></img>
-                            </span>
-                            Agregar al carrito
-                        </a>
+                            <a id="btn-comprarCurso"
+                                onclick=" agregarAlCarrito( '<?php echo $cursoID ?>',' <?php echo $cursoYModulos[0]['titulo'] ?>' , '<?php echo $cursoYModulos[0]['precio_Curso_num'] ?>' )"
+                                class="btn mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <span>
+                                    <img class="addIcon" src="Recursos/icons8-add-shopping-cart-96.png"></img>
+                                </span>
+                                Agregar al carrito
+
+                            </a>
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
+
             </div>
 
         </div>
     </section>
 
 
-
-    <section class=" bg-light"> <!-- MODULOS E INFORMACIÓN DE COMPRA -->
+    <!-- MODULOS E INFORMACIÓN DE COMPRA -->
+    <section class="bg-light">
         <div class="container bg-light pb-3">
 
             <div class="row mt-5 mx-3"> <!--Titulo de la sección-->
@@ -175,8 +181,10 @@ if (isset($_GET['id'])) {
                     </div>
 
                     <div class="col-5 my-3">
-                        <a id="btn-comprarModulo" href="curso.php?idCur=<?php echo  $curso['ID_Curso'] ;?>&idMod=<?php echo $curso["Modulo_ID"];?>" class="btn mx-2">
-                           Empezar modulo
+                        <a id="btn-comprarModulo"
+                            href="curso.php?idCur=<?php echo $curso['ID_Curso']; ?>&idMod=<?php echo $curso["Modulo_ID"]; ?>"
+                            class="btn mx-2">
+                            Empezar modulo
                         </a>
                     </div>
                 </div>
@@ -185,6 +193,7 @@ if (isset($_GET['id'])) {
         </div>
     </section>
 
+    <!-- opiniones de otros usuarios  -->
     <section>
         <div class="container my-5">
             <h3 class="my-3">Opiniones de otros usuarios</h3>
@@ -207,35 +216,35 @@ if (isset($_GET['id'])) {
         </div>
     </section>
 
-
+    <!-- Footer -->
     <section>
         <footer id="Footer" class="footer text center">
             <div class="text-center p-3">
                 <p class="lead link-light">© 2023 Copyright: Codebug.com</p>
             </div>
         </footer>
-</body>
-</section>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">¡Aviso!</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Se ha agregado el curso al carrito.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">¡Aviso!</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    Se ha agregado el curso al carrito.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script src="scripts/cursoInfo.js"></script>
+    <script src="scripts/cursoInfo.js"></script>
 
 </body>
 

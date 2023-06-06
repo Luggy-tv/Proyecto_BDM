@@ -212,5 +212,12 @@ function getModuloDetail($idModulo){
     return  $result;
 }
 
+function inscibirACurso($idCurso,$idUsuario){
+    include("config.php");
+    $sql="CALL sp_UsuarioEnCursoManage('A',$idUsuario,$idCurso);";
+    $result=mysqli_query($conn,$sql);
+    return $result;
+}
+
 
 ?>
