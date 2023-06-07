@@ -168,10 +168,11 @@ function editModulo($id_Modulo, $nuevoTitulo, $nuevoDescripcion, $nuevoPrecio, $
     return $result;
 }
 
-function editAdjunto($id_Adjunto,$nuevoDescripcion,$nuevoAdjunto){
+function editAdjunto($id_Adjunto, $nuevoDescripcion, $nuevoAdjunto)
+{
     include("config.php");
-    $sql= "Call SP_adjuntoDeCursoManage('B',$id_Adjunto,0,'$nuevoDescripcion','$nuevoAdjunto');";
-    $result = mysqli_query($conn,$sql);
+    $sql = "Call SP_adjuntoDeCursoManage('B',$id_Adjunto,0,'$nuevoDescripcion','$nuevoAdjunto');";
+    $result = mysqli_query($conn, $sql);
     mysqli_close($conn);
     return $result;
 }
@@ -181,7 +182,7 @@ function getAdjuntoIdFromNivelId($id_Nivel)
     include("config.php");
     $sql = "call sp_SelectAdjuntoFromNivelID($id_Nivel);";
     $result = mysqli_query($conn, $sql);
-    
+
 
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
@@ -195,29 +196,63 @@ function getAdjuntoIdFromNivelId($id_Nivel)
     }
 }
 
-function deslistarCurso($id_Curso){
+function deslistarCurso($id_Curso)
+{
     include("config.php");
-    $sql= "CALL SP_CursoManage('C',$id_Curso,0,0,0,0,0,0,0);";
-    $result = mysqli_query($conn,$sql);
+    $sql = "CALL SP_CursoManage('C',$id_Curso,0,0,0,0,0,0,0);";
+    $result = mysqli_query($conn, $sql);
     mysqli_close($conn);
     return $result;
 }
 
-function getModuloDetail($idModulo){
+function getModuloDetail($idModulo)
+{
     include("config.php");
-    $sql="CALL sp_SelectModuloDetalle($idModulo)";
-    $result=mysqli_query($conn,$sql);
+    $sql = "CALL sp_SelectModuloDetalle($idModulo)";
+    $result = mysqli_query($conn, $sql);
     mysqli_close($conn);
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    return  $result;
-}
-
-function inscibirACurso($idCurso,$idUsuario){
-    include("config.php");
-    $sql="CALL sp_UsuarioEnCursoManage('A',$idUsuario,$idCurso);";
-    $result=mysqli_query($conn,$sql);
     return $result;
 }
 
+function inscibirACurso($idCurso)
+{
+    include("config.php");
+
+    $idUser = getIDFromToken();
+
+    $sql = "CALL sp_UsuarioEnCursoManage('A',$idUser,$idCurso);";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function crearDetalleOrden($idOrden,$idCurso,$precioCurso){
+    include("config.php");
+    $sql = "CALL sp_DetalleOrdenCreate($idOrden,$idCurso,$precioCurso);";
+    $result = mysqli_query($conn, $sql);
+}
+
+function CrearOrden($montoTotal)
+{
+    include_once("userClass.php");
+    $idUsuario = getIDFromToken();
+    include("config.php");
+    $sql = "CALL sp_OrdenCreate($idUsuario,$montoTotal);";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function checkUserInCursoStatus($idCurso){
+
+    include("config.php");
+    include_once("userClass.php");
+
+    $idUser = getIDFromToken();
+
+    $sql="CALL sp_SelectIsUsuarioEnCurso($idUser,$idCurso);";
+    $result = mysqli_query($conn, $sql);
+
+    return $result;
+}
 
 ?>

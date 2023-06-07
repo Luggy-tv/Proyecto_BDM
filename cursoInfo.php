@@ -6,9 +6,13 @@ if (isset($_GET['id'])) {
     include("scripts/cursoClass.php");
     $cursoYModulos = getCursoForCursoInfo($cursoID);
 
+    $userInCursoStatus = checkUserInCursoStatus($cursoID);
+
     $userTieneCurso= true;
 
-    // print_r($cursoYModulos);
+    print_r($userInCursoStatus);
+    // print_r("lol");
+
 } else {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error al conectar con el curso favor de regresar a la pantalla anterior.");
@@ -130,7 +134,7 @@ if (isset($_GET['id'])) {
                     </p>
                 </div>
 
-                <?php if ($userTieneCurso): ?>
+                <?php if (!$userTieneCurso): ?>
                     <div class="comprar col-5">
                         <div class="my-3 py-3 mx-3 px-3">
                             <h5>Adquiere este curso por</h5>
@@ -179,7 +183,7 @@ if (isset($_GET['id'])) {
                             <?php echo $curso['Nivel_Descripcion'] ?>
                         </h5>
                     </div>
-
+                    <?php if ($userTieneCurso): ?>
                     <div class="col-5 my-3">
                         <a id="btn-comprarModulo"
                             href="curso.php?idCur=<?php echo $curso['ID_Curso']; ?>&idMod=<?php echo $curso["Modulo_ID"]; ?>"
@@ -187,6 +191,7 @@ if (isset($_GET['id'])) {
                             Empezar modulo
                         </a>
                     </div>
+                    <?php endif; ?>
                 </div>
 
             <?php endforeach ?>
