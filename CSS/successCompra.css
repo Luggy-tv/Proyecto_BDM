@@ -1,0 +1,56 @@
+:root {
+    --big-stone: #172542; /*Azul oscuro*/
+    --royal-blue: #2648f0; /*Azul medio*/
+    --picton-blue: #4eaaed; /*Azul claro*/
+    --cornflower: #9ad1ef; /*Azul claro++*/
+    --portage: #9863f3; /*Morado*/
+    --perfume: #c8bdf9; /*Morado claro*/
+    --link-water: #dfdbf6; /*Morado claro++*/
+    --salmon: #ff885d; /*Coral*/
+    --mandys-pink: #f4cab2; /*Coral claro*/
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background: var(--link-water);
+  }
+  
+  h1 {
+    font-weight: bold;
+    color: #172542;
+  }
+  
+  h2 {
+    font-weight: bold;
+    color: var(--salmon);
+  }
+  
+  h3 {
+    font-weight: bold;
+    color: #172542;
+  }
+  
+  p {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .btn {
+    background-color:var(--salmon);
+    text-align: center;
+    width: 50%;
+    padding: 1%;
+    color: #fff;
+  }
+
+  .btn:hover{
+    background-color: #4eaaed;
+    color:#c8bdf9;
+  }
+
+  .footer {
+    background-color: var(--big-stone);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
