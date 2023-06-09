@@ -17,6 +17,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     $listaMejorCalificados = getMejorCalificados();
     $listaMasRecientes = getMasRecientes();
 
+    // print_r($listaMasVendidos);
+
 }
 
 ?>
@@ -130,9 +132,9 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                         <div class="carousel-item active">
                                             <div class="row">
 
-                                                <?php if (!empty($listaMejorCalificados)): ?>
+                                                <?php if (!empty($listaMasVendidos)): ?>
 
-                                                    <?php foreach ($listaMejorCalificados as $curso):
+                                                    <?php foreach ($listaMasVendidos as $curso):
                                                         $imagen_base64 = base64_encode($curso->imagen);
                                                         ?>
 
@@ -263,7 +265,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                         <div class="carousel-item active">
                                             <div class="row">
 
-                                                <?php if (!empty($listaMejorCalificados)): ?>
+                                                <?php if (!empty($listaMasRecientes)): ?>
                                                     <?php foreach ($listaMasRecientes as $curso):
                                                         $imagen_base64 = base64_encode($curso->imagen);
                                                         ?>

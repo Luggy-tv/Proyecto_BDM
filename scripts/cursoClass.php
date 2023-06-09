@@ -106,7 +106,7 @@ function getMasRecientes()
 function getMasVendidos()
 {
     include("config.php");
-    $sql = "Call SP_SelectCursoForHome('C');";
+    $sql = "Call SP_SelectCursoForHome('A');";
     $result = mysqli_query($conn, $sql);
     $listaCursosmasVendidos = array();
 
@@ -130,7 +130,7 @@ function getMasVendidos()
 function getMejorCalificados()
 {
     include("config.php");
-    $sql = "Call SP_SelectCursoForHome('C');";
+    $sql = "Call SP_SelectCursoForHome('B');";
     $result = mysqli_query($conn, $sql);
     $listaCursosmasVendidos = array();
 
