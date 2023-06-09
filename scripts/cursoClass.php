@@ -255,4 +255,23 @@ function checkUserInCursoStatus($idCurso){
     return $result;
 }
 
+function addNivelToUsuarioEnCurso($idCurso){
+    include("config.php");
+    include_once("userClass.php");
+    $idUser = getIDFromToken();
+    $sql = "CALL sp_UsuarioEnCursoManage('B',$idUser,$idCurso);";
+    $result = mysqli_query($conn, $sql);
+}
+
+function checkUserCursosForKardex(){
+    include("config.php");
+    include_once("userClass.php");
+    $idUser = getIDFromToken();
+    $sql="CALL sp_SelectUserInfoKardex($idUser);";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
 ?>

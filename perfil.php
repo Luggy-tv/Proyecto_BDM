@@ -12,7 +12,11 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     //$userImg = imagecreatefromstring($usuario->Imagen);
     include("scripts/cursoClass.php");
 
-    $listaMasVendidos = getMasVendidos();
+
+
+    $listaMasVendidos = checkUserCursosForKardex();
+
+    // print_r($listaMasVendidos);
 }
 ?>
 
@@ -249,34 +253,64 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         <div id="kardex" class="row pb-4 py-3">
             <h2 class="my-2 text-center fw-bold">Tu Kardex</h2>
             <div class="container-xl ">
+
                 <div class="row">
                     <div class="col-1"></div>
-                    <div class="col-10 bg-light rounded-3 p-0">
-                        <table class="table table-striped bg-light rounded-3 p-3">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Cursos</th>
-                                    <th scope="col">Niveles</th>
-                                    <th scope="col">Diploma</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!empty($listaMasVendidos)): ?>
+                    <?php if (!empty($listaMasVendidos)): ?>
+                        <div class="col-10 bg-light rounded-3 p-0">
+                            <table class="table table-striped bg-light rounded-3 p-3">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Cursos</th>
+                                        <th scope="col">Fecha de Inscripcion</th>
+                                        
+                                        <th scope="col">Nivel Actual</th>
+                                        <th scope="col">Ultimo Avance</th>
+                                        <th scope="col">Categoria</th>
+
+                                        <th scope="col">Fecha de Finalizacion</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaDeDatos">
+
                                     <?php foreach ($listaMasVendidos as $curso): ?>
                                         <tr>
-                                            <th scope="row"><?php echo $curso->ID_Curso ?></th>
-                                            <td><?php echo $curso->titulo ?></td>
-                                            <td>0/10</td>
-                                            <td><button class="btn p-0"
-                                                    onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')"> <i
-                                                        class="fa fa-download"></i> Descargar</button></td>
+                                            <th scope="row">
+                                           
+                                                <?php echo $curso['ID_Curso'] ?>
+                                            </th>
+                                            <td> 
+                                                <a class="link-primary" href="scripts/cursoRedir.php?id=<?php echo $curso['ID_Curso'] ?>"> 
+                                                    <?php echo $curso['Titulo_Curso'] ?>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                 <?php echo $curso['FechaInscripcion'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso['Nivel'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso['FechaDeUltimoAvance'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso['NombreDeCategoria'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso['FechaFinalizacion'] ?>
+                                            </td>
                                         </tr>
                                     <?php endforeach ?>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    <?php else: ?>
+                        <h3 class="text-center mt-2">No te has inscrito a un curso!</h3>
+                    <?php endif; ?>
                     <div class="col-1"></div>
                 </div>
             </div>

@@ -8,9 +8,22 @@ if (isset($_GET['id'])) {
 
     $userInCursoStatus = checkUserInCursoStatus($cursoID);
 
-    $userTieneCurso= true;
+    $userTieneCurso = false;
+    $showDiploma = false;
 
-    print_r($userInCursoStatus);
+    if (mysqli_num_rows($userInCursoStatus) > 0) {
+        $userTieneCurso = true;
+
+        $row = mysqli_fetch_assoc($userInCursoStatus);
+
+
+        $showDiploma = $row['Completado'];
+
+        // print_r($showDiploma);
+
+    }
+
+    // print_r($userInCursoStatus);
     // print_r("lol");
 
 } else {
@@ -155,6 +168,24 @@ if (isset($_GET['id'])) {
                     </div>
                 <?php endif; ?>
 
+                <?php if ($showDiploma): ?>
+                    <div class="comprar col-5">
+                        <div class="my-3 py-3 mx-3 px-3">
+                            <h5>Completaste el curso, aqui esta tu diploma!</h5>
+
+
+                            <button class="btn mx-2"  id="btn-comprarCurso"
+                            onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')">
+                                <i class="fa fa-download">
+                                </i>
+                                Descargar
+                            </button>
+
+                            
+                        </div>
+                    </div>
+                <?php endif; ?>
+
             </div>
 
         </div>
@@ -184,13 +215,13 @@ if (isset($_GET['id'])) {
                         </h5>
                     </div>
                     <?php if ($userTieneCurso): ?>
-                    <div class="col-5 my-3">
-                        <a id="btn-comprarModulo"
-                            href="curso.php?idCur=<?php echo $curso['ID_Curso']; ?>&idMod=<?php echo $curso["Modulo_ID"]; ?>"
-                            class="btn mx-2">
-                            Empezar modulo
-                        </a>
-                    </div>
+                        <div class="col-5 my-3">
+                            <a id="btn-comprarModulo"
+                                href="curso.php?idCur=<?php echo $curso['ID_Curso']; ?>&idMod=<?php echo $curso["Modulo_ID"]; ?>"
+                                class="btn mx-2">
+                                Empezar modulo
+                            </a>
+                        </div>
                     <?php endif; ?>
                 </div>
 

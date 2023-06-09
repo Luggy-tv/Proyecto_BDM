@@ -8,8 +8,11 @@ if (isset($_GET['idCur']) && isset($_GET['idMod'])) {
     $cursoYModulos = getCursoForCursoInfo($cursoID);
     // print_r($cursoYModulos);
     $modulo = getModuloDetail($moduloID);
+
     // print_r($modulo);
 
+    addNivelToUsuarioEnCurso($cursoID);
+    
     $videoPath = $modulo[0]['Video'];
     $videoPath = str_replace("..", "/RepositorioParaProyectoDeBDM/BDM", $videoPath);
 
