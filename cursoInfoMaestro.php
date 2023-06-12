@@ -215,22 +215,13 @@ if (isset($_GET['id'])) {
     </section>
 
     <section>
-<<<<<<< HEAD:cursoInfoMaestro.html
-        <div class="container my-5">
-            <h3>Funciones como maestro</h3>
-            <hr style="height: 2px;">
-            <a id="btn-editarCurso" href="editarCurso.html" class="btn mx-2">
-                Editar curso  
-            </a>
-=======
-        <!-- <?php if ($cursoYModulos[0]['id_Docente'] === $ID_Usuario): ?> -->
+        <?php if ($cursoYModulos[0]['id_Docente'] === $ID_Usuario): ?>
             <div class="container my-5">
                 <h3>Funciones como maestro</h3>
                 <hr style="height: 2px;">
                 <a id="btn-editarCurso" href="editarCurso.php?id=<?php echo $cursoID ?>" class="btn mx-2" >
                     Editar curso
                 </a>
->>>>>>> poncho_branch(remote):cursoInfoMaestro.php
 
             </div>
         <?php endif ?>

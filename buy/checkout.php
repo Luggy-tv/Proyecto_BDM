@@ -18,10 +18,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         $dataArray = json_decode($cookieData, true);
         $carritoHasItems = true;
     }
-
-
-    // print_r($dataArray);
-
+    
 }
 
 ?>

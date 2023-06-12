@@ -26,26 +26,10 @@ if (!empty($_GET['paymentID']) && !empty($_GET['payerID']) && !empty($_GET['toke
   }
 
   setcookie('carrito', '', time() - 3600, '/');
+  
+  header('Location:./SuccessCompra.html');
 
-
-  ?>
-  <div class="alert alert-success">
-    <strong>Success!</strong> Your order processed successfully.
-  </div>
-  <table>
-    <tr>
-      <td>Payment Id:
-        <?php echo $paymentID; ?>
-      </td>
-      <td>Payer Id:
-        <?php echo $payerID; ?>
-      </td>
-      <td><a href="checkout.php">Regresar</a></td>
-    </tr>
-  </table>
-  <?php
 } else {
-  header('Location:index.php');
-  // echo "hola";
+  header('Location:./checkout.php');
 }
 ?>

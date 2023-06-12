@@ -1,0 +1,4 @@
+use codebug;
+SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE, COLUMN_COMMENT
+FROM information_schema.COLUMNS
+WHERE TABLE_SCHEMA = 'codebug';

@@ -12,6 +12,7 @@ if (isset($_GET['id'])) {
     $showDiploma = false;
 
     if (mysqli_num_rows($userInCursoStatus) > 0) {
+        
         $userTieneCurso = true;
 
         $row = mysqli_fetch_assoc($userInCursoStatus);
@@ -175,7 +176,7 @@ if (isset($_GET['id'])) {
 
 
                             <button class="btn mx-2"  id="btn-comprarCurso"
-                            onclick="window.open('Recursos/tinypngs/CertificadoDeCurso.jpeg')">
+                            onclick="window.open('Recursos/CertificadoDeCurso.pdf')">
                                 <i class="fa fa-download">
                                 </i>
                                 Descargar

@@ -12,7 +12,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     //$userImg = imagecreatefromstring($usuario->Imagen);
     include("scripts/cursoClass.php");
 
-
+    include_once("scripts/categoriasClass.php");
+    $listaCategorias = setCategoriasLista();
 
     $listaMasVendidos = checkUserCursosForKardex();
 
@@ -41,7 +42,9 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -113,140 +116,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         </div>
     </section>
 
-    <!--TUS CURSOS-->
-    <section>
-        <div id="cursos" class="row pb-4">
-            <h2 class="my-3 text-center fw-bold">Tus cursos</h2>
-
-            <div class="container-xl">
-                <div class="row">
-                    <div class="col-md-10 mx-auto bg-light rounded-1 my-auto">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-
-
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/html.jpg" class="img-fluid rounded-3"
-                                                        alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Aprende HTML desde cero</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Consectetur, dolor!</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/bootstrap.jpg"
-                                                        class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Bootstrap: Todo lo que debes saber</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
-                                                        provident.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/database.jpg"
-                                                        class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Fundamentos de las bases de datos</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error,
-                                                        fugiat.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/mysql.jpg" class="img-fluid rounded-3"
-                                                        alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>MySQL para principiantes</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                                                        dolorem!</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/mysql2.jpg" class="img-fluid rounded-3"
-                                                        alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>MySQL nivel avanzado</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                                                        eveniet.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/programador1.jpg"
-                                                        class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Introducción a la progrmación web</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-                                                        impedit?</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <!-- Carousel controls -->
-                            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
 
     <!--KARDEX-->
     <section>
@@ -256,6 +125,69 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
                 <div class="row">
                     <div class="col-1"></div>
+
+                    <div class="col-10 mb-3">
+
+                        <div class="accordion" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                        Filtros
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label for="fecha" class="form-label">Fecha de inscripcion</label>
+                                                <input id="fecha" type="date" class="form-control" name="fecha">
+                                                <button type="submit" id="fecha-btn"
+                                                    class="btn btn-primary w-100 mt-2 mb-1 ">Filtrar por fecha</button>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="" class="form-label">Categoria</label>
+                                                <select name="categoria" id="categoria" class="form-control">
+                                                    <?php foreach ($listaCategorias as $categoria): ?>
+                                                        <?php echo "<option value='" . $categoria['ID'] . "'> " . $categoria['Categoria'] . "</option>"; ?>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                                <button type="submit" id="categoria-btn"
+                                                    class="btn btn-primary w-100 mt-2 mb-1 ">Filtrar por
+                                                    categoria</button>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="" class="form-label">Estatus</label>
+                                                <select name="estatus" id="estatus" class="form-control">
+                                                    <option value="1">Terminado</option>
+                                                    <option value="0">En Curso</option>
+                                                </select>
+                                                <button type="submit" id="estatus-btn"
+                                                    class="btn btn-primary w-100 mt-2 mb-1">Filtrar por estatus
+                                                </button>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <button type="submit" id="all-btn"
+                                                    class="btn btn-info w-100 mt-2 mb-1">Usar todos los filtros
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+
                     <?php if (!empty($listaMasVendidos)): ?>
                         <div class="col-10 bg-light rounded-3 p-0">
                             <table class="table table-striped bg-light rounded-3 p-3">
@@ -264,11 +196,9 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                         <th scope="col">#</th>
                                         <th scope="col">Cursos</th>
                                         <th scope="col">Fecha de Inscripcion</th>
-                                        
                                         <th scope="col">Nivel Actual</th>
                                         <th scope="col">Ultimo Avance</th>
                                         <th scope="col">Categoria</th>
-
                                         <th scope="col">Fecha de Finalizacion</th>
 
                                     </tr>
@@ -278,16 +208,17 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                                     <?php foreach ($listaMasVendidos as $curso): ?>
                                         <tr>
                                             <th scope="row">
-                                           
+
                                                 <?php echo $curso['ID_Curso'] ?>
                                             </th>
-                                            <td> 
-                                                <a class="link-primary" href="scripts/cursoRedir.php?id=<?php echo $curso['ID_Curso'] ?>"> 
+                                            <td>
+                                                <a class="link-primary"
+                                                    href="scripts/cursoRedir.php?id=<?php echo $curso['ID_Curso'] ?>">
                                                     <?php echo $curso['Titulo_Curso'] ?>
                                                 </a>
                                             </td>
                                             <td>
-                                                 <?php echo $curso['FechaInscripcion'] ?>
+                                                <?php echo $curso['FechaInscripcion'] ?>
                                             </td>
                                             <td>
                                                 <?php echo $curso['Nivel'] ?>

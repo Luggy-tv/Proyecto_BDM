@@ -274,4 +274,7 @@ function checkUserCursosForKardex(){
     return $result;
 }
 
+
+
+
 ?>
