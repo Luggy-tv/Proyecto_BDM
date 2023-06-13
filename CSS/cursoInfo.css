@@ -169,6 +169,14 @@
     border-radius: 10px;
     background-color: #f9f9f9;
   }
+  
+  .calif {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
 
   .profile-pic {
     width: 50px;

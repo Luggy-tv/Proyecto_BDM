@@ -255,6 +255,27 @@ function checkUserInCursoStatus($idCurso){
     return $result;
 }
 
+function getCursoComments($idCurso){
+    include("config.php");
+
+    $sql="CALL sp_SelectComentariosCurso($idCurso);";
+
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function checkIfUserHasComment(){
+    include("config.php");
+    include_once("userClass.php");
+    $idUser = getIDFromToken();
+    $sql = "CALL sp_SelectIfUserHasComment($idUser);";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
 function addNivelToUsuarioEnCurso($idCurso){
     include("config.php");
     include_once("userClass.php");

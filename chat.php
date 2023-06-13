@@ -32,7 +32,8 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 </head>
 
 <body>
-  <section> <!--NAVBAR-->
+  <!--NAVBAR-->
+  <section>
     <nav class="navbar navbar-dark navbar-expand-md">
       <div class="container-fluid"><a class="navbar-brand link-light" href="inicio.php">Codebug</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
@@ -48,26 +49,12 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
             <li class="nav-item">
               <a class="nav-link link-light" href="scripts/perfilRedir.php" style="border-left-style: none;">Perfil</a>
             </li>
-
           </ul>
         </div>
-
-        <!-- <div class="cart nav-item">
-          <a class="nav-link link-light" href="#">
-            <span>Carrito de compras</span>
-          </a>
-          <ul class="product-list pt-3 px-5">
-            <h3>Carrito de compras</h3>
-            <li>Product A - 000.00</li>
-            <li>Product B - $000.00</li>
-            <li>Product C - $000.00</li>
-            <li><a href="buy/checkout.php" class="checkout-button">Checkout</a></li>
-          </ul>
-        </div> -->
-
       </div>
     </nav>
-  </section> <!--TERMINA NAVBAR-->
+  </section>
+  <!--TERMINA NAVBAR-->
 
   <section>
     <div class="row d-flex mx-0 my-lg-0">
