@@ -82,4 +82,79 @@ function getUserList()
     $userList = mysqli_fetch_all($result, MYSQLI_ASSOC);
     return $userList;
 }
+
+function getReporteDeCurso(){
+    include("config.php");
+    $idUser = getIDFromToken();
+    $sql="CALL sp_ReporteCurso($idUser);";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function getReporteTotalDeCursos(){
+    include("config.php");
+    $idUser = getIDFromToken();
+    $sql="CALL sp_ReporteTotalDeCursos($idUser);";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);    
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+
+function getReporteDetalleDeCurso($id_Curso){
+    include("config.php");
+    $sql="CALL sp_ReporteDetalleDeCurso($id_Curso);";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);    
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function getReporteDetalleDeCursoTotal($id_Curso){
+    include("config.php");
+    $sql="CALL sp_ReporteDetalleDeCursoIngresosTot($id_Curso);";
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);    
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+
+
+function getReporteDeCursoFiltro($fecha,$idCategoria,$estatus){
+    include("config.php");
+    $idUser = getIDFromToken();
+
+    $sql = "CALL sp_ReporteCursoFiltro($idUser,";
+    $sql .= ($fecha === null) ? "NULL," : "'$fecha',";
+    $sql .= ($idCategoria === null) ? "NULL," : "$idCategoria,";
+    $sql .= ($estatus === null) ? "NULL" : "$estatus";
+    $sql .= ");";
+    
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function getKardexFiltro($fecha,$idCategoria,$estatus){
+    include("config.php");
+    $idUser = getIDFromToken();
+
+    $sql = "CALL sp_SelectUserInfoKardexFiltro($idUser,";
+    $sql .= ($fecha === null) ? "NULL," : "'$fecha',";
+    $sql .= ($idCategoria === null) ? "NULL," : "$idCategoria,";
+    $sql .= ($estatus === null) ? "NULL" : "$estatus";
+    $sql .= ");";
+    
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+
 ?>

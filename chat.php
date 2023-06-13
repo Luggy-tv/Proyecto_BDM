@@ -42,22 +42,12 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
         <div id="navcol-1" class="collapse navbar-collapse">
           <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-
-            <!-- <div class="dropdown"> 
-                            <button class="dropbtn" onclick="myFunction()">Cursos por categoría
-                              <i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdown-content" id="myDropdown">
-                              <a href="#">Back end</a>
-                              <a href="#">Front end</a>
-                              <a href="#">Diseño</a>
-                            </div>
-                        </div> -->
-
-            <li class="nav-item"><a class="nav-link link-light" href="chat.php"
-                style="border-left-style: none;">Mensajes</a></li>
-            <li class="nav-item"><a class="nav-link link-light" href="scripts/perfilRedir.php"
-                style="border-left-style: none;">Perfil</a></li>
+            <li class="nav-item">
+              <a class="nav-link link-light" href="chat.php" style="border-left-style: none;">Mensajes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link-light" href="scripts/perfilRedir.php" style="border-left-style: none;">Perfil</a>
+            </li>
 
           </ul>
         </div>

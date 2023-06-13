@@ -6,9 +6,16 @@ if (isset($_GET['id'])) {
     include("scripts/cursoClass.php");
     $cursoYModulos = getCursoForCursoInfo($cursoID);
 
-    $userTieneCurso= true;
+    $userInCursoStatus = checkUserInCursoStatus($cursoID);
 
-    // print_r($cursoYModulos);
+    $userTieneCurso = false;
+    $showDiploma = false;
+
+    if (mysqli_num_rows($userInCursoStatus) > 0) {
+        $userTieneCurso = true;
+        $row = mysqli_fetch_assoc($userInCursoStatus);
+        $showDiploma = $row['Completado'];
+    }
 } else {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error al conectar con el curso favor de regresar a la pantalla anterior.");
@@ -130,7 +137,7 @@ if (isset($_GET['id'])) {
                     </p>
                 </div>
 
-                <?php if ($userTieneCurso): ?>
+                <?php if (!$userTieneCurso): ?>
                     <div class="comprar col-5">
                         <div class="my-3 py-3 mx-3 px-3">
                             <h5>Adquiere este curso por</h5>
@@ -147,6 +154,34 @@ if (isset($_GET['id'])) {
                                 Agregar al carrito
 
                             </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($showDiploma): ?>
+                    <div class="comprar col-5">
+                        <div class="my-3 py-3 mx-3 px-3">
+                            <h5>Completaste el curso, aqui esta tu diploma!</h5>
+
+                            <form action="Diploma/ejemplo.php" method="POST">
+
+                                <input type="hidden" id="user" name="user" value="<?php echo $row['NombreCompleto'] ?>">
+                                <input type="hidden" id="curso" name="curso"
+                                    value="<?php echo $cursoYModulos[0]['titulo'] ?>">
+                                <input type="hidden" id="fecha" name="fecha"
+                                    value="<?php echo $row['FechaFinalizacion'] ?>">
+                                <input type="hidden" id="docente" name="docente"
+                                    value="<?php echo $cursoYModulos[0]['Nombre_Completo'] ?>">
+
+                                <button type="submit" class="btn mx-2">
+                                    <i class="fa fa-download">
+                                    </i>
+                                    Descargar diploma
+                                </button>
+                            </form>
+
+
+
                         </div>
                     </div>
                 <?php endif; ?>
@@ -179,14 +214,15 @@ if (isset($_GET['id'])) {
                             <?php echo $curso['Nivel_Descripcion'] ?>
                         </h5>
                     </div>
-
-                    <div class="col-5 my-3">
-                        <a id="btn-comprarModulo"
-                            href="curso.php?idCur=<?php echo $curso['ID_Curso']; ?>&idMod=<?php echo $curso["Modulo_ID"]; ?>"
-                            class="btn mx-2">
-                            Empezar modulo
-                        </a>
-                    </div>
+                    <?php if ($userTieneCurso): ?>
+                        <div class="col-5 my-3">
+                            <a id="btn-comprarModulo"
+                                href="curso.php?idCur=<?php echo $curso['ID_Curso']; ?>&idMod=<?php echo $curso["Modulo_ID"]; ?>"
+                                class="btn mx-2">
+                                Empezar modulo
+                            </a>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
             <?php endforeach ?>

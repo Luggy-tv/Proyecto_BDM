@@ -12,15 +12,13 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
     $usuario = SetUserFromToken();
     $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
     $carritoHasItems = false;
+    
     if (isset($_COOKIE['carrito'])) {
         $cookieData = $_COOKIE['carrito'];
         $dataArray = json_decode($cookieData, true);
         $carritoHasItems = true;
     }
-
-
-    // print_r($dataArray);
-
+    
 }
 
 ?>

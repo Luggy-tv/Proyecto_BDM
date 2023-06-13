@@ -53,7 +53,6 @@ input::placeholder {
 }
 
 #button-addon3 {
-  
   background-color: var(--salmon);
   height: 100%;
   border-radius: 0;
@@ -71,7 +70,6 @@ input::placeholder {
 #chatbox {
   background-color: var(--link-water);
 }
-
 
 /* Styles for the shopping cart */
 .cart {
@@ -140,7 +138,6 @@ input::placeholder {
 .cart .product-list:hover {
   display: block;
 }
-
 
 .dropdown {
   float: left;
