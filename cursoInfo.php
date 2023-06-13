@@ -12,21 +12,10 @@ if (isset($_GET['id'])) {
     $showDiploma = false;
 
     if (mysqli_num_rows($userInCursoStatus) > 0) {
-        
         $userTieneCurso = true;
-
         $row = mysqli_fetch_assoc($userInCursoStatus);
-
-
         $showDiploma = $row['Completado'];
-
-        // print_r($showDiploma);
-
     }
-
-    // print_r($userInCursoStatus);
-    // print_r("lol");
-
 } else {
     header("HTTP/1.1 400 Bad Request");
     die("Se produjo un error al conectar con el curso favor de regresar a la pantalla anterior.");
@@ -174,15 +163,25 @@ if (isset($_GET['id'])) {
                         <div class="my-3 py-3 mx-3 px-3">
                             <h5>Completaste el curso, aqui esta tu diploma!</h5>
 
+                            <form action="Diploma/ejemplo.php" method="POST">
 
-                            <button class="btn mx-2"  id="btn-comprarCurso"
-                            onclick="window.open('Recursos/CertificadoDeCurso.pdf')">
-                                <i class="fa fa-download">
-                                </i>
-                                Descargar
-                            </button>
+                                <input type="hidden" id="user" name="user" value="<?php echo $row['NombreCompleto'] ?>">
+                                <input type="hidden" id="curso" name="curso"
+                                    value="<?php echo $cursoYModulos[0]['titulo'] ?>">
+                                <input type="hidden" id="fecha" name="fecha"
+                                    value="<?php echo $row['FechaFinalizacion'] ?>">
+                                <input type="hidden" id="docente" name="docente"
+                                    value="<?php echo $cursoYModulos[0]['Nombre_Completo'] ?>">
 
-                            
+                                <button type="submit" class="btn mx-2">
+                                    <i class="fa fa-download">
+                                    </i>
+                                    Descargar diploma
+                                </button>
+                            </form>
+
+
+
                         </div>
                     </div>
                 <?php endif; ?>
