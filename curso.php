@@ -122,63 +122,6 @@ if (isset($_GET['idCur']) && isset($_GET['idMod'])) {
 
     <!--  ................................................................................................................................-->
 
-    <section> <!--COMENTARIOS-->
-        <div class="container my-5">
-            <h1 class="my-3">Comentarios</h1>
-            <hr style="height: 2px;">
-
-            <div id="comments">
-                <!-- Comentarios existentes -->
-                <div class="comment">
-                    <img class="profile-pic" src="Recursos/Open Peeps - Avatar (1).png" alt="John's Profile Picture">
-                    <h4 id="user">John Doe</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-
-                <div class="comment">
-                    <img class="profile-pic" src="Recursos/Open Peeps - Bust.png" alt="Jane's Profile Picture">
-                    <h4 id="user">Jane Smith</h4>
-                    <p>Nulla facilisi. Sed vitae dolor gravida, pulvinar leo id, molestie mauris.</p>
-                </div>
-            </div>
-
-            <br>
-            <h3>Agrega un comentario:</h3>
-
-            <form id="comment-form">
-                <!--Aqui tiene que tomar el nombre del usuario y su foto de perfil para publicar junto con el comentario-->
-
-                <textarea id="comment" name="comment" required></textarea><br><br>
-                <input class="btn" type="submit" value="Publicar comentario">
-            </form>
-
-
-            <script>
-                // JavaScript code for submitting the comment form
-                document.getElementById('comment-form').addEventListener('submit', function (event) {
-                    event.preventDefault(); // Prevent form submission
-
-                    // Get the values from the form inputs
-                    var name = document.getElementById('name').value;
-                    var comment = document.getElementById('comment').value;
-
-                    // Create a new comment element
-                    var newComment = document.createElement('div');
-                    newComment.className = 'comment';
-                    newComment.innerHTML = '<img class="profile-pic" src="default_profile.jpg" alt="Profile Picture"><h3>' + name + '</h3><p>' + comment + '</p>';
-
-                    // Append the new comment to the comment section
-                    document.getElementById('comments').appendChild(newComment);
-
-                    // Clear the form inputs
-                    document.getElementById('name').value = '';
-                    document.getElementById('comment').value = '';
-                });
-            </script>
-
-        </div>
-    </section>
-
 
 </body>
 

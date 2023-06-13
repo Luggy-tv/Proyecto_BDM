@@ -178,6 +178,32 @@
     margin-right: 10px;
   }
 
+  
+  .btn {
+    background-color:var(--portage);
+    width: 100%;
+    padding: 1%;
+    color: #fff;
+  }
+
+  .btn:hover{
+    background-color: #4eaaed;
+    color: #dfdbf6;
+  }
+
+  #comment{
+    width: 100%;
+    padding: 10px;
+    background-color: #c8bdf9;
+    opacity: 50%;
+    border-color: #172542;
+    border-width: 2px;
+    border-radius: 5px;
+    resize: none;
+  }
+
+
+
   .search{
     display: flex;
     align-items: center;

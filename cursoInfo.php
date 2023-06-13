@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="CSS/cursoInfo.css">
+    <link rel="stylesheet" href="CSS/cursoInfo.css?v=<?php echo time(); ?>">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -229,10 +229,10 @@ if (isset($_GET['id'])) {
         </div>
     </section>
 
-    <!-- opiniones de otros usuarios  -->
-    <section>
+    <section> <!--COMENTARIOS-->
         <div class="container my-5">
-            <h3 class="my-3">Opiniones de otros usuarios</h3>
+            <h1 class="my-3">Comentarios</h1>
+            <hr style="height: 2px;">
 
             <div id="comments">
                 <!-- Comentarios existentes -->
@@ -247,8 +247,42 @@ if (isset($_GET['id'])) {
                     <h4 id="user">Jane Smith</h4>
                     <p>Nulla facilisi. Sed vitae dolor gravida, pulvinar leo id, molestie mauris.</p>
                 </div>
-
             </div>
+
+            <br>
+            <h3>Agrega un comentario:</h3>
+
+            <form id="comment-form">
+                <!--Aqui tiene que tomar el nombre del usuario y su foto de perfil para publicar junto con el comentario-->
+
+                <textarea id="comment" name="comment" required></textarea><br><br>
+                <input class="btn" type="submit" value="Publicar comentario">
+            </form>
+
+
+            <script>
+                // JavaScript code for submitting the comment form
+                document.getElementById('comment-form').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent form submission
+
+                    // Get the values from the form inputs
+                    var name = document.getElementById('name').value;
+                    var comment = document.getElementById('comment').value;
+
+                    // Create a new comment element
+                    var newComment = document.createElement('div');
+                    newComment.className = 'comment';
+                    newComment.innerHTML = '<img class="profile-pic" src="default_profile.jpg" alt="Profile Picture"><h3>' + name + '</h3><p>' + comment + '</p>';
+
+                    // Append the new comment to the comment section
+                    document.getElementById('comments').appendChild(newComment);
+
+                    // Clear the form inputs
+                    document.getElementById('name').value = '';
+                    document.getElementById('comment').value = '';
+                });
+            </script>
+
         </div>
     </section>
 
