@@ -125,70 +125,70 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
                 <div class="row">
                     <div class="col-1"></div>
+                    <?php if (!empty($listaMasVendidos)): ?>
+                        <div class="col-10 mb-3">
 
-                    <div class="col-10 mb-3">
+                            <div class="accordion" id="accordionFlushExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                            aria-controls="flush-collapseOne">
+                                            Filtros
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="fecha" class="form-label">Fecha de inscripcion</label>
+                                                    <input id="fecha" type="date" class="form-control" name="fecha">
+                                                    <button type="submit" id="fecha-btn"
+                                                        class="btn btn-primary w-100 mt-2 mb-1 ">Filtrar por fecha</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="" class="form-label">Categoria</label>
+                                                    <select name="categoria" id="categoria" class="form-control">
+                                                        <?php foreach ($listaCategorias as $categoria): ?>
+                                                            <?php echo "<option value='" . $categoria['ID'] . "'> " . $categoria['Categoria'] . "</option>"; ?>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <button type="submit" id="categoria-btn"
+                                                        class="btn btn-primary w-100 mt-2 mb-1 ">Filtrar por
+                                                        categoria</button>
+                                                </div>
 
-                        <div class="accordion" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                        aria-controls="flush-collapseOne">
-                                        Filtros
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <label for="fecha" class="form-label">Fecha de inscripcion</label>
-                                                <input id="fecha" type="date" class="form-control" name="fecha">
-                                                <button type="submit" id="fecha-btn"
-                                                    class="btn btn-primary w-100 mt-2 mb-1 ">Filtrar por fecha</button>
+                                                <div class="col-4">
+                                                    <label for="" class="form-label">Estatus</label>
+                                                    <select name="estatus" id="estatus" class="form-control">
+                                                        <option value="1">Terminado</option>
+                                                        <option value="0">En Curso</option>
+                                                    </select>
+                                                    <button type="submit" id="estatus-btn"
+                                                        class="btn btn-primary w-100 mt-2 mb-1">Filtrar por estatus
+                                                    </button>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <button type="submit" id="all-btn"
+                                                        class="btn btn-info w-100 mt-2 mb-1">Usar todos los filtros
+                                                    </button>
+
+                                                </div>
                                             </div>
-                                            <div class="col-4">
-                                                <label for="" class="form-label">Categoria</label>
-                                                <select name="categoria" id="categoria" class="form-control">
-                                                    <?php foreach ($listaCategorias as $categoria): ?>
-                                                        <?php echo "<option value='" . $categoria['ID'] . "'> " . $categoria['Categoria'] . "</option>"; ?>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                                <button type="submit" id="categoria-btn"
-                                                    class="btn btn-primary w-100 mt-2 mb-1 ">Filtrar por
-                                                    categoria</button>
-                                            </div>
 
-                                            <div class="col-4">
-                                                <label for="" class="form-label">Estatus</label>
-                                                <select name="estatus" id="estatus" class="form-control">
-                                                    <option value="1">Terminado</option>
-                                                    <option value="0">En Curso</option>
-                                                </select>
-                                                <button type="submit" id="estatus-btn"
-                                                    class="btn btn-primary w-100 mt-2 mb-1">Filtrar por estatus
-                                                </button>
-                                            </div>
 
-                                            <div class="col-12">
-                                                <button type="submit" id="all-btn"
-                                                    class="btn btn-info w-100 mt-2 mb-1">Usar todos los filtros
-                                                </button>
-
-                                            </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                        <div class="col-1"></div>
+                        <div class="col-1"></div>
 
-                    </div>
-                    <div class="col-1"></div>
-                    <div class="col-1"></div>
 
-                    <?php if (!empty($listaMasVendidos)): ?>
                         <div class="col-10 bg-light rounded-3 p-0">
                             <table class="table table-striped bg-light rounded-3 p-3">
                                 <thead>
@@ -240,7 +240,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
 
                         </div>
                     <?php else: ?>
-                        <h3 class="text-center mt-2">No te has inscrito a un curso!</h3>
+                        <h3 class="text-center mt-2">No te has inscrito a ningun curso!</h3>
                     <?php endif; ?>
                     <div class="col-1"></div>
                 </div>
