@@ -1,3 +1,9 @@
+<?php
+//Check if Cookie is set and if is set then a bg info appears with a button if 
+
+?>
+
+
 <html>
 
 <head>
@@ -49,7 +55,7 @@
 
         <!--Inicia columna con transparencia-->
         <div class="text-center mt-4">
-          <a href="landing.html">
+          <a href="index.html">
             <img src="Recursos/Intellibug_placeholder.png" width="15%" alt="">
           </a>
         </div>

@@ -1,8 +1,21 @@
 <?php
-include_once("scripts/userClass.php");
-$usuario = SetUserFromToken();
-$usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
-$imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
+if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
+    header("HTTP/1.1 400 Bad Request");
+    die("Se produjo un error de solicitud. La cookie no se encontró o está vacía. Para poder entrar a esta pagina inicie sesion.");
+} else {
+    include_once("scripts/userClass.php");
+    $usuario = SetUserFromToken();
+    $usuario_nombreComp = $usuario->nombre . " " . $usuario->apellidoPat . " " . $usuario->apellidoMat;
+
+    $reporteDeCurso = getReporteDeCurso();
+    $reporteTotalDeCursos = getReporteTotalDeCursos();
+
+    include_once("scripts/categoriasClass.php");
+    $listaCategorias = setCategoriasLista();
+
+    // print_r($reporteDeCurso);
+}
+
 ?>
 
 <html lang="en">
@@ -21,20 +34,15 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
 
     <link rel="stylesheet" href="CSS/perfil.css">
 
-    <link rel="preload" as="image" href="profilePictures/ppimg1.png">
-    <link rel="preload" as="image" href="Recursos/tinypngs/html.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/bootstrap.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/database.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/mysql.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/mysql2.jpg">
-    <link rel="preload" as="image" href="Recursos/tinypngs/programador1.jpg">
-
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
 </head>
 
@@ -43,7 +51,7 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
     <nav class="navbar navbar-dark navbar-expand-md">
         <div class="container-fluid">
 
-            <a class="navbar-brand link-light" href="inicio.html">Codebug</a>
+            <a class="navbar-brand link-light" href="inicio.php">Codebug</a>
 
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                 <span class="visually-hidden">Toggle navigation</span>
@@ -52,8 +60,7 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
 
             <div id="navcol-1" class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto" style="border-bottom-style: none;">
-                    <li class="nav-item"><a class="nav-link link-light" href="chat.html">Mensajes</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="#">Mas Cursos</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="chat.php">Mensajes</a></li>
                 </ul>
             </div>
 
@@ -62,11 +69,11 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
 
     <!--Imagen y nombre de perfil-->
     <section>
-        <div class="container-fluid bg-light w-100">
+        <div class="container-fluid py-5 bg-light ">
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
-                    <img class="img-fluid img-thumbnail h-auto" src="<?php echo $imgPath ?>" alt="">
+                    <img class="img-fluid img-thumbnail h-auto" src="scripts/loaduserimg.php">
                 </div>
                 <div class="col-8 mt-3 ">
                     <h1 id="nombreCompleto" class="fw-bold">
@@ -77,208 +84,163 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
                     </p>
                     <!--<a id="btn-loadNewPfp" class="btn btn-primary px-2 py-1" href="#">Actualizar foto de perfil</a>-->
                     <a id="btn-editProfile" class="btn btn-primary px-2 py-1" href="editperfil.php">Editar perfil</a>
+                    <a id="btn-crearCurso" class="btn btn-primary px-2 py-1" href="crearCurso.php">Crear Curso</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!--TUS CURSOS-->
-    <section>
-        <div id="cursos" class="row h-100 pb-4">
-            <h2 class="my-2 text-center fw-bold">Tus cursos</h2>
-
-            <div class="container-xl">
-                <div class="row">
-                    <div class="col-md-10 mx-auto bg-light rounded-1 my-auto">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-
-
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/html.jpg" class="img-fluid rounded-3"
-                                                        alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Aprende HTML desde cero</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Consectetur, dolor!</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/bootstrap.jpg"
-                                                        class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Bootstrap: Todo lo que debes saber</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
-                                                        provident.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/database.jpg"
-                                                        class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Fundamentos de las bases de datos</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error,
-                                                        fugiat.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/mysql.jpg" class="img-fluid rounded-3"
-                                                        alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>MySQL para principiantes</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                                                        dolorem!</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/mysql2.jpg" class="img-fluid rounded-3"
-                                                        alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>MySQL nivel avanzado</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-                                                        eveniet.</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="thumb-wrapper rounded-3">
-                                                <div class="img-box">
-                                                    <img src="Recursos/tinypngs/programador1.jpg"
-                                                        class="img-fluid rounded-3" alt="">
-                                                </div>
-                                                <div class="thumb-content">
-                                                    <h4>Introducción a la progrmación web</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-                                                        impedit?</p>
-                                                    <a href="#" class="btn btn-primary">Ver más <i
-                                                            class="fa fa-angle-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <!-- Carousel controls -->
-                            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
 
     <!--KARDEX-->
     <section>
-        <div id="kardex" class="row h-100 pb-4">
-            <h2 class="my-2 text-center fw-bold">Reportes de Cursos</h2>
+        <div id="kardex" class="row pb-4 py-3">
+            <h2 class="my-2 text-center fw-bold pb-3">Reportes de Cursos</h2>
             <div class="container-xl ">
                 <div class="row">
 
-                </div>
-                <div class="row">
                     <div class="col-1"></div>
-                    <div class="col-10 bg-light rounded-3 p-0">
-                        <table class="table table-striped bg-light rounded-3 p-3">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Curso</th>
-                                    <th scope="col">Cantidad De alumnos</th>
-                                    <th scope="col">Nivel promedio de alumno</th>
-                                    <th scope="col">Total de ingresos</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Aprende HTML desde cero</th>
-                                    <td>154</td>
-                                    <td>9.0</td>
-                                    <td>MXN $21,634.52</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Bootstrap: Todo lo que debes saber</th>
-                                    <td>122</td>
-                                    <td>7.8</td>
-                                    <td>MXN $15,500.00</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Fundamentos de las bases de datos</th>
-                                    <td>41</td>
-                                    <td>4.4</td>
-                                    <td>MXN $10,500.00</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">MySQL para principiantes</th>
-                                    <td>10</td>
-                                    <td>9.5</td>
-                                    <td>MXN $4,100.20</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">MySQL nivel avanzado</th>
-                                    <td>10</td>
-                                    <td>7.0</td>
-                                    <td>MXN $700.00</td>
-                                </tr>
+                    <?php if (!empty($reporteDeCurso)): ?>
+                        <div class="col-10 mb-3">
 
-                                <tr>
-                                    <th scope="row">Introducción a la progrmación web</th>
-                                    <td>10</td>
-                                    <td>8.5</td>
-                                    <td>MXN $2,400.40</td>
-                                </tr>
+                            <div class="accordion " id="accordionFlushExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                            aria-controls="flush-collapseOne">
+                                            Filtros
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="fecha" class="form-label">Fecha de creacion</label>
+                                                    <input id="fecha" type="date" class="form-control" name="fecha">
+                                                    <button type="submit" id="fecha-btn"
+                                                        class="btn btn-primary w-100 mt-2 mb-1 ">Filtrar por fecha</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="" class="form-label">Categoria</label>
+                                                    <select name="categoria" id="categoria" class="form-control">
+                                                        <?php foreach ($listaCategorias as $categoria): ?>
+                                                            <?php echo "<option value='" . $categoria['ID'] . "'> " . $categoria['Categoria'] . "</option>"; ?>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <button type="submit" id="categoria-btn"
+                                                        class="btn btn-primary w-100 mt-2 mb-1 ">Filtrar por
+                                                        categoria</button>
+                                                </div>
 
-                            </tbody>
-                        </table>
-                    </div>
+                                                <div class="col-4">
+                                                    <label for="" class="form-label">Estatus</label>
+                                                    <select name="estatus" id="estatus" class="form-control">
+                                                        <option value="1">Activo</option>
+                                                        <option value="0">Deslistado</option>
+                                                    </select>
+                                                    <button type="submit" id="estatus-btn"
+                                                        class="btn btn-primary w-100 mt-2 mb-1">Filtrar por estatus
+                                                    </button>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <button type="submit" id="all-btn"
+                                                        class="btn btn-info w-100 mt-2 mb-1">Usar todos los filtros
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-1"></div>
+                        <div class="col-1"></div>
+
+                        <div class="col-10 bg-light rounded-3 p-0">
+                            <table class="table table-striped bg-light rounded-3 p-3">
+                                <thead>
+                                    <tr class="align-middle">
+                                        <th scope="col" class="text-center">Curso</th>
+                                        <th scope="col" class="text-center">Estado curso</th>
+                                        <th scope="col" class="text-center">Categoria</th>
+                                        <th scope="col" class="text-center">Reporte de curso</th>
+                                        <th scope="col" class="text-center">Fecha de creacion</th>
+                                        <th scope="col" class="text-center">Cantidad de alumnos</th>
+                                        <th scope="col" class="text-center">Nivel promedio de alumno</th>
+                                        <th scope="col" class="text-center">Total de ingresos por curso</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpoDeTabla">
+                                    <?php foreach ($reporteDeCurso as $curso): ?>
+                                        <tr class="align-middle text-center">
+                                            <td scope="row">
+                                                <a class="link-primary"
+                                                    href="scripts/cursoRedir.php?id=<?php echo $curso['IndiceCurso'] ?>">
+                                                    <?php echo $curso["TituloCurso"]; ?>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso['Estatus'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso['NombreDeCategoria'] ?>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary w-auto"
+                                                    href="./reporteCursoDetalle.php?id=<?php echo $curso['IndiceCurso'] ?>">
+                                                    Ir a Detalle
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso['FechaCreacion'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso["CantidadUsuarios"]; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso["PromedioNivel"]; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $curso["TotalVentas"]; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                                <tfoot>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end">Ingresos totales: </td>
+                                    <td class="text-center">
+                                        <?php if (empty($reporteTotalDeCursos)) {
+                                            echo "No han comprado tus cursos";
+                                        } else {
+                                            echo $reporteTotalDeCursos[0]['IngresosTotales'];
+                                        } ?>
+                                    </td>
+                                </tfoot>
+
+
+                            </table>
+                        </div>
+
+                    <?php else: ?>
+                        <div class="col-10">
+                            <h3 class="text-center mt-2">No haz creado ningun curso!</h3>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="col-1"></div>
                 </div>
             </div>
@@ -291,7 +253,8 @@ $imgPath = "profilePictures/ImagenesSubidasPorUsuarios/" . $usuario->Imagen;
             <p class="lead link-light">© 2023 Copyright: Codebug.com</p>
         </div>
     </footer>
-
+    
+    <script src="scripts/perfilMaestro.js"></script>
 </body>
 
 </html>

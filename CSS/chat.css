@@ -52,6 +52,13 @@ input::placeholder {
   color: white;
 }
 
+#button-addon3 {
+  background-color: var(--salmon);
+  height: 100%;
+  border-radius: 0;
+  color: white;
+}
+
 .form-control {
   height: 1px;
 }
@@ -64,6 +71,113 @@ input::placeholder {
   background-color: var(--link-water);
 }
 
-#chatact:active {
-  background-color: var(--cornflower);
+/* Styles for the shopping cart */
+.cart {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-icon {
+  font-size: 24px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  color: #fff;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+/* Styles for the product list and checkout button */
+.product-list {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1;
+  width: 500px;
+}
+
+.product-list li {
+  padding: 15px;
+}
+
+.checkout-button {
+  display: block;
+  background-color: #9863f3;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.checkout-button:hover {
+  background-color: #4eaaed;
+  color: #ccc;
+}
+
+.cart:hover .product-list {
+  display: block;
+}
+
+.cart .product-list:hover {
+  display: block;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 8px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
 }

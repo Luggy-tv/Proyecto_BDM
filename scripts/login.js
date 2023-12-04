@@ -17,7 +17,7 @@ formLogin.addEventListener("submit", (e) => {
     formLogin.reset();
     e.preventDefault();
     //alert("Contraseña y correo validos");
-    //window.location = 'inicio.html';
+    //window.location = 'inicio.php';
   }
 });
 
