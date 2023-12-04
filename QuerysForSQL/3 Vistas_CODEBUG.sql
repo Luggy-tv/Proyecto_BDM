@@ -128,7 +128,7 @@ create view v_UsuarioInscrito as
 		ID_UsuarioCurso,
 		Nivel,
 		Completado,
-		coalesce( date_format(FechaFinalizacion, '%d %b %Y'), 'No haz iniciado el curso') as FechaFinalizacion,
+		coalesce( date_format(FechaFinalizacion, '%d %b %Y'), 'No haz acabado el curso') as FechaFinalizacion,
         DATE_FORMAT(FechaInscripcion, '%d %b %Y') as FechaInscripcion,
 		coalesce( date_format(FechaDeUltimoAvance, '%d %b %Y'), 'No haz iniciado el curso') as FechaDeUltimoAvance,
 		ID_Usuario,

@@ -226,7 +226,8 @@ function inscibirACurso($idCurso)
     return $result;
 }
 
-function crearDetalleOrden($idOrden,$idCurso,$precioCurso){
+function crearDetalleOrden($idOrden, $idCurso, $precioCurso)
+{
     include("config.php");
     $sql = "CALL sp_DetalleOrdenCreate($idOrden,$idCurso,$precioCurso);";
     $result = mysqli_query($conn, $sql);
@@ -242,41 +243,45 @@ function CrearOrden($montoTotal)
     return $result;
 }
 
-function checkUserInCursoStatus($idCurso){
+function checkUserInCursoStatus($idCurso)
+{
 
     include("config.php");
     include_once("userClass.php");
 
     $idUser = getIDFromToken();
 
-    $sql="CALL sp_SelectIsUsuarioEnCurso($idUser,$idCurso);";
+    $sql = "CALL sp_SelectIsUsuarioEnCurso($idUser,$idCurso);";
     $result = mysqli_query($conn, $sql);
 
     return $result;
 }
 
-function getCursoComments($idCurso){
+function getCursoComments($idCurso)
+{
     include("config.php");
 
-    $sql="CALL sp_SelectComentariosCurso($idCurso);";
+    $sql = "CALL sp_SelectComentariosCurso($idCurso);";
 
     $result = mysqli_query($conn, $sql);
     mysqli_close($conn);
-    
+
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
     return $result;
 }
 
-function checkIfUserHasComment(){
+function checkIfUserHasCommentInCurso($idCurso)
+{
     include("config.php");
     include_once("userClass.php");
     $idUser = getIDFromToken();
-    $sql = "CALL sp_SelectIfUserHasComment($idUser);";
+    $sql = "CALL sp_SelectIfUserHasComment($idUser,$idCurso);";
     $result = mysqli_query($conn, $sql);
     return $result;
 }
 
-function addNivelToUsuarioEnCurso($idCurso){
+function addNivelToUsuarioEnCurso($idCurso)
+{
     include("config.php");
     include_once("userClass.php");
     $idUser = getIDFromToken();
@@ -284,14 +289,26 @@ function addNivelToUsuarioEnCurso($idCurso){
     $result = mysqli_query($conn, $sql);
 }
 
-function checkUserCursosForKardex(){
+function checkUserCursosForKardex()
+{
     include("config.php");
     include_once("userClass.php");
     $idUser = getIDFromToken();
-    $sql="CALL sp_SelectUserInfoKardex($idUser);";
+    $sql = "CALL sp_SelectUserInfoKardex($idUser);";
     $result = mysqli_query($conn, $sql);
     mysqli_close($conn);
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return $result;
+}
+
+function calificacionInsert($idUser, $idCurso, $comment, $calif)
+{
+    include("config.php");
+
+    $sql= "CALL sp_CalificacionInsert($calif,$idCurso,$idUser,'$comment');";
+    $result = mysqli_query($conn,$sql);
+
+    mysqli_close($conn);
     return $result;
 }
 

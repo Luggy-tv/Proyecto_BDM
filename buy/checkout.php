@@ -17,7 +17,9 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         $cookieData = $_COOKIE['carrito'];
         $dataArray = json_decode($cookieData, true);
         $carritoHasItems = true;
+
     }
+    $totalPrecio=100;
     
 }
 
@@ -74,7 +76,7 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
         <!-- Tabla de Orden -->
         <div class="container bg-light mt-2 mb-5 px-3 py-4">
 
-            <?php if ($carritoHasItems) { ?>
+         
 
                 <div class="row mx-5 justify-content-center">
                     <table class="table bg-light rounded-3 mx-5">
@@ -84,27 +86,23 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                             <th scope="col" class="text-center">Precio</th>
                             <th scope="col" class="text-center">Eliminar</th>
                         </tr>
-                        <?php
-                        $totalPrecio = 0;
-                        foreach ($dataArray as $curso):
-                            $id =$curso['identificador'];
-                            $totalPrecio += $curso['precio']; ?>
+                        
                             <tr>
                                 <td scope="row" class="text-center">
-                                    <?php echo $curso['identificador']; ?>
+                                   id item
                                 </td>
                                 <td class="text-center">
-                                    <?php echo $curso['nombre']; ?>
+                               item
                                 </td>
                                 <td class="text-center">
-                                    <?php echo $curso['precio']; ?>
+                                Precio item
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-primary" onclick="eliminarDecarrito(<?php echo $id ?>)"> Quitar de Carrito</button>
+                                  Eliminar item
 
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+                      
                         <tr>
                             <td scope="row" class="table-active"></td>
                             <td class="text-end table-active">Total:</td>
@@ -126,9 +124,6 @@ if (!isset($_COOKIE['sessionToken']) || empty($_COOKIE['sessionToken'])) {
                         <?php include('paypalcheckout.php'); ?>
                     </div>
                 </div>
-            <?php } else { ?>
-                <h1 class="text-center">Tu carrito esta vacio! </h1>
-            <?php } ?>
 
 
         </div>

@@ -6,7 +6,6 @@ call SP_UsuarioManage('z'	,3		,'Irving'	, 'Rangel' 		,'Olivares'	,'irving@mail.c
 call SP_UsuarioManage('a'	,4		,'Silvia'	, 'Martinez' 	,'De Luna'	,'silvia@mail.com'	, 'Sil_12345678','F'	,19701014  ,'','png'	, true);
 call SP_UsuarioManage('a'	,4		,'Carmina'	, 'Orta' 		,'Becerra'	,'mina@mail.com'	, 'Min_12345678','F'	,20010610  ,'','png'	, false);
 call SP_UsuarioManage('a'	,4		,'Edelmiro'	, 'Martinez' 	,'Flores'	,'edel@mail.com'	, 'Ede_12345678','F'	,19711030  ,'','png'	, true);
-
 call SP_UsuarioManage('a'	,4		,'Josue'	, 'Ortega' 		,'Morales'	,'josue@mail.com'	, 'Jos_12345678','M'	,20010610  ,'','png'	, false);
 
 Call sp_categoriaManage('a',0,'Matematicas','Este curso contiene matematicas');
@@ -79,3 +78,7 @@ where
 		c.id_Curso=p_id_Curso
 ORDER BY
     c.titulo;
+    
+    
+    drop database sakila
+    create database sakila

@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
 
     $userTieneCurso = false;
     $showDiploma = false;
-    $userMadeComment =false;
+    $userMadeComment = false;
 
     if (mysqli_num_rows($userInCursoStatus) > 0) {
 
@@ -21,9 +21,9 @@ if (isset($_GET['id'])) {
         $row = mysqli_fetch_assoc($userInCursoStatus);
         $showDiploma = $row['Completado'];
 
-        $userHasCommentList = checkIfUserHasComment();
-        if(mysqli_num_rows($userHasCommentList)>0){
-            $userMadeComment =true;
+        $userHasCommentList = checkIfUserHasCommentInCurso($cursoID);
+        if (mysqli_num_rows($userHasCommentList) > 0) {
+            $userMadeComment = true;
         }
 
 
@@ -261,11 +261,9 @@ if (isset($_GET['id'])) {
                             <img class="profile-pic"
                                 src="data:image/<?php echo $comment['ImagenEX'] ?>;base64,<?php echo $imagen_base64 ?>">
                             <h4 id="user">
-                                <?php echo $comment['NombreCompleto'] ?>
+                                <?php echo $comment['NombreCompleto'] ?> | Calificacion: <?php echo $comment['Calificacion'] ?>
                             </h4>
-                            <p>
-                                <?php echo $comment['Comentario'] ?>.
-                            </p>
+                            <h4> <?php echo $comment['Comentario'] ?> </h4>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -279,16 +277,21 @@ if (isset($_GET['id'])) {
                 <div class="calif">
 
 
-                    <h3>Agrega un comentario:</h3>
+                    
+                    
 
-                    <form id="comment-form">
+                    <form id="comment-form" action="scripts/cursoMensaje.php" method="POST">
                         <div class="row">
                             <!--Aqui tiene que tomar el nombre del usuario y su foto de perfil para publicar junto con el comentario-->
+
+                            <input type="hidden" name="curso" value="<?php echo $cursoID ?>">
                             <div class="col-9">
+                            <h3>Agrega un comentario:</h3>
                                 <textarea class="form-input" id="comment" name="comment" required></textarea>
                             </div>
-                            <div class="col-2">
-                                <input type="number" class="form-input h-75" name="calif" id="comment" min="1" max="5">
+                            <div class="col-3">
+                            <h3 id="calif">Califica del 1 al 5</h3>
+                                <input type="number" class="form-input" name="calif" id="comment" min="1" max="5" required>
                             </div>
 
                             <input class="btn mt-2" type="submit" value="Publicar comentario">

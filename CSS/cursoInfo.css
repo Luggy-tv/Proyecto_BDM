@@ -168,6 +168,7 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
+    
   }
   
   .calif {
@@ -242,6 +243,14 @@
     font-size: 16px;
   }
 
+  .form-input{
+    height: 10vh;
+  }
+
+  #calif{
+    text-align: end;
+   
+  }
 
   /* Styles for the shopping cart */
   .cart {

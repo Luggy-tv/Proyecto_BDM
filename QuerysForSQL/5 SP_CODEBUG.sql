@@ -646,21 +646,7 @@ DELIMITER //
 		NombreDeCategoria
         from v_UsuarioInscrito where id_Usuario=p_idUser;
   end; //
- DELIMITER ;
-
-	 # CALL sp_CalificacionInsert(p_calif,p_idcurso,p_iduser,p_commentario)
-  drop procedure if exists sp_CalificacionInsert;
-DELIMITER //
-  create procedure sp_CalificacionInsert(  
-	IN p_Calificacion tinyint,
-    IN p_idcurso	int,
-    In p_idUsuario int,
-    in p_comentario varchar(140)
-  ) begin  
-	insert into calificaciondecurso(Calificacion,Curso,Usuario,Comentario,Fecha) VALUES (p_Calificacion,p_idcurso,p_idUsuario,p_comentario,now());
-  end; //
- DELIMITER ;
- 
+ DELIMITER ; 
 #CALL sp_ReporteCurso(id_usuario)
   drop procedure if exists sp_ReporteCurso;
 DELIMITER //
@@ -722,7 +708,7 @@ SELECT
      DATE_FORMAT(uc.FechaInscripcion, '%d %b %Y') as FechaInscripcion,
     uc.Nivel AS NivelActual, 
     COALESCE( DATE_FORMAT(uc.FechaDeUltimoAvance, '%d %b %Y'), 'No se ha avanzado') as FechaDeUltimoAvance,
-	COALESCE( DATE_FORMAT(uc.fechaFinalizacion, '%d %b %Y') , 'No se ha avanzado') as fechaFinalizacion,
+	COALESCE( DATE_FORMAT(uc.fechaFinalizacion, '%d %b %Y') , 'No se ha completado') as fechaFinalizacion,
 	concat('MXN $', Format(c.precio,2)) as TotalPagado
 FROM
     curso c
@@ -753,8 +739,7 @@ where
 group by 
     c.id_Curso;
   end; //
- DELIMITER ;
- 
+ DELIMITER ; 
 #CALL sp_ReporteCursoFiltro(p_idUsuario,p_fechaCreacion,p_idCategoria,p_estatus)
  drop procedure if exists sp_ReporteCursoFiltro;
  DELIMITER //
@@ -793,8 +778,6 @@ BEGIN
         c.ID_Curso, c.titulo;
 END //
 DELIMITER ;
-
-
   # CALL sp_SelectUserInfoKardexFiltro(p_idUser,p_Fecha,p_idCategoria,p_status)
   drop procedure if exists sp_SelectUserInfoKardexFiltro;
 DELIMITER //
@@ -808,7 +791,7 @@ DELIMITER //
 		uec.ID_UsuarioCurso,
 		uec.Nivel,
 		uec.Completado,
-		coalesce( date_format(uec.FechaFinalizacion, '%d %b %Y'), 'No haz iniciado el curso') as FechaFinalizacion,
+		coalesce( date_format(uec.FechaFinalizacion, '%d %b %Y'), 'No haz completado el curso') as FechaFinalizacion,
         DATE_FORMAT(uec.FechaInscripcion, '%d %b %Y') as FechaInscripcion,
 		coalesce( date_format(uec.FechaDeUltimoAvance, '%d %b %Y'), 'No haz iniciado el curso') as FechaDeUltimoAvance,
 		u.ID_Usuario,
@@ -832,3 +815,58 @@ DELIMITER //
     
   end; //
  DELIMITER ;  
+ 
+ 	 # CALL sp_CalificacionInsert(p_calif,p_idcurso,p_iduser,p_commentario)
+  drop procedure if exists sp_CalificacionInsert;
+DELIMITER //
+  create procedure sp_CalificacionInsert(  
+	IN p_Calificacion tinyint,
+    IN p_idcurso	int,
+    In p_idUsuario int,
+    in p_comentario varchar(140)
+  ) begin  
+	insert into calificaciondecurso(Calificacion,Curso,Usuario,Comentario,Fecha) VALUES (p_Calificacion,p_idcurso,p_idUsuario,p_comentario,now());
+  end; //
+ DELIMITER ;
+ 
+ 	 # CALL sp_SelectComentariosCurso(p_idCurso)
+  drop procedure if exists sp_SelectComentariosCurso;
+DELIMITER //
+  create procedure sp_SelectComentariosCurso(  
+    IN p_idcurso	int
+  ) begin  
+select 
+	id_CalifDeCurso,
+    Calificacion,
+    Fecha,
+    Comentario,
+    concat(Nombre,' ',ApPaterno,' ',ApMaterno)as NombreCompleto,
+    Imagen,
+    ImagenEX 
+from  
+	calificaciondecurso cdc 
+join usuario u on cdc.usuario=u.ID_Usuario 
+where 
+	cdc.curso =p_idcurso 
+LIMIT 4;
+  end; //
+ DELIMITER ;
+ 
+ 
+ 
+  	 # CALL sp_SelectIfUserHasComment(p_idCurso,p_idCurso)
+  drop procedure if exists sp_SelectIfUserHasComment;
+DELIMITER //
+  create procedure sp_SelectIfUserHasComment(  
+    IN p_idUser	int,
+    IN p_idCurso int
+  ) begin  
+select 
+	ID_CalifDeCurso,Calificacion,Curso,Usuario
+from  
+	calificaciondecurso cdc 
+where 
+	cdc.Usuario =p_idUser and cdc.curso= p_idCurso;
+  end; //
+ DELIMITER ;
+ 
